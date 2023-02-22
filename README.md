@@ -4,4 +4,4 @@ Could you please verify that no modifications of the repository were made after 
 
 We apologize for the inconvenience.
 
-- The PennBuzz Team
+The PennBuzz Team
