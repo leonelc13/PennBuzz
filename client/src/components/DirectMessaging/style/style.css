@@ -1,0 +1,249 @@
+/* Page */
+
+.page-window {
+    padding: 10%;
+    width: 80%;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 1fr 3fr;
+    grid-column-gap: 2em;
+}
+
+/*    CHANNELS   */
+
+.channels-window {
+    grid-column: 1/1;
+    grid-row: 2/2;
+}
+
+/* CHANNEL HEADER */
+
+.channel-header-container {
+    grid-column: 1/1;
+    grid-row: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 1em;
+}
+
+.channel-text-header {
+    font-weight: bold;
+    font-size: 1.75em;
+}
+
+
+.channel-plus-icon {
+    margin-left: auto;
+    color: #FF0606;
+    font-size: 1.5em;
+}
+
+
+/*CHANNEL*/
+
+.channel-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    height: 70px;
+    border-top: 1px solid black;
+}
+
+.channel-img-wrapper {
+    margin-right: 5%;
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    overflow: hidden;
+    align-items: center;
+}
+
+.channel-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.channel-name {
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.channel-icon {
+    margin-left: auto;
+    color: #FF0606;
+    font-size: 1.35em;
+}
+
+
+.selected-channel {
+    background-color: #f2f2f2;
+}
+
+
+
+/*    CHATS    */
+
+/*    CHAT HEADER   */
+
+#chat-header-container {
+    grid-column: 2/2;
+    grid-row: 1/1;
+    display: flex;
+    align-items: center;
+    padding-left: 35%;
+}
+
+#chat-header-img-wrapper {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    overflow: hidden;
+    align-items: center;
+}
+
+#chat-header-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+
+
+/*    CHAT MESSAGING   */
+
+/* Empty chat window*/
+
+#empty-chat-window {
+    grid-column: 2/2;
+    grid-row: 2/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    padding: 20%;
+    top: 0;
+
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+#empty-chat-window-text {
+    font-size: 2vh;
+}
+
+/* Chat window styles */
+#chat-window {
+    grid-column: 2/2;
+    grid-row: 2/2;
+    width: 80%;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+#chat-container {
+    overflow-y: auto;
+    max-height: 92%;
+}
+
+/* Individual Message styles */
+
+.message-container {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-bubble {
+    padding: 10px;
+    display: block;
+    max-width: 75%;
+}
+
+.message-bubble.sender {
+    border-radius: 10px 10px 0px 10px;
+    background-color: rgba(255, 45, 70, 0.18);
+}
+
+.message-bubble.recipient {
+    background-color: #f1f0f0;
+    border-radius: 10px 10px 10px 0px;
+}
+
+.sender {
+    margin-left: auto;
+}
+
+/* Sender name styles */
+.sender-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Timestamp styles */
+.message-timestamp {
+    font-size: 0.5em;
+    display: none;
+}
+
+.message-container:hover .message-timestamp {
+    display: block;
+}
+
+
+/* Input area styles */
+#input-area {
+    display: flex;
+    margin-top: 10px;
+    border-radius: 25px;
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+
+}
+
+/* Text input styles */
+#message-input {
+    flex: 1;
+    border: 1px solid #FF0606;
+    border-radius: 25px;
+    padding: 10px;
+    margin-right: 10px;
+    margin-top: auto;
+}
+
+#message-input::placeholder {
+    color: #FF0606;
+}
+
+
+/* Send button styles */
+#send-button {
+    background-color: #FF0606;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
