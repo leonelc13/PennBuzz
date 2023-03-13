@@ -9,7 +9,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // For UI Testing, insert the parent component of your feature here
 root.render(
   <React.StrictMode>
-    <DirectMessagingPage />
   </React.StrictMode>
 );
 
