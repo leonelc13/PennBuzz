@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style/index.css';
 import reportWebVitals from './reportWebVitals';
+import MainFeed from './components/main_feed/MainFeed';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // For UI Testing, insert the parent component of your feature here
 root.render(
   <React.StrictMode>
-  </React.StrictMode>
+    <MainFeed />
+  </React.StrictMode >
 );
 
 // If you want to start measuring performance in your app, pass a function
