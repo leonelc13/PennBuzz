@@ -1,0 +1,53 @@
+#header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+
+    border-bottom: 0.5px solid rgb(78, 78, 78);
+}
+
+#pennbuzz-name {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#buzz-name {
+    color: #FF0000;
+}
+
+#search-input {
+    width: 50%;
+    border: 1px solid #FF0606;
+    border-radius: 25px;
+    padding: 10px;
+    margin-right: 10px;
+    height: 0.25em;
+}
+
+#search-input::placeholder {
+    color: #FF0606;
+}
+
+.navbar-text {
+    font-weight: bold;
+}
+
+#user-profile-picture-wrapper {
+    margin-right: 5%;
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    overflow: hidden;
+    align-items: center;
+}
+
+#user-profile-picture-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
