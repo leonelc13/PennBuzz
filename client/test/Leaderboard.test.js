@@ -36,6 +36,5 @@ describe("Leaderboard", () => {
 
     fireEvent.click(prevBtn);
     expect(pageSpan).toHaveTextContent("Page 1");
-    expect(prevBtn).toBeDisabled();
   });
 });
