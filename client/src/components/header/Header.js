@@ -1,39 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 /**
  * React Component for Header displayed to a logged in user
  **/
 
-class Header extends Component {
 
 
-    render() {
-        return (
-            <div id="header-container">
-                <span id="pennbuzz-name">
+function Header(props) {
+
+    return (
+        <div id="header-container">
+
+            <span id="pennbuzz-name">
+                <Link to="/">
                     Penn
                     <span id="buzz-name">
                         Buzz
                     </span>
-                </span>
+                </Link>
+            </span>
 
+            <input type="text" id="search-input" placeholder="Search for Friends, Quizzes, and more"></input>
 
-                <input type="text" id="search-input" placeholder="Search for Friends, Quizzes, and more"></input>
-                <span class="navbar-text">
+            <span className="navbar-text">
+                <Link to="/leaderboard">
                     Leaderboard
-                </span>
-                <span class="navbar-text">
+                </Link >
+            </span>
+            <span className="navbar-text">
+                <Link to="/chat">
                     Chats
-                </span>
-                <span id="user-profile-picture-wrapper">
-                    <img src="https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download" alt="profile-pic"></img>
-                </span>
+                </Link>
+            </span>
+            <span id="user-profile-picture-wrapper">
 
+                <Link to={`/${props.user}`} >
+                    <img src={props.user_profile_picture} alt=" profile-pic"></img>
+                </Link>
+            </span>
 
-
-            </div >
-        );
-    }
+        </div >
+    );
 }
 
 export default Header

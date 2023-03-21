@@ -1,3 +1,9 @@
+.main-feed-container {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+}
+
 .quiz-container {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -8,6 +14,7 @@
     padding: 30px;
     grid-column-gap: 2em;
     position: relative;
+
 }
 
 .quiz-header-container {
@@ -47,6 +54,11 @@
     display: flex;
     flex-direction: row;
     margin-left: auto;
+}
+
+.quiz-labels-container :hover {
+    background-color: #FF0606;
+    color: white;
 }
 
 .quiz-labels-container div {
@@ -112,6 +124,11 @@
     color: #FF0606;
     padding: 10px;
     display: flex;
+}
+
+.quiz-upvotes :hover {
+    background-color: #FF0606;
+    color: white;
 }
 
 .quiz-upvotes button i {
