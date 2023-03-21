@@ -1,4 +1,7 @@
 #header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -8,6 +11,7 @@
     padding: 0.75em;
 
     border-bottom: 0.5px solid rgb(78, 78, 78);
+
 }
 
 #pennbuzz-name {
@@ -50,4 +54,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* Reset styles for links */
+a {
+    text-decoration: none;
+    color: inherit;
 }

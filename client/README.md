@@ -1,6 +1,11 @@
-# Penn Buzz 
+# PennBuzz - Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In order to run the client, the server needs to be mocked.
+
+1. cd into the test folder
+2. run 'json-server --watch db.json --routes routes.json' in a terminal
+3. in a separate terminal run 'npm start'
+
 
 ## Available Scripts
 

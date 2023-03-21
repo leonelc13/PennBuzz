@@ -1,0 +1,126 @@
+{
+    "quizzes": [
+        {
+            "title": "Which Penn Professor are you?",
+            "author_name": "johnwick",
+            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+            "description": "Complete this quiz and find out your soulmate professor at Penn!",
+            "upvotes": 87,
+            "downvotes": 12,
+            "num_comments": 7,
+            "labels": [
+                "Penn",
+                "Professors"
+            ],
+            "timestamp": "12/12/2023",
+            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+            "key": "Which Penn Professor are you?-12/12/2023-johnwick-1"
+        },
+        {
+            "title": "Which Penn Professor are you?",
+            "author_name": "johnwick",
+            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+            "description": "Complete this quiz and find out your soulmate professor at Penn!",
+            "upvotes": 87,
+            "downvotes": 12,
+            "num_comments": 7,
+            "labels": [
+                "Penn",
+                "Professors"
+            ],
+            "timestamp": "12/12/2023",
+            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+            "key": "Which Penn Professor are you?-12/12/2023-johnwick-2"
+        },
+        {
+            "title": "Which Penn Professor are you?",
+            "author_name": "johnwick",
+            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+            "description": "Complete this quiz and find out your soulmate professor at Penn!",
+            "upvotes": 87,
+            "downvotes": 12,
+            "num_comments": 7,
+            "labels": [
+                "Penn",
+                "Professors"
+            ],
+            "timestamp": "12/12/2023",
+            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+            "key": "Which Penn Professor are you?-12/12/2023-johnwick-3"
+        }
+    ],
+    "channels": {
+        "johnwick": {
+            "name": "John Wick",
+            "timestamp": "8:54pm 12/12/2023",
+            "img": "https://drive.google.com/uc?export=view&id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe"
+        },
+        "jonjones": {
+            "name": "Jon Jones",
+            "timestamp": "8:54pm 12/12/2023",
+            "img": "https://drive.google.com/uc?export=view&id=1bL48Yx608hc6QK41dVx-7O95XwMPOc25"
+        }
+    },
+    "messages": [
+        {
+            "channel_id": "johnwick",
+            "messages": [
+                {
+                    "sender": "johnwick",
+                    "timestamp": "8:24pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johndoe",
+                    "timestamp": "8:29pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johnwick",
+                    "timestamp": "8:31pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johndoe",
+                    "timestamp": "8:32pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johnwick",
+                    "timestamp": "8:33pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johndoe",
+                    "timestamp": "8:34pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johnwick",
+                    "timestamp": "8:34pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "johndoe",
+                    "timestamp": "8:35pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                }
+            ]
+        },
+        {
+            "channel_id": "jonjones",
+            "messages": [
+                {
+                    "sender": "johndoe",
+                    "timestamp": "8:22pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                },
+                {
+                    "sender": "jonjones",
+                    "timestamp": "8:29pm 12/12/2023",
+                    "text": "Hey John! How are you!"
+                }
+            ]
+        }
+    ]
+}
