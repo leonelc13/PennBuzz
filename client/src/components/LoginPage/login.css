@@ -1,0 +1,117 @@
+  /* Center the contents of the login page */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Style the PennBuzz heading */
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  /* Style the container for the login form */
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 80px 20px 80px 20px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    margin-top: 30px;
+    height: 300px;
+    width: 400px;
+  }
+  
+  /* Style the text for the login form */
+  label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Style the text for the error message */
+  p {
+    color: red;
+    font-size: 1.2rem;
+  }
+  
+  /* Style the input fields for the username and password */
+  input[type="text"], input[type="password"] {
+    font-size: 1.2rem;
+    padding-bottom: 25px;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin: 20px 0px;
+    border: none;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black
+  }
+  
+  /* Style the sign in button */
+  button[type="submit"] {
+    background-color: red;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 117px;
+    padding-left: 117px;
+    margin: 20px 0px;
+    cursor: pointer;
+  }
+  
+  a {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  /* Style the login container text */
+    .login-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    }
+    
+    /* Add the sign in and registration text */
+    .sign-in-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    }
+    
+    .registration-text {
+    font-size: 0.8rem;
+    margin-top: 1px;
+    color: black;
+    }
+
+    .title-text {
+      font-size: 1.8rem;
+      color: black;
+      font-weight: bold;
+      margin-top: 0px;
+      margin-bottom: 3px;
+    }
+    
+    
+  
