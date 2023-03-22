@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,5 +37,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "babel-loader": "^9.1.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jsdom": "^21.1.1"
   }
 }
