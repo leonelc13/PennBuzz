@@ -37,7 +37,7 @@ function Register(props) {
 
   
     try {
-      const response = await fetch('http://localhost:3002/users');
+      const response = await fetch('http://localhost:3000/users');
       const data = await response.json();
 
       if (data.find((user) => user.username === username)) {
