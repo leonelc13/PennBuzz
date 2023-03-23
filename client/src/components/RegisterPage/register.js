@@ -71,23 +71,23 @@ function Register(props) {
   };
 
   return (
-    <div>
-      <h1>Penn<span className="Buzz">Buzz</span></h1>
+    <div className='register-container'>
+      <h1 className='header-text'>Penn<span className="Buzz">Buzz</span></h1>
       {errorMessage && <p className='error-text'>{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="register-form" onSubmit={handleSubmit}>
         <p className="title-text">Sign Up</p>
         <p className="login-text">
-          Or <Link to="/login">Sign In</Link> to your account
+          Or <Link to="/login" className='url-text'>Sign In</Link> to your account
         </p>
         <div>
           <label className='titles-text' htmlFor="username">Pick a Username</label>
-          <input type="text" value={username} id="username" onChange={handleUsernameChange} />
+          <input type="text" value={username} id="username" className="input-edits" onChange={handleUsernameChange} />
         </div>
         <div>
           <label className='titles-text' htmlFor='password'>Pick a Password</label>
-          <input type="password" value={password} id="password" onChange={handlePasswordChange} />
+          <input type="password" value={password} id="password" className="input-edits" onChange={handlePasswordChange} />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className='btn-edits'>Sign Up</button>
       </form>
     </div>
   );

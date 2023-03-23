@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
@@ -6,34 +7,34 @@ import Register from "../src/components/RegisterPage/register";
 
 describe("Register component", () => {
   test("renders correctly", () => {
-    const tree = renderer.create(<Register />).toJSON();
+    const tree = renderer.create(<BrowserRouter><Register /></BrowserRouter>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   test("renders with username and password inputs", () => {
-    render(<Register />);
+    render(<BrowserRouter><Register /></BrowserRouter>);
     expect(screen.getByLabelText(/Pick a Username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Pick a Password/i)).toBeInTheDocument();
   });
 
   test("renders with 'Sign Up' button", () => {
-    render(<Register />);
+    render(<BrowserRouter><Register /></BrowserRouter>);
     expect(screen.getByRole('button', { name: /Sign Up/i })).toBeInTheDocument();
   });
 
   test("renders with 'sign in' link", () => {
-    render(<Register />);
+    render(<BrowserRouter><Register /></BrowserRouter>);
     expect(screen.getByRole('link', { name: /sign in/i })).toBeInTheDocument();
   });
 
   test("renders with 'PennBuzz' heading", () => {
-    render(<Register />);
+    render(<BrowserRouter><Register /></BrowserRouter>);
     expect(screen.getByRole('heading', { name: /Penn Buzz/i })).toBeInTheDocument();
   });
 
   describe('Registration Functionality', () => {
     test('displays error message for missing username', () => {
-      render(<Register />);
+      render(<BrowserRouter><Register /></BrowserRouter>);
       const passwordInput = screen.getByLabelText(/Pick a Password/i);
       const signUpButton = screen.getByRole('button', { name: /Sign Up/i });
 
@@ -44,7 +45,7 @@ describe("Register component", () => {
     });
 
     test('displays error message for missing password', () => {
-      render(<Register />);
+      render(<BrowserRouter><Register /></BrowserRouter>);
       const usernameInput = screen.getByLabelText(/Pick a Username/i);
       const signUpButton = screen.getByRole('button', { name: /Sign Up/i });
 
@@ -55,7 +56,7 @@ describe("Register component", () => {
     });
 
     test('displays error message for missing username and password', () => {
-      render(<Register />);
+      render(<BrowserRouter><Register /></BrowserRouter>);
       const signUpButton = screen.getByRole('button', { name: /Sign Up/i });
 
       fireEvent.click(signUpButton);
@@ -64,7 +65,7 @@ describe("Register component", () => {
     });
 
     test('successfully submits registration form', () => {
-      render(<Register />);
+      render(<BrowserRouter><Register /></BrowserRouter>);
       const usernameInput = screen.getByLabelText(/Pick a Username/i);
       const passwordInput = screen.getByLabelText(/Pick a Password/i);
       const signUpButton = screen.getByRole('button', { name: /Sign Up/i });
@@ -78,7 +79,7 @@ describe("Register component", () => {
     });
 
     test('redirects to login page on click of "sign in" link', () => {
-      render(<Register />);
+      render(<BrowserRouter><Register /></BrowserRouter>);
       const signInLink = screen.getByRole('link', { name: /sign in/i });
 
       fireEvent.click(signInLink);

@@ -1,21 +1,14 @@
   /* Center the contents of the login page */
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-  }
-
-  .container {
+  .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 90vh;
   }
   
   /* Style the PennBuzz heading */
-  h1 {
+  .heading-text {
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
@@ -24,7 +17,7 @@
   }
   
   /* Style the container for the login form */
-  form {
+  .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,25 +26,13 @@
     border-radius: 20px;
     padding: 80px 20px 80px 20px;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
-    margin-top: 30px;
+    margin-top: 10px;
     height: 300px;
     width: 400px;
   }
   
-  /* Style the text for the login form */
-  label {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  /* Style the text for the error message */
-  p {
-    color: red;
-    font-size: 1.2rem;
-  }
-  
   /* Style the input fields for the username and password */
-  input[type="text"], input[type="password"] {
+  .login-inputs{
     font-size: 1.2rem;
     padding-bottom: 25px;
     padding-right: 0px;
@@ -67,7 +48,7 @@
 
   }
   
-  button[type="submit"], button[type="button"] {
+  .login-button{
     background-color: red;
     color: #fff;
     font-size: 1.2rem;
@@ -80,7 +61,7 @@
     width: 86%;
   }
   
-  a {
+   .sign-up-text {
     color: red;
     font-size: 0.8rem;
     font-weight: bold;
@@ -93,7 +74,7 @@
     color: black;
     }
 
-    .title-text {
+    .sign-text {
       font-size: 1.6rem;
       color: black;
       font-weight: bold;
@@ -101,21 +82,22 @@
       margin-bottom: 3px;
     }
 
-    .Buzz {
+    .buzz-text {
       font-size: 4rem;
       color: red;
     }
 
-    .error-text {
+    .error-message {
       font-size: 1rem;
       align-items: center;
       font-weight: bold;
       padding-left: 45px;
     }
 
-    .titles-text {
+    .inputs-text {
       margin: 0px 28px;
       font-size: 1rem;
+      font-weight: bold;
 
   }
     
