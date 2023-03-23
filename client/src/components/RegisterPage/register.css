@@ -87,7 +87,8 @@
     text-decoration: none;
   }
     
-    .registration-text {
+    
+    .login-text {
     font-size: 0.8rem;
     margin-top: 1px;
     color: black;
@@ -102,23 +103,21 @@
     }
 
     .Buzz {
-      font-size: 4rem;
-      color: red;
+        font-size: 4rem;
+        color: red;
     }
-
+    
     .error-text {
-      font-size: 1rem;
-      align-items: center;
-      font-weight: bold;
-      padding-left: 45px;
+        font-size: 1rem;
+        align-items: center;
+        font-weight: bold;
+        padding-left: 45px;
     }
 
     .titles-text {
-      margin: 0px 28px;
-      font-size: 1rem;
+        margin: 0px 28px;
+        font-size: 1rem;
 
-  }
-    
-  
+    }
     
   
