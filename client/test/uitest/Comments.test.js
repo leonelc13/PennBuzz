@@ -6,7 +6,6 @@ import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CommentList from '../../src/components/Comments/CommentList';
 
-
 describe('CommentList component tests', () => {
     const comments = [
         { author: 'John Doe', commentContent: 'This is a great post' },
@@ -18,6 +17,7 @@ describe('CommentList component tests', () => {
         expect(container.firstChild).toMatchSnapshot();
     });
 
+    
     test('adds a new comment when "Add Comment" button is clicked', () => {
         const { getByPlaceholderText, getByText } = render(
             <CommentList comments={comments} />
