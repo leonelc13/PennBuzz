@@ -17,7 +17,7 @@
   }
   
   /* Style the container for the login form */
-  .form {
+  .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -32,7 +32,7 @@
   }
   
   /* Style the input fields for the username and password */
-  .inputs{
+  .login-inputs{
     font-size: 1.2rem;
     padding-bottom: 25px;
     padding-right: 0px;
@@ -48,7 +48,7 @@
 
   }
   
-  .button{
+  .login-button{
     background-color: red;
     color: #fff;
     font-size: 1.2rem;

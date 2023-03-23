@@ -50,20 +50,20 @@ function Login(props) {
       <h1 className="heading-text">Penn<span className="buzz-text">Buzz</span></h1>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <p className="sign-text">Sign In</p>
         <p className="registration-text">
           Or <Link to="/register" className="sign-up-text">Sign Up</Link> to make your own account
         </p>
         <div>
           <label className="inputs-text" htmlFor="username">Username</label>
-          <input type="text" className="inputs" value={username} id="username" onChange={handleUsernameChange} />
+          <input type="text" className="login-inputs" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
           <label className="inputs-text" htmlFor="password">Password</label>
-          <input type="password" className="inputs" value={password} id="password" onChange={handlePasswordChange} />
+          <input type="password" className="login-inputs" value={password} id="password" onChange={handlePasswordChange} />
         </div>
-        <button type="submit" className="button">Sign In</button>
+        <button type="submit" className="login-button">Sign In</button>
       </form>
     </div>
   );
