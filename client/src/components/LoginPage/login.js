@@ -46,24 +46,24 @@ function Login(props) {
   };
 
   return (
-    <div>
-      <h1>Penn<span className="Buzz">Buzz</span></h1>
-      {errorMessage && <p className="error-text">{errorMessage}</p>}
+    <div className="login-container">
+      <h1 className="heading-text">Penn<span className="buzz-text">Buzz</span></h1>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <p className="title-text">Sign In</p>
+      <form className="form" onSubmit={handleSubmit}>
+        <p className="sign-text">Sign In</p>
         <p className="registration-text">
-          Or <Link to="/register">Sign Up</Link> to make your own account
+          Or <Link to="/register" className="sign-up-text">Sign Up</Link> to make your own account
         </p>
         <div>
-          <label className="titles-text" htmlFor="username">Username</label>
-          <input type="text" value={username} id="username" onChange={handleUsernameChange} />
+          <label className="inputs-text" htmlFor="username">Username</label>
+          <input type="text" className="inputs" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label className="titles-text" htmlFor="password">Password</label>
-          <input type="password" value={password} id="password" onChange={handlePasswordChange} />
+          <label className="inputs-text" htmlFor="password">Password</label>
+          <input type="password" className="inputs" value={password} id="password" onChange={handlePasswordChange} />
         </div>
-        <button type="submit">Sign In</button>
+        <button type="submit" className="button">Sign In</button>
       </form>
     </div>
   );
