@@ -14,7 +14,7 @@ function Register() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!username && !password) {
@@ -33,24 +33,38 @@ function Register() {
     }
 
   
-   // implemented for faked backend
-   /* const response = await fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });*/
+    try {
+      const response = await fetch('http://localhost:3001/users');
+      const data = await response.json();
+
+      if (data.find((user) => user.username === username)) {
+        setErrorMessage('Username is already taken');
+        return;
+      }
+
+      const postResponse = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
   
-    //const data = await response.json();
+      const postData = await postResponse.json();
   
-   /* if (data.error) {
-      setErrorMessage(data.error);
-      return;
-    }*/
+      if (postData.error) {
+        setErrorMessage(postData.error);
+        return;
+      }
+  
+      // handle successful registration
+    } catch (error) {
+      console.error(error);
+      setErrorMessage('An error occurred while registering. Please try again later.');
+    }
   
   };
 
@@ -78,4 +92,3 @@ function Register() {
 }
 
 export default Register;
-

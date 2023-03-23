@@ -14,7 +14,7 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!username && !password) {
       setErrorMessage('Missing username and password');
@@ -30,18 +30,19 @@ function Login() {
       setErrorMessage('Missing password');
       return;
     }
-    /*
+    
     try {
-      /**const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
-      const data = await response.json(); */
-      /*if (data.length === 0 || users[0].password !== password || data[0].username !== username) {
+      const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
+      const data = await response.json();
+      if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
         return;
       }
+      handleLogin();
       // redirect to the homepage
     } catch (error) {
       console.error(error);
-    }*/
+    }
   };
 
   return (
