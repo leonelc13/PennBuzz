@@ -48,7 +48,7 @@ function App() {
                 <Routes>
                     <Route exact path='/' element={<Navigate to='/login' />} />
                     <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
-                    <Route exact path='/register' element={<Register />} />
+                    <Route exact path='/register' element={<Register handleLogin={handleLogin}/>} />
                 </Routes>
                 </>
             )}

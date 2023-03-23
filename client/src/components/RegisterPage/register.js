@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./register.css";
 
-function Register() {
+function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -34,7 +34,7 @@ function Register() {
 
   
     try {
-      const response = await fetch('http://localhost:3001/users');
+      const response = await fetch('http://localhost:3002/users');
       const data = await response.json();
 
       if (data.find((user) => user.username === username)) {
@@ -42,7 +42,7 @@ function Register() {
         return;
       }
 
-      const postResponse = await fetch('http://localhost:3001/users', {
+      const postResponse = await fetch('http://localhost:3002/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ function Register() {
         return;
       }
   
-      // handle successful registration
+      props.handleLogin(username);
     } catch (error) {
       console.error(error);
       setErrorMessage('An error occurred while registering. Please try again later.');
@@ -73,9 +73,9 @@ function Register() {
       <h1>Penn<a className="Buzz">Buzz</a></h1>
       {errorMessage && <p className='error-text'>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
-        <p className="title-text">Sign Up To PennBuzz</p>
+        <p className="title-text">Sign Up</p>
         <p className="login-text">
-          Or <a href="/login">sign in</a> to your account
+          Or <a href="/login">Sign In</a> to your account
         </p>
         <div>
           <label className='titles-text' htmlFor="username">Pick a Username</label>

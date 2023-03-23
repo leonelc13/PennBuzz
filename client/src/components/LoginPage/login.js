@@ -32,7 +32,7 @@ function Login(props) {
     }
     
     try {
-      const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
+      const response = await fetch("http://localhost:3002/users?username=" + username + "&password=" + password);
       const data = await response.json();
       if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
@@ -52,7 +52,7 @@ function Login(props) {
       <form onSubmit={handleSubmit}>
         <p className="title-text">Sign In</p>
         <p className="registration-text">
-          Or <a href="/register">Sign up</a> to make your own account
+          Or <a href="/register">Sign Up</a> to make your own account
         </p>
         <div>
           <label className="titles-text" htmlFor="username">Username</label>
