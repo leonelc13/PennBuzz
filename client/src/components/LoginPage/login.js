@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./login.css";
 
 function Login(props) {
@@ -32,7 +33,7 @@ function Login(props) {
     }
     
     try {
-      const response = await fetch("http://localhost:3002/users?username=" + username + "&password=" + password);
+      const response = await fetch("http://localhost:3000/users?username=" + username + "&password=" + password);
       const data = await response.json();
       if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
@@ -46,13 +47,13 @@ function Login(props) {
 
   return (
     <div>
-      <h1>Penn<a className="Buzz">Buzz</a></h1>
+      <h1>Penn<span className="Buzz">Buzz</span></h1>
       {errorMessage && <p className="error-text">{errorMessage}</p>}
 
       <form onSubmit={handleSubmit}>
         <p className="title-text">Sign In</p>
         <p className="registration-text">
-          Or <a href="/register">Sign Up</a> to make your own account
+          Or <Link to="/register">Sign Up</Link> to make your own account
         </p>
         <div>
           <label className="titles-text" htmlFor="username">Username</label>

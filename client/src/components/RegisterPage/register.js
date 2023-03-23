@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import "./register.css";
 
 function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  //const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -42,7 +45,7 @@ function Register(props) {
         return;
       }
 
-      const postResponse = await fetch('http://localhost:3002/users', {
+      const postResponse = await fetch('http://localhost:3000/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +64,7 @@ function Register(props) {
       }
   
       props.handleLogin(username);
+      //navigate('/profile');
     } catch (error) {
       console.error(error);
       setErrorMessage('An error occurred while registering. Please try again later.');
@@ -70,12 +74,12 @@ function Register(props) {
 
   return (
     <div>
-      <h1>Penn<a className="Buzz">Buzz</a></h1>
+      <h1>Penn<span className="Buzz">Buzz</span></h1>
       {errorMessage && <p className='error-text'>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <p className="title-text">Sign Up</p>
         <p className="login-text">
-          Or <a href="/login">Sign In</a> to your account
+          Or <Link to="/login">Sign In</Link> to your account
         </p>
         <div>
           <label className='titles-text' htmlFor="username">Pick a Username</label>
