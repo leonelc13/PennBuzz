@@ -30,7 +30,7 @@ function Login() {
       setErrorMessage('Missing password');
       return;
     }
-    /* faked backend code 
+    /*
     try {
       /**const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
       const data = await response.json(); */
@@ -55,12 +55,12 @@ function Login() {
           Or <a href="/register">Sign up</a> to make your own account
         </p>
         <div>
-          <label className="titles-text">Username</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <label className="titles-text" htmlFor="username">Username</label>
+          <input type="text" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label className="titles-text">Password</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <label className="titles-text" htmlFor="password">Password</label>
+          <input type="password" value={password} id="password" onChange={handlePasswordChange} />
         </div>
         <button type="submit">Sign In</button>
       </form>

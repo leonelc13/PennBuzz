@@ -64,12 +64,12 @@ function Register() {
           Or <a href="/login">sign in</a> to your account
         </p>
         <div>
-          <label className='titles-text'>Pick a Username</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <label className='titles-text' htmlFor="username">Pick a Username</label>
+          <input type="text" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label className='titles-text'>Pick a Password</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <label className='titles-text' htmlFor='password'>Pick a Password</label>
+          <input type="password" value={password} id="password" onChange={handlePasswordChange} />
         </div>
         <button type="submit">Sign Up</button>
       </form>
@@ -78,3 +78,4 @@ function Register() {
 }
 
 export default Register;
+
