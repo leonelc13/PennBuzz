@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
 import DirectMessagingPage from './components/DirectMessaging/DirectMessagingPage';
-import Header from './components/header/Header';
-import ProfilePage from './components/ProfilePage/ProfilePage'
+import Header from './components/Header/Header';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import LeaderBoard from './components/Leaderboard/Leaderboard';
 import './style/index.css';
 
 
@@ -23,6 +24,7 @@ function App() {
                     <Route exact path="/chat" element={<DirectMessagingPage {...props} />} />
                     <Route exact path="/" element={<MainFeed {...props} />} />
                     <Route exact path="/profile" element={<ProfilePage {...props} />} />
+                    <Route exact path="/leaderboard" element={<LeaderBoard />} />
                 </Routes>
             </div>
         </Router>
