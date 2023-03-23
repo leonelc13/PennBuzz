@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,8 +38,7 @@ function Login() {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
         return;
       }
-      handleLogin();
-      // redirect to the homepage
+      props.handleLogin(username);
     } catch (error) {
       console.error(error);
     }

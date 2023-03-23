@@ -1,10 +1,11 @@
-import React from 'react';
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, BrowserRouter as Router, Navigate} from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
 import DirectMessagingPage from './components/DirectMessaging/DirectMessagingPage';
 import Header from './components/header/Header';
 import ProfilePage from './components/ProfilePage/ProfilePage'
 import Login from './components/LoginPage/login'
+import Register from './components/RegisterPage/register'
 import './style/index.css';
 
 
@@ -15,7 +16,7 @@ function App() {
     const [username, setUsername] = useState("");
 
     const handleLogout = () => {
-        setLogin(false);
+        setAuthenticated(false);
     };
     
     const handleLogin = (username) => {
@@ -33,21 +34,24 @@ function App() {
 
     return (
         <Router>
-            <div>
-                {authenticated ? (
-                    <>
-                        <Header {...props} />
-                        <Routes>
-                            <Route exact path='/chat' element={<DirectMessagingPage {...props} />} />
-                            <Route exact path='/' element={<MainFeed {...props} />} />
-                            <Route exact path='/profile' element={<ProfilePage {...props} />} />
-                        </Routes>
-                    </>
-                    ) : (
-                        <Navigate to='/login' />
-                    )}
+            {authenticated ? (
+                <>
+                <Header {...props} />
+                <Routes>
+                    <Route exact path='/chat' element={<DirectMessagingPage {...props} />} />
+                    <Route exact path='/' element={<MainFeed {...props} />} />
+                    <Route exact path='/profile' element={<ProfilePage {...props} />} />
+                </Routes>
+                </>
+            ) : (
+                <>
+                <Routes>
+                    <Route exact path='/' element={<Navigate to='/login' />} />
                     <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
-            </div>
+                    <Route exact path='/register' element={<Register />} />
+                </Routes>
+                </>
+            )}
         </Router>
     );
 }
