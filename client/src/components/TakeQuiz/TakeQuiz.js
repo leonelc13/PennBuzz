@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import QuizResults from './QuizResults';
-import './takeQuizStyle.css' 
+import './quizStyle.css'
 
 
 function TakeQuiz({ title, questions, submitted, setSubmitted }) {
