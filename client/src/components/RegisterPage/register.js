@@ -7,8 +7,6 @@ function Register(props) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  //const navigate = useNavigate();
-
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -64,7 +62,7 @@ function Register(props) {
       }
   
       props.handleLogin(username);
-      //navigate('/profile');
+
     } catch (error) {
       console.error(error);
       setErrorMessage('An error occurred while registering. Please try again later.');
