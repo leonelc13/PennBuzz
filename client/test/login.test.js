@@ -1,40 +1,41 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from "react-test-renderer";
+import { BrowserRouter } from 'react-router-dom';
 import "@testing-library/jest-dom";
 import Login from "../src/components/LoginPage/login";
 
 describe("Login component", () => {
     test("renders correctly", () => {
-      const tree = renderer.create(<Login />).toJSON();
+      const tree = renderer.create(<BrowserRouter><Login /></BrowserRouter>).toJSON();
       expect(tree).toMatchSnapshot();
     });
   
     test("renders with username and password inputs", () => {
-        render(<Login />);
+        render(<BrowserRouter><Login /></BrowserRouter>);
         expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
       });
     
       test("renders with 'Sign In' button", () => {
-        render(<Login />);
+        render(<BrowserRouter><Login /></BrowserRouter>);
         expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
       });
     
       test("renders with 'Sign up' link", () => {
-        render(<Login />);
+        render(<BrowserRouter><Login /></BrowserRouter>);
         expect(screen.getByRole('link', { name: /Sign up/i })).toBeInTheDocument();
       });
     
       test("renders with 'PennBuzz' heading", () => {
-        render(<Login />);
+        render(<BrowserRouter><Login /></BrowserRouter>);
         expect(screen.getByRole('heading', { name: /Penn Buzz/i })).toBeInTheDocument();
       });
   });
 
 describe('Login Functionality', () => {
   test('renders login form', () => {
-    render(<Login />);
+    render(<BrowserRouter><Login /></BrowserRouter>);
     expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
@@ -42,7 +43,7 @@ describe('Login Functionality', () => {
   });
 
   test('displays error message for missing username', () => {
-    render(<Login />);
+    render(<BrowserRouter><Login /></BrowserRouter>);
     const passwordInput = screen.getByLabelText(/Password/i);
     const signInButton = screen.getByRole('button', { name: /Sign In/i });
 
@@ -53,7 +54,7 @@ describe('Login Functionality', () => {
   });
 
   test('displays error message for missing password', () => {
-    render(<Login />);
+    render(<BrowserRouter><Login /></BrowserRouter>);
     const usernameInput = screen.getByLabelText(/Username/i);
     const signInButton = screen.getByRole('button', { name: /Sign In/i });
 
@@ -64,19 +65,12 @@ describe('Login Functionality', () => {
   });
 
   test('displays error message for missing username and password', () => {
-    render(<Login />);
+    render(<BrowserRouter><Login /></BrowserRouter>);
     const signInButton = screen.getByRole('button', { name: /Sign In/i });
 
     fireEvent.click(signInButton);
 
     expect(screen.getByText(/Missing username and password/i)).toBeInTheDocument();
   });
-
-  test('displays error message for incorrect username and password', () => {
-    // TODO: write this test
-  });
-
-  test('redirects to homepage on successful login', () => {
-    // TODO: write this test
-  });
+  
 });
