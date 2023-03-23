@@ -8,7 +8,6 @@ function QuizInfo({props}) {
     const [submitted, setSubmitted] = useState(false);
     const [upvotes, setUpvotes] = useState(props.upvotes);
     const [downvotes, setDownvotes] = useState(props.downvotes);
-    const [inComments, setInComments] = useState(false);
     const answers = ['answer1', 'answer2', 'answer3', 'answer4'];
     const questions = [['question1', answers], ['question2', answers], ['question3', answers], ['question4', answers]];
     const comments = [
@@ -26,8 +25,12 @@ function QuizInfo({props}) {
         setSubmitted(false);
     }
 
-    const handleCommentsClick = (e) => {
-        setInComments(true);
+    const handleUpvoteClick = (e) => {
+        setUpvotes(upvotes + 1);
+    }
+
+    const handleDownvoteClick = (e) => {
+        setDownvotes(downvotes + 1);
     }
 
     if (inQuiz === true) {
@@ -69,11 +72,11 @@ function QuizInfo({props}) {
                     </button>
                     <div className="quiz-upvotes-comments">
                         <div className='quiz-upvotes'>
-                            <button >
+                            <button onClick={handleUpvoteClick}>
                                 <i class="fa-solid fa-arrow-up"></i>
                                 {upvotes}
                             </button>
-                            <button>
+                            <button onClick={handleDownvoteClick}>
                                 <i class="fa-solid fa-arrow-down"></i>
                                 {downvotes}
                             </button>
