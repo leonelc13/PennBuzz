@@ -4,13 +4,13 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
 import Leaderboard from "../../src/components/Leaderboard/Leaderboard";
 
-let props = { user: "johndoe" };
 describe("Leaderboard", () => {
 
   test("changes time period and updates the active class", () => {
-    render(<Leaderboard {...props} />);
+    render(<Router><Leaderboard /></Router>);
     const weekBtn = screen.getByText("Week");
     const monthBtn = screen.getByText("Month");
     const allTimeBtn = screen.getByText("All-Time");
@@ -27,7 +27,7 @@ describe("Leaderboard", () => {
   });
 
   test("paginates users", () => {
-    render(<Leaderboard />);
+    render(<Router><Leaderboard /></Router>);
     const prevBtn = screen.getByText("Previous");
     const nextBtn = screen.getByText("Next");
     const pageSpan = screen.getByText("Page 1");

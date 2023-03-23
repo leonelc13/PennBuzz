@@ -1,133 +1,160 @@
 {
-    "profile": [
-        {
-            "profile_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-            "name": "johndoe",
-            "biography": "John Wick is a legendary hitman and assassin, known for his unparalleled skills and deadly determination. Born into a life of crime, John worked for years as a hired killer, earning a reputation as the best in the business. However, when he decided to retire and start a new life with his wife, Helen, tragedy struck. After Helen passed away, John was left alone and brokenhearted.\n\nIn a final act of love, Helen arranged for a puppy to be delivered to John after her death, hoping it would provide him with some comfort and companionship. When a group of thugs broke into John's home, stole his car, and killed his beloved puppy, they unleashed the wrath of a man who had nothing left to lose."
-        }
-    ],
-    "quizzes": [
-        {
-            "title": "Which Penn Professor are you?",
-            "author_name": "johnwick",
-            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-            "description": "Complete this quiz and find out your soulmate professor at Penn!",
-            "upvotes": 87,
-            "downvotes": 12,
-            "num_comments": 7,
-            "labels": [
-                "Penn",
-                "Professors"
-            ],
-            "timestamp": "12/12/2023",
-            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
-            "key": "Which Penn Professor are you?-12/12/2023-johnwick-1"
-        },
-        {
-            "title": "Which Penn Professor are you?",
-            "author_name": "johnwick",
-            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-            "description": "Complete this quiz and find out your soulmate professor at Penn!",
-            "upvotes": 87,
-            "downvotes": 12,
-            "num_comments": 7,
-            "labels": [
-                "Penn",
-                "Professors"
-            ],
-            "timestamp": "12/12/2023",
-            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
-            "key": "Which Penn Professor are you?-12/12/2023-johnwick-2"
-        },
-        {
-            "title": "Which Penn Professor are you?",
-            "author_name": "johnwick",
-            "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-            "description": "Complete this quiz and find out your soulmate professor at Penn!",
-            "upvotes": 87,
-            "downvotes": 12,
-            "num_comments": 7,
-            "labels": [
-                "Penn",
-                "Professors"
-            ],
-            "timestamp": "12/12/2023",
-            "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
-            "key": "Which Penn Professor are you?-12/12/2023-johnwick-3"
-        }
-    ],
-    "channels": {
-        "johnwick": {
-            "name": "John Wick",
-            "timestamp": "8:54pm 12/12/2023",
-            "img": "https://drive.google.com/uc?export=view&id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe"
-        },
-        "jonjones": {
-            "name": "Jon Jones",
-            "timestamp": "8:54pm 12/12/2023",
-            "img": "https://drive.google.com/uc?export=view&id=1bL48Yx608hc6QK41dVx-7O95XwMPOc25"
-        }
+  "profile": [
+    {
+      "profile_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      "name": "johndoe",
+      "biography": "John Wick is a legendary hitman and assassin, known for his unparalleled skills and deadly determination. Born into a life of crime, John worked for years as a hired killer, earning a reputation as the best in the business. However, when he decided to retire and start a new life with his wife, Helen, tragedy struck. After Helen passed away, John was left alone and brokenhearted.\n\nIn a final act of love, Helen arranged for a puppy to be delivered to John after her death, hoping it would provide him with some comfort and companionship. When a group of thugs broke into John's home, stole his car, and killed his beloved puppy, they unleashed the wrath of a man who had nothing left to lose."
+    }
+  ],
+  "quizzes": [
+    {
+      "title": "Which Penn Professor are you?",
+      "author_name": "johnwick",
+      "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      "description": "Complete this quiz and find out your soulmate professor at Penn!",
+      "upvotes": 87,
+      "downvotes": 12,
+      "num_comments": 7,
+      "labels": [
+        "Penn",
+        "Professors"
+      ],
+      "timestamp": "12/12/2023",
+      "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+      "key": "Which Penn Professor are you?-12/12/2023-johnwick-1"
     },
-    "messages": [
+    {
+      "title": "Which Penn Professor are you?",
+      "author_name": "johnwick",
+      "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      "description": "Complete this quiz and find out your soulmate professor at Penn!",
+      "upvotes": 87,
+      "downvotes": 12,
+      "num_comments": 7,
+      "labels": [
+        "Penn",
+        "Professors"
+      ],
+      "timestamp": "12/12/2023",
+      "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+      "key": "Which Penn Professor are you?-12/12/2023-johnwick-2"
+    },
+    {
+      "title": "Which Penn Professor are you?",
+      "author_name": "johnwick",
+      "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      "description": "Complete this quiz and find out your soulmate professor at Penn!",
+      "upvotes": 87,
+      "downvotes": 12,
+      "num_comments": 7,
+      "labels": [
+        "Penn",
+        "Professors"
+      ],
+      "timestamp": "12/12/2023",
+      "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+      "key": "Which Penn Professor are you?-12/12/2023-johnwick-3"
+    }
+  ],
+  "channels": {
+    "johnwick": {
+      "name": "John Wick",
+      "timestamp": "8:54pm 12/12/2023",
+      "img": "https://drive.google.com/uc?export=view&id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe"
+    },
+    "jonjones": {
+      "name": "Jon Jones",
+      "timestamp": "8:54pm 12/12/2023",
+      "img": "https://drive.google.com/uc?export=view&id=1bL48Yx608hc6QK41dVx-7O95XwMPOc25"
+    }
+  },
+  "messages": [
+    {
+      "channel_id": "johnwick",
+      "messages": [
         {
-            "channel_id": "johnwick",
-            "messages": [
-                {
-                    "sender": "johnwick",
-                    "timestamp": "8:24pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johndoe",
-                    "timestamp": "8:29pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johnwick",
-                    "timestamp": "8:31pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johndoe",
-                    "timestamp": "8:32pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johnwick",
-                    "timestamp": "8:33pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johndoe",
-                    "timestamp": "8:34pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johnwick",
-                    "timestamp": "8:34pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "johndoe",
-                    "timestamp": "8:35pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                }
-            ]
+          "sender": "johnwick",
+          "timestamp": "8:24pm 12/12/2023",
+          "text": "Hey John! How are you!"
         },
         {
-            "channel_id": "jonjones",
-            "messages": [
-                {
-                    "sender": "johndoe",
-                    "timestamp": "8:22pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                },
-                {
-                    "sender": "jonjones",
-                    "timestamp": "8:29pm 12/12/2023",
-                    "text": "Hey John! How are you!"
-                }
-            ]
+          "sender": "johndoe",
+          "timestamp": "8:29pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johnwick",
+          "timestamp": "8:31pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johndoe",
+          "timestamp": "8:32pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johnwick",
+          "timestamp": "8:33pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johndoe",
+          "timestamp": "8:34pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johnwick",
+          "timestamp": "8:34pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "johndoe",
+          "timestamp": "8:35pm 12/12/2023",
+          "text": "Hey John! How are you!"
         }
-    ]
+      ]
+    },
+    {
+      "channel_id": "jonjones",
+      "messages": [
+        {
+          "sender": "johndoe",
+          "timestamp": "8:22pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        },
+        {
+          "sender": "jonjones",
+          "timestamp": "8:29pm 12/12/2023",
+          "text": "Hey John! How are you!"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "john",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "username": "jane",
+      "password": "password456"
+    },
+    {
+      "username": "bob",
+      "password": "wqwqeqwe",
+      "id": 3
+    },
+    {
+      "username": "leonel",
+      "password": "cotnreras",
+      "id": 4
+    },
+    {
+      "username": "leonel23",
+      "password": "contreras",
+      "id": 5
+    }
+  ]
 }

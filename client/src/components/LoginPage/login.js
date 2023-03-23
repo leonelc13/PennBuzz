@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./login.css";
 
-function Login() {
+function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,16 +15,31 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!username && !password) {
+      setErrorMessage('Missing username and password');
+      return;
+    }
+
+    if (!username) {
+      setErrorMessage('Missing username');
+      return;
+    }
+  
+    if (!password) {
+      setErrorMessage('Missing password');
+      return;
+    }
+    
     try {
-      /**const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
-      const data = await response.json(); */
-      if (data.length === 0 || users[0].password !== password || data[0].username !== username) {
+      const response = await fetch("http://localhost:3000/users?username=" + username + "&password=" + password);
+      const data = await response.json();
+      if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
         return;
       }
-      // redirect to the homepage
+      props.handleLogin(username);
     } catch (error) {
       console.error(error);
     }
@@ -31,21 +47,21 @@ function Login() {
 
   return (
     <div>
-      <h1>PennBuzz</h1>
-      {errorMessage && <p>{errorMessage}</p>}
+      <h1>Penn<span className="Buzz">Buzz</span></h1>
+      {errorMessage && <p className="error-text">{errorMessage}</p>}
 
       <form onSubmit={handleSubmit}>
         <p className="title-text">Sign In</p>
         <p className="registration-text">
-          Or <a href="/register">Sign up</a> to make your own account
+          Or <Link to="/register">Sign Up</Link> to make your own account
         </p>
         <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          <label className="titles-text" htmlFor="username">Username</label>
+          <input type="text" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <label className="titles-text" htmlFor="password">Password</label>
+          <input type="password" value={password} id="password" onChange={handlePasswordChange} />
         </div>
         <button type="submit">Sign In</button>
       </form>
