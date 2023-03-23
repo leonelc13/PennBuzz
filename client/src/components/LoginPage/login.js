@@ -30,7 +30,7 @@ function Login() {
       setErrorMessage('Missing password');
       return;
     }
-    /*
+    /* faked backend code 
     try {
       /**const response = await fetch("http://localhost:3001/users?username=" + username + "&password=" + password);
       const data = await response.json(); */
