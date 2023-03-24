@@ -1,103 +1,167 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import axios from "axios";
 import QuizInfo from '../../src/components/QuizInfo/QuizInfo';
 
-let props = {
-  title: 'Test Quiz',
-  description: 'This is a test quiz',
-  author_name: 'John Doe',
-  author_img: 'https://example.com/profile.jpg',
-  thumbnail_img: 'https://example.com/thumbnail.jpg',
-  upvotes: 10,
-  downvotes: 2,
-  labels: ['label1', 'label2'],
-};
+jest.mock("axios");
 
+describe("QuizInfo component", () => {
+  const quizData = {
+    title: "Which Penn Professor are you?",
+    author_name: "johnwick",
+    author_img: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+    description: "Complete this quiz and find out your soulmate professor at Penn!",
+    upvotes: 87,
+    downvotes: 12,
+    num_comments: 7,
+    labels: ["Penn", "Professors"],
+    timestamp: "12/12/2023",
+    thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+    quizId: '123',
+    questions : [
+      {
+        question: 'Question 1 content',
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+      },
+      {
+        question: 'Question 2 content',
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+      },
+      {
+        question: 'Question 3 content',
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+      },
+      {
+        question: 'Question 4 content',
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+      }
+    ],
+    comments : [
+      {author: 'AdamSmith', content: 'So fun!'},
+      {author: 'johnwick', content: 'enjoy!'},
+      {author: 'carguy', content: 'I disagree with my results'}
+    ]
+  }
 
-  test('shows quiz when "Take Quiz" button is clicked', () => {
-    render(<QuizInfo props={props} />);
-
-    const takeQuizButton = screen.getByText(/Take Quiz/i);
-    fireEvent.click(takeQuizButton);
-
-    const question1Element = screen.getByText(/question1/i);
-    expect(question1Element).toBeInTheDocument();
-
-    const answer1Element = screen.getByText(/answer1/i);
-    expect(answer1Element).toBeInTheDocument();
-
-    const nextButton = screen.getByText(/Next/i);
-    expect(nextButton).toBeInTheDocument();
+  beforeEach(() => {
+    axios.mockReset();
   });
 
-describe('QuizInfo', () => {
-  test('renders quiz information', () => {
-    render(<QuizInfo props={props} />);
-    const titleElement = screen.getByText(props.title);
-    expect(titleElement).toBeInTheDocument();
-    const authorNameElement = screen.getByText(props.author_name);
-    expect(authorNameElement).toBeInTheDocument();
-    const descriptionElement = screen.getByText(props.description);
-    expect(descriptionElement).toBeInTheDocument();
-    const thumbnailElement = screen.getByAltText('quiz-thumbnail');
-    expect(thumbnailElement).toBeInTheDocument();
-    const upvotesElement = screen.getByText(props.upvotes);
-    expect(upvotesElement).toBeInTheDocument();
-    const downvotesElement = screen.getByText(props.downvotes);
-    expect(downvotesElement).toBeInTheDocument();
+  test("should render loading spinner when data is being retrieved", async () => {
+    axios.get.mockResolvedValueOnce({ data: {} });
+    render(<QuizInfo user="testuser" />);
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText("Loading...")).not.toBeInTheDocument());
   });
 
-  test('takes quiz when "Take Quiz" button is clicked', () => {
-    render(<QuizInfo props={props} />);
-    const takeQuizButton = screen.getByText('Take Quiz');
-    fireEvent.click(takeQuizButton);
-    const backToQuizInfoButton = screen.getByText('Back to Quiz Info');
-    expect(backToQuizInfoButton).toBeInTheDocument();
+  test("should render quiz info page with data after successful data retrieval", async () => {
+    const quizData = {
+      title: "Which Penn Professor are you?",
+      author_name: "johnwick",
+      author_img: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      description: "Complete this quiz and find out your soulmate professor at Penn!",
+      upvotes: 87,
+      downvotes: 12,
+      num_comments: 7,
+      labels: ["Penn", "Professors"],
+      timestamp: "12/12/2023",
+      thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+      quizId: '123',
+      questions : [
+        {
+          question: 'Question 1 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 2 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 3 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 4 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        }
+      ],
+      comments : [
+        {author: 'AdamSmith', content: 'So fun!'},
+        {author: 'johnwick', content: 'enjoy!'},
+        {author: 'carguy', content: 'I disagree with my results'}
+      ]
+    }
+    axios.get.mockResolvedValueOnce({ data: quizData });
+    render(<QuizInfo user="testuser" />);
+    await waitFor(() => expect(screen.getByText("Test Quiz")).toBeInTheDocument());
+    expect(screen.getByText("Test Author")).toBeInTheDocument();
+    expect(screen.getByText("Test Label 1")).toBeInTheDocument();
+    expect(screen.getByText("Test Label 2")).toBeInTheDocument();
+    expect(screen.getByText("This is a test quiz.")).toBeInTheDocument();
+    expect(screen.getByText("Take Quiz")).toBeInTheDocument();
+    expect(screen.getByText("5")).toBeInTheDocument();
+    expect(screen.getByText("2")).toBeInTheDocument();
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
   });
 
-
-  test('upvotes and downvotes work correctly', () => {
-    render(<QuizInfo props={props} />);
-    const upvoteButton = screen.getAllByRole('button')[1];
-    console.log(upvoteButton);
-    const downvoteButton = screen.getAllByRole('button')[2];
-    fireEvent.click(upvoteButton);
-    expect(screen.getByText('11')).toBeInTheDocument();
-    fireEvent.click(downvoteButton);
-    expect(screen.getByText('3')).toBeInTheDocument();
+  test("should render take quiz component when take quiz button is clicked", async () => {
+    const quizData = {
+      title: "Which Penn Professor are you?",
+      author_name: "johnwick",
+      author_img: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+      description: "Complete this quiz and find out your soulmate professor at Penn!",
+      upvotes: 87,
+      downvotes: 12,
+      num_comments: 7,
+      labels: ["Penn", "Professors"],
+      timestamp: "12/12/2023",
+      thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
+      quizId: '123',
+      questions : [
+        {
+          question: 'Question 1 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 2 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 3 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        },
+        {
+          question: 'Question 4 content',
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        }
+      ],
+      comments : [
+        {author: 'AdamSmith', content: 'So fun!'},
+        {author: 'johnwick', content: 'enjoy!'},
+        {author: 'carguy', content: 'I disagree with my results'}
+      ]
+    }
+    axios.get.mockResolvedValueOnce({ data: quizData });
+    render(<QuizInfo user="testuser" />);
+    await waitFor(() => expect(screen.getByText("Test Quiz")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("Take Quiz"));
+    expect(screen.getByText("Question 1")).toBeInTheDocument(); // Replace with actual question text
+    expect(screen.getByText("Question 2")).toBeInTheDocument(); // Replace with actual question text
+    expect(screen.getByText("Back to Quiz Info")).toBeInTheDocument();
   });
 
-  test("clicking the back to quiz info button displays the quiz info", () => {
-    const props = {
-      author_img: "test.png",
-      author_name: "Test Author",
-      description: "Test Description",
-      labels: ["label1", "label2"],
-      thumbnail_img: "test-thumbnail.png",
-      title: "Test Quiz",
-      upvotes: 10,
-      downvotes: 5,
-    };
-    render(<QuizInfo props={props} />);
-    
-    // Click on the "Take Quiz" button
-    const takeQuizButton = screen.getByText("Take Quiz");
-    fireEvent.click(takeQuizButton);
-  
-    // Click on the "Back to Quiz Info" button
-    const backButton = screen.getByText("Back to Quiz Info");
-    fireEvent.click(backButton);
-  
-    // Ensure that the quiz info is displayed again
-    const quizTitle = screen.getByText(props.title);
-    const quizDescription = screen.getByText(props.description);
-    expect(quizTitle).toBeInTheDocument();
-    expect(quizDescription).toBeInTheDocument();
-  });
-  
+  test("should add a comment when add comment button is clicked", async () => {
+    axios.get.mockResolvedValueOnce({ data: quizData });
+    render(<QuizInfo user="testuser" />);
+    await waitFor(() => expect(screen.getByText("Test User 1")).toBeInTheDocument());
+    axios.post.mockResolvedValueOnce({ data: { author: "testuser", content: "This is a new comment" } });
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "This is a new comment" } });
+    fireEvent.click(screen.getByText("Add Comment"));
+
+  })
 
 });
