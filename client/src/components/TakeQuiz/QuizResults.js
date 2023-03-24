@@ -1,18 +1,13 @@
 import React, { useState, useRef } from 'react';
 
-function QuizResults ({selectedAnswers, questions, setSubmitted, setInQuiz}) {
-
-    const handleBackButtonClick = (e) => {
-        setInQuiz(false);
-        setSubmitted(false);
-    }
+function QuizResults ({selectedAnswers, questions}) {
 
     return (
         <div>
             <h2>Your results!</h2>
             <ul>
                 { selectedAnswers.map((answer, index) => (
-                    <li> Question {index + 1} answer: {questions[index][1][answer]}</li>
+                    <li> Question {index + 1} answer: {questions[index].answers[answer]}</li>
                 ))}
             </ul>
         </div>        
