@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import TakeQuiz from '../TakeQuiz/TakeQuiz';
 import CommentList from '../Comments/CommentList';
 import './quizStyle.css'
@@ -13,6 +13,8 @@ function QuizInfo(props) {
     const [comments, setComments] = useState([]);
     const [upvotes, setUpvotes] = useState(0);
     const [downvotes, setDownvotes] = useState(0);
+
+    console.log(quizData);
 
     // mock backend quizData retrieval
     useEffect(() => {
