@@ -5,6 +5,7 @@ import './quizStyle.css'
 import axios from 'axios';
 
 function QuizInfo(props) {
+    // Initialize states
     const [inQuiz, setInQuiz] = useState(false);    
     const [submitted, setSubmitted] = useState(false);
     const [quizData, setQuizData] = useState({});
@@ -13,7 +14,7 @@ function QuizInfo(props) {
     const [upvotes, setUpvotes] = useState(0);
     const [downvotes, setDownvotes] = useState(0);
 
-
+    // mock backend quizData retrieval
     useEffect(() => {
         axios.get('http://localhost:3000/quizData',
         {
@@ -38,6 +39,7 @@ function QuizInfo(props) {
         return <div>Loading...</div>;
     }
 
+    // Updates upvote number
     function handleUpvoteClick(e) {
         axios.post('http://localhost:3000/quizData', { upvotes: quizData.upvotes + 1 })
             .then(response => {
@@ -49,6 +51,7 @@ function QuizInfo(props) {
             });
     }
       
+    // Updates downvote number
     function handleDownvoteClick(e) {
         axios.post('http://localhost:3000/quizData', { 
                 downvotes: quizData.downvotes + 1 
@@ -62,6 +65,7 @@ function QuizInfo(props) {
             });
     }
     
+    // updates comments 
     function handleAddComment(e) {
         axios.post('http://localhost:3000/quizData', {
             author: props.user,
@@ -76,15 +80,18 @@ function QuizInfo(props) {
         });
     }
 
+    // handles Take quiz click to trigger take quiz rendering
     function handleOnTakeQuizClick() {
         setInQuiz(true);
     }
 
+    // handles back button when in TakeQuiz
     const handleBackButtonClick = (e) => {
         setInQuiz(false);
         setSubmitted(false);
     }
 
+    // conditional rendering of take quiz
     if (inQuiz === true) {
         return (
             <div>
@@ -95,6 +102,7 @@ function QuizInfo(props) {
         );
     }   
 
+    // default rendering of quiz info page
     return(
         <div className="quiz-container">
             <div className="quiz-header-container">
