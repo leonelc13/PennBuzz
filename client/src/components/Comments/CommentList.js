@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import './commentStyle.css';
 
-function CommentList({comments}) {
-  const [newComment, setNewComment] = useState('');
-
-  const handleAddComment = () => {
-    comments.push({author: 'You', commentContent: newComment});
-    setNewComment('');
-  };
+function CommentList({comments, handleAddComment, newComment, setNewComment}) {
 
   return (
     <div className="comment-list-container">
