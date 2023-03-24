@@ -3,10 +3,12 @@ import QuizResults from './QuizResults';
 import './takeQuizStyle.css'
 
 function TakeQuiz({ title, questions, submitted, setSubmitted }) {
+    // Initialize States
     const [selectedAnswers, setSelectedAnswers] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
+    // handle next button click
     const handleNextButtonClick = (e) => {
         if (selectedAnswerIndex || selectedAnswerIndex === 0) {
             selectedAnswers[currentQuestion] = selectedAnswerIndex;
@@ -18,6 +20,8 @@ function TakeQuiz({ title, questions, submitted, setSubmitted }) {
         }
                 
     }
+
+    // handle previous button click
     const handlePreviousButtonClick = (e) => {
         selectedAnswers[currentQuestion] = selectedAnswerIndex;
         const nextQuestion = currentQuestion - 1;
@@ -25,6 +29,7 @@ function TakeQuiz({ title, questions, submitted, setSubmitted }) {
         setSelectedAnswerIndex(selectedAnswers[nextQuestion]);   
     }
 
+    //handle submit button click
     const handleSubmitQuizButtonClick = (e) => {
         if (selectedAnswerIndex || selectedAnswerIndex === 0) {
             selectedAnswers[currentQuestion] = selectedAnswerIndex;
@@ -35,25 +40,28 @@ function TakeQuiz({ title, questions, submitted, setSubmitted }) {
         }        
     }
 
+    // handles answer selection
     const onAnswerSelected = (answer, index) => {
         setSelectedAnswerIndex(index);
     }
 
+    // conditional rendering of quiz results
     if (submitted) {
         return (
             <div>
                 <QuizResults selectedAnswers={selectedAnswers} questions={questions} />
             </div>
         )
-    } else if(currentQuestion === questions.length - 1) {
+    } // conditional rendering of last question with submit button  
+    else if(currentQuestion === questions.length - 1) {
         return (
             <div className='.take-quiz-body'>
                 <div className='take-quiz-container'>
                     <h2>{title}</h2>
                     <div>
-                        <h3> {questions[currentQuestion][0]}</h3>
+                        <h3> {questions[currentQuestion].question}</h3>
                         <ul>
-                            {questions[currentQuestion][1].map((answer, index) => (
+                            {questions[currentQuestion].answers.map((answer, index) => (
                                 <li
                                     onClick={() => onAnswerSelected(answer, index)}
                                     key={answer}
@@ -72,14 +80,15 @@ function TakeQuiz({ title, questions, submitted, setSubmitted }) {
             </div>
             
         )
-    } else if (currentQuestion === 0) {
+    } // conditional rendering of first question and next button
+    else if (currentQuestion === 0) {
         return (
             <div className='take-quiz-container'>
                 <h2>{title}</h2>
                 <div>
-                    <h3> {questions[currentQuestion][0]}</h3>
+                    <h3> {questions[currentQuestion].question}</h3>
                     <ul>
-                        {questions[currentQuestion][1].map((answer, index) => (
+                        {questions[currentQuestion].answers.map((answer, index) => (
                             <li
                                 onClick={() => onAnswerSelected(answer, index)}
                                 key={answer}
@@ -96,13 +105,14 @@ function TakeQuiz({ title, questions, submitted, setSubmitted }) {
             </div>
         );
     }
+    // rendering of default question
     return (
         <div className='take-quiz-container'>
             <h2>{title}</h2>
             <div>
-                <h3> {questions[currentQuestion][0]}</h3>
+                <h3> {questions[currentQuestion].question}</h3>
                 <ul>
-                    {questions[currentQuestion][1].map((answer, index) => (
+                    {questions[currentQuestion].answers.map((answer, index) => (
                         <li
                             onClick={() => onAnswerSelected(answer, index)}
                             key={answer}
