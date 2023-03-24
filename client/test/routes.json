@@ -1,4 +1,5 @@
 {
     "/messages/:channel_id": "/messages/:channel_id",
-    "/quizzes": "/quizzes"
+    "/quizzes": "/quizzes",
+    "/profile": "/profile"
 }

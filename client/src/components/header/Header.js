@@ -35,7 +35,7 @@ function Header(props) {
             </span>
             <span id="user-profile-picture-wrapper">
 
-                <Link to={`/${props.user}`} >
+                <Link to={`/profile`} >
                     <img src={props.user_profile_picture} alt=" profile-pic"></img>
                 </Link>
             </span>
