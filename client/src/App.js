@@ -5,6 +5,7 @@ import MainFeed from './components/MainFeed/MainFeed';
 import DirectMessagingPage from './components/DirectMessaging/DirectMessagingPage';
 import Header from './components/header/Header';
 import ProfilePage from './components/ProfilePage/ProfilePage'
+import Leaderboard from './components/Leaderboard/Leaderboard'
 import Login from './components/LoginPage/login'
 import Register from './components/RegisterPage/register'
 import './style/index.css';
@@ -42,6 +43,7 @@ function App() {
                         <Route exact path='/chat' element={<DirectMessagingPage {...props} />} />
                         <Route exact path='/' element={<MainFeed {...props} />} />
                         <Route exact path='/profile' element={<ProfilePage {...props} />} />
+                        <Route exact path ='/leaderboard' element={<Leaderboard {...props} />} />
                     </Routes>
                 </>
             ) : (
@@ -50,6 +52,7 @@ function App() {
                         <Route exact path='/' element={<Navigate to='/login' />} />
                         <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
                         <Route exact path='/register' element={<Register handleLogin={handleLogin} />} />
+                        <Route exact path='*' element={<Navigate to='/login' />} />
                     </Routes>
                 </>
             )}

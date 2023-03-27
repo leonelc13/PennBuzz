@@ -156,5 +156,42 @@
       "password": "contreras",
       "id": 5
     }
+  ],
+  "scores": [
+    {
+      "user_id": 1,
+      "name": "john",
+      "week": 75,
+      "month": 85,
+      "allTime": 90
+    },
+    {
+      "user_id": 2,
+      "name": "jane",
+      "week": 60,
+      "month": 80,
+      "allTime": 95
+    },
+    {
+      "user_id": 3,
+      "name": "bob",
+      "week": 50,
+      "month": 70,
+      "allTime": 85
+    },
+    {
+      "user_id": 4,
+      "name": "leonel",
+      "week": 79,
+      "month": 20,
+      "allTime": 60
+    },
+    {
+      "user_id": 5,
+      "name": "leonel23",
+      "week": 89,
+      "month": 26,
+      "allTime": 49
+    }
   ]
 }

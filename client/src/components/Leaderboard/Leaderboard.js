@@ -1,109 +1,111 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useMemo } from 'react';
+import axios from 'axios';
 import "./style.css";
+export default function Leaderboard () {
+    const [timePeriod, setTimePeriod] = useState("week");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [scores, setScores] = useState(null);
 
-class Leaderboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timePeriod: "week",
-      currentPage: 1
+    useEffect(() => {
+        axios.get('http://localhost:3000/scores')
+            .then(response => {
+                setScores(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching channels data: ', error);
+            });
+    }, []);
+
+    const changeTimePeriod = (period) => {
+        setTimePeriod(period);
+        setCurrentPage(1);
     };
-  }
+    
+    const changePage = (offset) => {
+        setCurrentPage(currentPage + offset);
+    };
 
-  changeTimePeriod(period) {
-    this.setState({ timePeriod: period, currentPage: 1 });
-  }
-
-  changePage(offset) {
-    this.setState((prevState) => ({
-      currentPage: prevState.currentPage + offset
-    }));
-  }
-
-  render() {
-    const { timePeriod, currentPage } = this.state;
-
-    const mockUsers = new Array(45).fill().map((_, i) => ({
-      name: `User ${i + 1}`,
-      scores: {
+    const mockUsers = useMemo(() => new Array(45).fill().map((_, i) => ({
+        name: `User ${i + 1}`,
         week: Math.floor(Math.random() * 100),
         month: Math.floor(Math.random() * 100),
         allTime: Math.floor(Math.random() * 100)
-      }
-    }));
+    })), []);
 
-    const sortedUsers = [...mockUsers].sort(
-      (a, b) => b.scores[timePeriod] - a.scores[timePeriod]
+    if (!scores) return <div>Loading...</div>;
+    
+
+    
+    const sortedUsers = [...mockUsers, ...scores].sort(
+        (a, b) => b[timePeriod] - a[timePeriod]
     );
-
+    
     const start = (currentPage - 1) * 15;
     const end = currentPage * 15;
     const displayedUsers = sortedUsers.slice(start, end);
+    
 
     return (
-      <>
-        <div className="leaderboard-container">
-          <div className="leaderboard-header">
-            <button
-              className={`leaderboard-toggle-btn${timePeriod === "week" ? " active" : ""
-                }`}
-              onClick={() => this.changeTimePeriod("week")}
-            >
-              Week
-            </button>
-            <button
-              className={`leaderboard-toggle-btn${timePeriod === "month" ? " active" : ""
-                }`}
-              onClick={() => this.changeTimePeriod("month")}
-            >
-              Month
-            </button>
-            <button
-              className={`leaderboard-toggle-btn${timePeriod === "allTime" ? " active" : ""
-                }`}
-              onClick={() => this.changeTimePeriod("allTime")}
-            >
-              All-Time
-            </button>
+        <>
+          <div className="leaderboard-container">
+            <div className="leaderboard-header">
+              <button
+                className={`leaderboard-toggle-btn${timePeriod === "week" ? " active" : ""
+                  }`}
+                onClick={() => changeTimePeriod("week")}
+              >
+                Week
+              </button>
+              <button
+                className={`leaderboard-toggle-btn${timePeriod === "month" ? " active" : ""
+                  }`}
+                onClick={() => changeTimePeriod("month")}
+              >
+                Month
+              </button>
+              <button
+                className={`leaderboard-toggle-btn${timePeriod === "allTime" ? " active" : ""
+                  }`}
+                onClick={() => changeTimePeriod("allTime")}
+              >
+                All-Time
+              </button>
+            </div>
+            <table className="leaderboard-table">
+              <tbody>
+                {displayedUsers.map((user, i) => (
+                  <tr key={i}>
+                    <td>{i + 1 + start}</td>
+                    <td>
+                      <span
+                        className="user-profile-picture"
+                        alt="profile picture"
+                      />
+                    </td>
+                    <td>{user.name}</td>
+                    <td>{user[timePeriod]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="leaderboard-pagination">
+              <button
+                className="leaderboard-pagination-btn"
+                disabled={currentPage === 1}
+                onClick={() => changePage(-1)}
+              >
+                Previous
+              </button>
+              <span>Page {currentPage}</span>
+              <button
+                className="leaderboard-pagination-btn"
+                disabled={end >= sortedUsers.length}
+                onClick={() => changePage(1)}
+              >
+                Next
+              </button>
+            </div>
           </div>
-          <table className="leaderboard-table">
-            <tbody>
-              {displayedUsers.map((user, i) => (
-                <tr key={i}>
-                  <td>{i + 1 + start}</td>
-                  <td>
-                    <span
-                      className="user-profile-picture"
-                      alt="profile picture"
-                    />
-                  </td>
-                  <td>{user.name}</td>
-                  <td>{user.scores[timePeriod]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="leaderboard-pagination">
-            <button
-              className="leaderboard-pagination-btn"
-              disabled={currentPage === 1}
-              onClick={() => this.changePage(-1)}
-            >
-              Previous
-            </button>
-            <span>Page {currentPage}</span>
-            <button
-              className="leaderboard-pagination-btn"
-              disabled={end >= sortedUsers.length}
-              onClick={() => this.changePage(1)}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      </>
-    );
-  }
+        </>
+      );
 }
-
-export default Leaderboard;
