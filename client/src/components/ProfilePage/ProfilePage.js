@@ -19,7 +19,7 @@ function ProfilePage(props) {
         axios.get(`http://localhost:3000/profile`,
             {
                 params: {
-                    name: props.user
+                    name: "johnwick"
                 }
             })
             .then(response => {
