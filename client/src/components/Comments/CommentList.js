@@ -8,7 +8,7 @@ function CommentList({comments, handleAddComment, newComment, setNewComment}) {
       <h2>Comments</h2>
       <ul className="comment-list">
         {comments.map((comment, index) => (
-          <li key={index}>{comment.author}: {comment.commentContent}</li>
+          <li key={index}>{comment.author}: {comment.content}</li>
         ))}
       </ul>
       <div className="comment-form">

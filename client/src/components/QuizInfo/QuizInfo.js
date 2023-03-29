@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import TakeQuiz from '../TakeQuiz/TakeQuiz';
 import CommentList from '../Comments/CommentList';
 import './quizStyle.css'
@@ -14,36 +15,27 @@ function QuizInfo(props) {
     const [upvotes, setUpvotes] = useState(0);
     const [downvotes, setDownvotes] = useState(0);
 
-    console.log(quizData);
+    const quizId = useRef('');
+    quizId.current = useParams().id;
 
     // mock backend quizData retrieval
     useEffect(() => {
-        axios.get('http://localhost:3000/quizData',
-        {
-            params: {
-                user: props.user
-            }
-        })
+        axios.get(`http://localhost:3000/quiz?id=${quizId.current}`)
         .then(response => {
-            setQuizData(response.data);
-            setComments(response.data.comments);
-            setUpvotes(response.data.upvotes);
-            setDownvotes(response.data.downvote);
+            setQuizData(response.data[0]);
+            setComments(response.data[0].comments);
+            setUpvotes(response.data[0].upvotes);
+            setDownvotes(response.data[0].downvote);         
         })
         .catch(error => {
             console.error('Error fetching data: ', error);
         });
 
-    }, [props.user]);
+    }, [quizData.current]);
     
-    // Loading screen while retrieving data
-    if (!quizData) {
-        return <div>Loading...</div>;
-    }
-
     // Updates upvote number
     function handleUpvoteClick(e) {
-        axios.post('http://localhost:3000/quizData', { upvotes: quizData.upvotes + 1 })
+        axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, { upvotes: quizData.upvotes + 1 })
             .then(response => {
                 setUpvotes(response.data.upvotes);
                 setQuizData({ ...quizData, upvotes: response.data.upvotes });
@@ -55,7 +47,7 @@ function QuizInfo(props) {
       
     // Updates downvote number
     function handleDownvoteClick(e) {
-        axios.post('http://localhost:3000/quizData', { 
+        axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, { 
                 downvotes: quizData.downvotes + 1 
             })
             .then(response => {
@@ -69,7 +61,7 @@ function QuizInfo(props) {
     
     // updates comments 
     function handleAddComment(e) {
-        axios.post('http://localhost:3000/quizData', {
+        axios.post(`http://localhost:3000/quiz?id=${quizId.current}/comments`, {
             author: props.user,
             content: newComment
         })
@@ -97,14 +89,18 @@ function QuizInfo(props) {
     if (inQuiz === true) {
         return (
             <div>
-                <TakeQuiz title={quiz.title} questions={quiz.questions} 
+                <TakeQuiz title={quizData.title} questions={quizData.questions} 
                         submitted={submitted} setSubmitted={setSubmitted}/>
                 <button className='quiz-take-quiz-button' onClick={handleBackButtonClick}>Back to Quiz Info</button>
             </div>
         );
     }   
 
-    // default rendering of quiz info page
+    // Loading screen while retrieving data
+    if (!quizData) {
+        return <div>Loading...</div>;
+    } else {
+        // default rendering of quiz info page
     return(
         <div className="quiz-container">
             <div className="quiz-header-container">
@@ -115,11 +111,12 @@ function QuizInfo(props) {
                     {quizData.author_name}
                 </span>
                 <span className="quiz-labels-container">
-                    {
+                    {/*
                         quizData.labels.map(label => (
                             <div >{label}</div>
                         ))
-                    }
+
+                        */} 
                 </span>
             </div>
             <div className="quiz-information">
@@ -145,16 +142,17 @@ function QuizInfo(props) {
                     </div>
                 </div>
                 <div className='quiz-statistics'>
-                    <p>{quiz.takenStat}</p>
-                    <p>{quiz.topStat}</p>
                 </div>
             </div>
-            <img className="quiz-thumbnail" src={quiz.thumbnail_img} alt="quiz-thumbnail"></img>
+            <img className="quiz-thumbnail" src={quizData.thumbnail_img} alt="quiz-thumbnail"></img>
             <CommentList comments={comments} 
                         handleAddComment={handleAddComment} 
                         newComment={newComment} 
                         setNewComment={setNewComment}/>
         </div >
     )
+
+    }
+    
 }
 export default QuizInfo;
