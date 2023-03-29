@@ -8,6 +8,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 import Leaderboard from './components/Leaderboard/Leaderboard'
 import Login from './components/LoginPage/login'
 import Register from './components/RegisterPage/register'
+import QuizInfo from './components/QuizInfo/QuizInfo'
 import './style/index.css';
 
 
@@ -44,6 +45,7 @@ function App() {
                         <Route exact path='/' element={<MainFeed {...props} />} />
                         <Route exact path='/profile' element={<ProfilePage {...props} />} />
                         <Route exact path ='/leaderboard' element={<Leaderboard {...props} />} />
+                        <Route path='/quiz/:id' element={<QuizInfo {...props} />} />
                     </Routes>
                 </>
             ) : (

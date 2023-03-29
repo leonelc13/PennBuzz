@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './style.css';
 import Quiz from './Quiz';
+import {Link } from 'react-router-dom';
 /**
  * React Component for Header displayed to a logged in user
  **/
@@ -33,7 +34,9 @@ function MainFeed(props) {
         <div className="main-feed-container">
             {
                 quizzes.map(quiz => (
-                    <Quiz {...quiz} />
+                    <Link to={`/quiz/${quiz.id}`}>
+                        <Quiz {...quiz} />
+                    </Link>
                 ))
             }
         </div >

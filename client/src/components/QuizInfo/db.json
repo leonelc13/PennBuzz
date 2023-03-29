@@ -10,7 +10,9 @@
         "labels": ["Penn", "Professors"],
         "timestamp": "12/12/2023",
         "thumbnail_img": "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
-        "quizId": 123,
+        "takenStat": 30,
+        "topStat": "Anne Duchene",
+        "quizId": 1,
         "comments": [
             {
                 "id": 1,
