@@ -41,7 +41,7 @@
 }
 
 #user-profile-picture-wrapper {
-    margin-right: 5%;
+    margin-right: 0%;
     border-radius: 50%;
     width: 2.5em;
     height: 2.5em;
@@ -60,4 +60,16 @@
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.logout_button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    padding: 5px 10px 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 2%;
+    cursor: pointer;
 }
