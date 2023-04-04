@@ -1,5 +1,13 @@
 {
     "/messages/:channel_id": "/messages/:channel_id",
     "/quizzes": "/quizzes",
-    "/profile": "/profile"
+    "/profile": "/profile",
+    "/created_quizzes": {
+        "post": {
+          "handler": "json",
+          "filePath": "db.json",
+          "path": "/created_quizzes",
+          "append": true
+        }
+      }
 }
