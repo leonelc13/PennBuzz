@@ -8,6 +8,9 @@ import './style.css';
 
 
 function Header(props) {
+    const handleLogout = () => {
+        props.handleLogout();
+    }
 
     return (
         <div id="header-container">
@@ -39,6 +42,8 @@ function Header(props) {
                     <img src={props.user_profile_picture} alt=" profile-pic"></img>
                 </Link>
             </span>
+
+            <button onClick={handleLogout} className='logout_button'>Logout</button>
 
         </div >
     );
