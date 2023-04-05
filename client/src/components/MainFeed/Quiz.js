@@ -8,18 +8,29 @@ import './style.css';
 
 function Quiz(props) {
 
-    const [upvoted, setUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
-    const [downvoted, setDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
+    const [isUpvoted, setIsUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
+    const [isDownvoted, setIsDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
 
-
+    const [upvotes, setUpvotes] = useState(props.upvotes);
+    const [downvotes, setDownvotes] = useState(props.downvotes)
 
 
     const handleUpvote = (event) => {
-        return setUpvoted(!upvoted)
+        if (isUpvoted) {
+            setUpvotes(upvotes - 1);
+            return setIsUpvoted(false);
+        }
+        setUpvotes(upvotes + 1);
+        return setIsUpvoted(true);
     }
 
     const handleDownvote = (event) => {
-        return setDownvoted(!downvoted)
+        if (isDownvoted) {
+            setDownvotes(downvotes - 1);
+            return setIsDownvoted(false);
+        }
+        setDownvotes(downvotes + 1);
+        return setIsDownvoted(true);
     }
 
     return (
@@ -53,16 +64,20 @@ function Quiz(props) {
                     </Link>
                     <div className="quiz-upvotes-comments">
                         <div className='quiz-upvotes'>
-                            <button onClick={handleUpvote} class={`quiz-upvotes-button ${upvoted && 'selected-vote-button'}`}>
+                            <button onClick={handleUpvote} class={`quiz-upvotes-button ${isUpvoted && 'selected-vote-button'}`}>
                                 <i className="fa-solid fa-arrow-up"></i>
-                                {upvoted ? props.upvotes + 1 : props.upvotes}
+                                {upvotes}
                             </button>
-                            <button onClick={handleDownvote} class={`quiz-upvotes-button ${downvoted && 'selected-vote-button'}`}>
+                            <button onClick={handleDownvote} class={`quiz-upvotes-button ${isDownvoted && 'selected-vote-button'}`}>
                                 <i className="fa-solid fa-arrow-down"></i>
-                                {downvoted ? props.downvotes + 1 : props.downvotes}
+                                {downvotes}
                             </button>
                         </div>
-                        <a>See all {props.num_comments} comments</a>
+
+                        <Link to={`/quiz/${props.id}`}>
+                            See all {props.num_comments} comments
+                        </Link>
+
                     </div>
                 </div>
             </div>
