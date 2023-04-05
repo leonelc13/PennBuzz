@@ -115,7 +115,7 @@
     display: flex;
 }
 
-.quiz-upvotes button {
+.quiz-upvotes-button {
     border: 1px solid #FF0606;
     border-radius: 5px;
     margin: 5px;
@@ -126,10 +126,11 @@
     display: flex;
 }
 
-.quiz-upvotes :hover {
+.selected-vote-button {
     background-color: #FF0606;
     color: white;
 }
+
 
 .quiz-upvotes button i {
     padding-right: 10%;

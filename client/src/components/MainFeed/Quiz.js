@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 /**
  * React Component for Header displayed to a logged in user
@@ -7,8 +8,19 @@ import './style.css';
 
 function Quiz(props) {
 
-    const [upvotes, setUpvotes] = useState(props.upvotes);
-    const [downvotes, setDownvotes] = useState(props.downvotes);
+    const [upvoted, setUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
+    const [downvoted, setDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
+
+
+
+
+    const handleUpvote = (event) => {
+        return setUpvoted(!upvoted)
+    }
+
+    const handleDownvote = (event) => {
+        return setDownvoted(!downvoted)
+    }
 
     return (
         <div className="quiz-container">
@@ -33,18 +45,21 @@ function Quiz(props) {
                     <span className="quiz-description">{props.description}</span>
                 </div>
                 <div className="quiz-buttons">
-                    <button className="quiz-take-quiz-button">
-                        Take Quiz
-                    </button>
+
+                    <Link to={`/quiz/${props.id}`}>
+                        <button className="quiz-take-quiz-button">
+                            Take Quiz
+                        </button>
+                    </Link>
                     <div className="quiz-upvotes-comments">
                         <div className='quiz-upvotes'>
-                            <button >
-                                <i class="fa-solid fa-arrow-up"></i>
-                                {upvotes}
+                            <button onClick={handleUpvote} class={`quiz-upvotes-button ${upvoted && 'selected-vote-button'}`}>
+                                <i className="fa-solid fa-arrow-up"></i>
+                                {upvoted ? props.upvotes + 1 : props.upvotes}
                             </button>
-                            <button>
-                                <i class="fa-solid fa-arrow-down"></i>
-                                {downvotes}
+                            <button onClick={handleDownvote} class={`quiz-upvotes-button ${downvoted && 'selected-vote-button'}`}>
+                                <i className="fa-solid fa-arrow-down"></i>
+                                {downvoted ? props.downvotes + 1 : props.downvotes}
                             </button>
                         </div>
                         <a>See all {props.num_comments} comments</a>
