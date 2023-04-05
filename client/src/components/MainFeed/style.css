@@ -132,8 +132,8 @@
 }
 
 .selected-vote-button {
-    background-color: #FF0606;
-    color: white;
+    background-color: #FF0606 !important;
+    color: white !important;
 }
 
 

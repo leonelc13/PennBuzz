@@ -1,9 +1,58 @@
 {
   "profile": [
     {
+      "id": "johnwick",
       "profile_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
       "name": "johnwick",
       "biography": "John Wick is a legendary hitman and assassin, known for his unparalleled skills and deadly determination. Born into a life of crime, John worked for years as a hired killer, earning a reputation as the best in the business. However, when he decided to retire and start a new life with his wife, Helen, tragedy struck. After Helen passed away, John was left alone and brokenhearted.\n\nIn a final act of love, Helen arranged for a puppy to be delivered to John after her death, hoping it would provide him with some comfort and companionship. When a group of thugs broke into John's home, stole his car, and killed his beloved puppy, they unleashed the wrath of a man who had nothing left to lose."
+    },
+    {
+      "id": "johndoe",
+      "profile_img": "https://drive.google.com/uc?id=13OVXxHvpAsPS5WmZgRzxu7j2lfH7kV3z&export=download",
+      "name": "johndoe",
+      "biography": "John Doe. Basic yet mysterious."
+    },
+    {
+      "id": "jonjones",
+      "profile_img": "https://drive.google.com/uc?export=view&id=1bL48Yx608hc6QK41dVx-7O95XwMPOc25",
+      "name": "jonjones",
+      "biography": "Jon Jones is a legendary UFC fighter."
+    }
+  ],
+  "search": [
+    {
+      "query": "jo",
+      "results": [
+        {
+          "id": "johndoe",
+          "title": "johndoe",
+          "type": "user",
+          "img": ""
+        },
+        {
+          "id": "johnwick",
+          "title": "johnwick",
+          "type": "user",
+          "img": ""
+        },
+        {
+          "id": "jonjones",
+          "title": "jonjones",
+          "type": "user",
+          "img": ""
+        }
+      ]
+    },
+    {
+      "query": "Which",
+      "results": [
+        {
+          "id": "1",
+          "title": "Which Penn Professor are you?",
+          "type": "quiz",
+          "img": ""
+        }
+      ]
     }
   ],
   "quizzes": [
@@ -135,34 +184,19 @@
   ],
   "users": [
     {
-      "id": 1,
-      "username": "john",
-      "password": "password123"
-    },
-    {
-      "id": 2,
-      "username": "jane",
-      "password": "password456"
-    },
-    {
-      "username": "bob",
-      "password": "wqwqeqwe",
-      "id": 3
-    },
-    {
-      "username": "leonel",
-      "password": "cotnreras",
-      "id": 4
-    },
-    {
-      "username": "leonel23",
-      "password": "contreras",
-      "id": 5
-    },
-    {
-      "username": "julian.g",
+      "username": "johndoe",
       "password": "test",
-      "id": 6
+      "id": 1
+    },
+    {
+      "username": "johnwick",
+      "password": "test",
+      "id": 2
+    },
+    {
+      "username": "jonjones",
+      "password": "test",
+      "id": 3
     }
   ],
   "scores": [
@@ -281,7 +315,7 @@
       ]
     },
     {
-      "title": "Which Penn Professor are you?",
+      "title": "Which Penn Professor are you? Really Think about it ",
       "author_name": "johnwick",
       "author_img": "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
       "description": "Complete this quiz and find out your soulmate professor at Penn!",
@@ -495,6 +529,427 @@
     {
       "downvotes": 15,
       "id": 18
+    },
+    {
+      "upvotes": 88,
+      "id": 19
+    },
+    {
+      "downvotes": 13,
+      "id": 20
+    },
+    {
+      "upvotes": 89,
+      "id": 21
+    },
+    {
+      "downvotes": 14,
+      "id": 22
+    },
+    {
+      "upvotes": 90,
+      "id": 23
+    },
+    {
+      "upvotes": 91,
+      "id": 24
+    },
+    {
+      "upvotes": 92,
+      "id": 25
+    },
+    {
+      "upvotes": 93,
+      "id": 26
+    },
+    {
+      "upvotes": 94,
+      "id": 27
+    },
+    {
+      "upvotes": 95,
+      "id": 28
+    },
+    {
+      "upvotes": 96,
+      "id": 29
+    },
+    {
+      "upvotes": 97,
+      "id": 30
+    },
+    {
+      "upvotes": 98,
+      "id": 31
+    },
+    {
+      "upvotes": 99,
+      "id": 32
+    },
+    {
+      "downvotes": 15,
+      "id": 33
+    },
+    {
+      "downvotes": 16,
+      "id": 34
+    },
+    {
+      "downvotes": 17,
+      "id": 35
+    },
+    {
+      "downvotes": 18,
+      "id": 36
+    },
+    {
+      "downvotes": 19,
+      "id": 37
+    },
+    {
+      "author": "john",
+      "content": "comment\n",
+      "id": 38
+    },
+    {
+      "downvotes": 13,
+      "id": 39
+    },
+    {
+      "upvotes": 88,
+      "id": 40
+    },
+    {
+      "upvotes": 89,
+      "id": 41
+    },
+    {
+      "downvotes": 14,
+      "id": 42
+    },
+    {
+      "downvotes": 15,
+      "id": 43
+    },
+    {
+      "downvotes": 13,
+      "id": 44
+    },
+    {
+      "downvotes": 14,
+      "id": 45
+    },
+    {
+      "downvotes": 15,
+      "id": 46
+    },
+    {
+      "downvotes": 16,
+      "id": 47
+    },
+    {
+      "downvotes": 17,
+      "id": 48
+    },
+    {
+      "downvotes": 13,
+      "id": 49
+    },
+    {
+      "downvotes": 14,
+      "id": 50
+    },
+    {
+      "upvotes": 88,
+      "id": 51
+    },
+    {
+      "upvotes": 89,
+      "id": 52
+    },
+    {
+      "downvotes": 13,
+      "id": 53
+    },
+    {
+      "downvotes": 14,
+      "id": 54
+    },
+    {
+      "downvotes": 13,
+      "id": 55
+    },
+    {
+      "upvotes": 88,
+      "id": 56
+    },
+    {
+      "upvotes": 89,
+      "id": 57
+    },
+    {
+      "downvotes": 14,
+      "id": 58
+    },
+    {
+      "downvotes": 15,
+      "id": 59
+    },
+    {
+      "downvotes": 16,
+      "id": 60
+    },
+    {
+      "downvotes": 17,
+      "id": 61
+    },
+    {
+      "downvotes": 18,
+      "id": 62
+    },
+    {
+      "upvotes": 90,
+      "id": 63
+    },
+    {
+      "upvotes": 91,
+      "id": 64
+    },
+    {
+      "downvotes": 19,
+      "id": 65
+    },
+    {
+      "downvotes": 20,
+      "id": 66
+    },
+    {
+      "downvotes": 21,
+      "id": 67
+    },
+    {
+      "downvotes": 22,
+      "id": 68
+    },
+    {
+      "downvotes": 23,
+      "id": 69
+    },
+    {
+      "downvotes": 24,
+      "id": 70
+    },
+    {
+      "downvotes": 25,
+      "id": 71
+    },
+    {
+      "downvotes": 26,
+      "id": 72
+    },
+    {
+      "downvotes": 27,
+      "id": 73
+    },
+    {
+      "downvotes": 28,
+      "id": 74
+    },
+    {
+      "downvotes": 29,
+      "id": 75
+    },
+    {
+      "downvotes": 30,
+      "id": 76
+    },
+    {
+      "downvotes": 31,
+      "id": 77
+    },
+    {
+      "downvotes": 32,
+      "id": 78
+    },
+    {
+      "downvotes": 33,
+      "id": 79
+    },
+    {
+      "downvotes": 34,
+      "id": 80
+    },
+    {
+      "downvotes": 35,
+      "id": 81
+    },
+    {
+      "downvotes": 36,
+      "id": 82
+    },
+    {
+      "downvotes": 37,
+      "id": 83
+    },
+    {
+      "downvotes": 38,
+      "id": 84
+    },
+    {
+      "upvotes": 92,
+      "id": 85
+    },
+    {
+      "upvotes": 93,
+      "id": 86
+    },
+    {
+      "upvotes": 94,
+      "id": 87
+    },
+    {
+      "upvotes": 95,
+      "id": 88
+    },
+    {
+      "upvotes": 96,
+      "id": 89
+    },
+    {
+      "upvotes": 88,
+      "id": 90
+    },
+    {
+      "downvotes": 13,
+      "id": 91
+    },
+    {
+      "upvotes": 89,
+      "id": 92
+    },
+    {
+      "downvotes": 14,
+      "id": 93
+    },
+    {
+      "upvotes": 90,
+      "id": 94
+    },
+    {
+      "upvotes": 88,
+      "id": 95
+    },
+    {
+      "downvotes": 13,
+      "id": 96
+    },
+    {
+      "upvotes": 89,
+      "id": 97
+    },
+    {
+      "downvotes": 14,
+      "id": 98
+    },
+    {
+      "upvotes": 90,
+      "id": 99
+    },
+    {
+      "downvotes": 15,
+      "id": 100
+    },
+    {
+      "upvotes": 91,
+      "id": 101
+    },
+    {
+      "downvotes": 16,
+      "id": 102
+    },
+    {
+      "upvotes": 88,
+      "id": 103
+    },
+    {
+      "downvotes": 13,
+      "id": 104
+    },
+    {
+      "upvotes": 89,
+      "id": 105
+    },
+    {
+      "downvotes": 14,
+      "id": 106
+    },
+    {
+      "upvotes": 88,
+      "id": 107
+    },
+    {
+      "downvotes": 13,
+      "id": 108
+    },
+    {
+      "upvotes": 89,
+      "id": 109
+    },
+    {
+      "downvotes": 14,
+      "id": 110
+    },
+    {
+      "upvotes": 90,
+      "id": 111
+    },
+    {
+      "downvotes": 15,
+      "id": 112
+    },
+    {
+      "upvotes": 91,
+      "id": 113
+    },
+    {
+      "downvotes": 16,
+      "id": 114
+    },
+    {
+      "upvotes": 92,
+      "id": 115
+    },
+    {
+      "downvotes": 17,
+      "id": 116
+    },
+    {
+      "upvotes": 93,
+      "id": 117
+    },
+    {
+      "downvotes": 18,
+      "id": 118
+    },
+    {
+      "upvotes": 94,
+      "id": 119
+    },
+    {
+      "downvotes": 19,
+      "id": 120
+    },
+    {
+      "upvotes": 95,
+      "id": 121
+    },
+    {
+      "downvotes": 20,
+      "id": 122
+    },
+    {
+      "upvotes": 96,
+      "id": 123
     }
   ]
 }

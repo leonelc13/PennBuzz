@@ -12,8 +12,16 @@ function QuizInfo(props) {
     const [quizData, setQuizData] = useState({});
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
-    const [upvotes, setUpvotes] = useState(0);
-    const [downvotes, setDownvotes] = useState(0);
+
+    const [isUpvoted, setIsUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
+    const [isDownvoted, setIsDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
+
+    const [upvotes, setUpvotes] = useState(props.upvotes);
+    const [downvotes, setDownvotes] = useState(props.downvotes);
+
+
+
+
 
     const quizId = useRef('');
     quizId.current = useParams().id;
@@ -33,31 +41,52 @@ function QuizInfo(props) {
 
     }, [quizData.current]);
 
-    // Updates upvote number
-    function handleUpvoteClick(e) {
-        axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, { upvotes: quizData.upvotes + 1 })
-            .then(response => {
-                setUpvotes(response.data.upvotes);
-                setQuizData({ ...quizData, upvotes: response.data.upvotes });
-            })
-            .catch(error => {
-                console.error('Error upvoting: ', error);
-            });
+
+    const handleUpvote = (event) => {
+        if (isUpvoted) {
+            setUpvotes(upvotes - 1);
+            return setIsUpvoted(false);
+        }
+        setUpvotes(upvotes + 1);
+        return setIsUpvoted(true);
     }
 
-    // Updates downvote number
-    function handleDownvoteClick(e) {
-        axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, {
-            downvotes: quizData.downvotes + 1
-        })
-            .then(response => {
-                setDownvotes(response.data.downvotes);
-                setQuizData({ ...quizData, downvotes: response.data.downvotes });
-            })
-            .catch(error => {
-                console.error('Error downvoting: ', error);
-            });
+    const handleDownvote = (event) => {
+        if (isDownvoted) {
+            setDownvotes(downvotes - 1);
+            return setIsDownvoted(false);
+        }
+        setDownvotes(downvotes + 1);
+        return setIsDownvoted(true);
     }
+
+
+    // // Updates upvote number
+    // function handleUpvoteClick(e) {
+    //     axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, { upvotes: quizData.upvotes + 1 })
+    //         .then(response => {
+    //             setUpvotes(response.data.upvotes);
+    //             setQuizData({ ...quizData, upvotes: response.data.upvotes });
+    //         })
+    //         .catch(error => {
+    //             console.error('Error upvoting: ', error);
+    //         });
+    // }
+
+    // // Updates downvote number
+    // function handleDownvoteClick(e) {
+
+    //     axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, {
+    //         downvotes: quizData.downvotes + 1
+    //     })
+    //         .then(response => {
+    //             setDownvotes(response.data.downvotes);
+    //             setQuizData({ ...quizData, downvotes: response.data.downvotes });
+    //         })
+    //         .catch(error => {
+    //             console.error('Error downvoting: ', error);
+    //         });
+    // }
 
     // updates comments 
     function handleAddComment(e) {
@@ -130,11 +159,11 @@ function QuizInfo(props) {
                         </button>
                         <div className="quiz-info-upvotes-comments">
                             <div className='quiz-info-upvotes'>
-                                <button onClick={handleUpvoteClick}>
+                                <button onClick={handleUpvote} class={`quiz-upvotes-button ${isUpvoted && 'selected-vote-button'}`}>
                                     <i class="fa-solid fa-arrow-up"></i>
                                     {upvotes}
                                 </button>
-                                <button onClick={handleDownvoteClick}>
+                                <button onClick={handleDownvote} class={`quiz-upvotes-button ${isDownvoted && 'selected-vote-button'}`}>
                                     <i class="fa-solid fa-arrow-down"></i>
                                     {downvotes}
                                 </button>
