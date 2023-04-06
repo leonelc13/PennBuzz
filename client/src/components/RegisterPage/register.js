@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./register.css";
 
@@ -6,6 +7,7 @@ function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { handleLogin } = props;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -15,7 +17,7 @@ function Register(props) {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = useCallback (async (event) => {
     event.preventDefault();
 
     if (!username && !password) {
@@ -35,40 +37,46 @@ function Register(props) {
 
   
     try {
-      const response = await fetch('http://localhost:3000/users');
-      const data = await response.json();
+      const response = await axios.get('http://localhost:3000/users');
+      const data = response.data;
 
       if (data.find((user) => user.username === username)) {
         setErrorMessage('Username is already taken');
         return;
       }
 
-      const postResponse = await fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+      const postResponse = await axios.post('http://localhost:3000/users', {
+          username: username,
+          password: password,
       });
   
-      const postData = await postResponse.json();
+      const postData = postResponse.data;
   
       if (postData.error) {
         setErrorMessage(postData.error);
         return;
       }
   
-      props.handleLogin(username);
+      handleLogin(username);
 
     } catch (error) {
       console.error(error);
       setErrorMessage('An error occurred while registering. Please try again later.');
     }
-  
-  };
+  }, [username, password, handleLogin]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        handleSubmit(event);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [handleSubmit]);
 
   return (
     <div className='register-container'>

@@ -43,7 +43,7 @@
 }
 
 #user-profile-picture-wrapper {
-    margin-right: 5%;
+    margin-right: 0%;
     border-radius: 50%;
     width: 2.5em;
     height: 2.5em;
@@ -106,4 +106,16 @@ a {
 
 .search-container ul.search-results li a:hover {
     text-decoration: underline;
+
+.logout_button {
+    background-color: red;
+    color: #fff;
+    box-sizing: border-box;
+    padding: 5px 10px 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 2.3%;
+    cursor: pointer;
+    border-radius: 25px;
+    border: 1px solid #FF0606;
 }

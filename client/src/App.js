@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
@@ -24,8 +24,12 @@ function App() {
 
     const handleLogin = (username) => {
         setUsername(username);
-        setAuthenticated(true);
+        setAuthenticated(true)
     }
+
+    useEffect(() => {
+        console.log(authenticated);
+    }, [authenticated]);
 
     // Needs to be modified upons integration with Login/Registration
     let props = {
@@ -46,12 +50,12 @@ function App() {
                         <Route exact path='/profile/:id' element={<ProfilePage {...props} />} />
                         <Route exact path='/leaderboard' element={<Leaderboard {...props} />} />
                         <Route path='/quiz/:id' element={<QuizInfo {...props} />} />
+                        <Route exact path='*' element={<Navigate to='/' />} />
                     </Routes>
                 </>
             ) : (
                 <>
                     <Routes>
-                        <Route exact path='/' element={<Navigate to='/login' />} />
                         <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
                         <Route exact path='/register' element={<Register handleLogin={handleLogin} />} />
                         <Route exact path='*' element={<Navigate to='/login' />} />
