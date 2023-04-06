@@ -123,10 +123,7 @@
     display: flex;
 }
 
-.quiz-info-upvotes :hover {
-    background-color: #FF0606;
-    color: white;
-}
+
 
 .quiz-info-upvotes button i {
     padding-right: 10%;

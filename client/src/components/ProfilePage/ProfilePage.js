@@ -3,6 +3,7 @@ import './style.css';
 import Quiz from './Quiz';
 import ButtonGroup from './ButtonGroup';
 import axios from 'axios';
+import { useParams, useLocation } from 'react-router-dom';
 /**
  * React Component for Header displayed to a logged in user
  **/
@@ -10,25 +11,25 @@ import axios from 'axios';
 
 function ProfilePage(props) {
 
+    const location = useLocation();
+
     // Initialize state    
+    const profile_id = useParams().id;
     const [profile, setProfile] = useState({});
     const [quizzes, setQuizzes] = useState([]);
 
+
     useEffect(() => {
         // Fetch profile data
-        axios.get(`http://localhost:3000/profile`,
-            {
-                params: {
-                    name: "johnwick"
-                }
-            })
+        axios.get(`http://localhost:3000/profile/${profile_id}`)
             .then(response => {
-                setProfile(response.data[0]);
+                console.log(response);
+                setProfile(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-    }, [props.user]);
+    }, [location]);
 
     useEffect(() => {
         // Fetch quizzes data
@@ -44,8 +45,8 @@ function ProfilePage(props) {
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-    
-    }, [props.user]);
+
+    }, [location]);
 
     return (
         <div className='profile-page-container'>
