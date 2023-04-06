@@ -107,6 +107,8 @@ a {
 .search-container ul.search-results li a:hover {
     text-decoration: underline;
 
+}
+
 .logout_button {
     background-color: red;
     color: #fff;
