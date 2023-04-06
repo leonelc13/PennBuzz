@@ -107,6 +107,11 @@
     border: none;
 }
 
+.quiz-take-quiz-button :hover {
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
 .quiz-upvotes-comments {
     margin-left: auto;
 }
@@ -115,7 +120,7 @@
     display: flex;
 }
 
-.quiz-upvotes button {
+.quiz-upvotes-button {
     border: 1px solid #FF0606;
     border-radius: 5px;
     margin: 5px;
@@ -126,10 +131,11 @@
     display: flex;
 }
 
-.quiz-upvotes :hover {
-    background-color: #FF0606;
-    color: white;
+.selected-vote-button {
+    background-color: #FF0606 !important;
+    color: white !important;
 }
+
 
 .quiz-upvotes button i {
     padding-right: 10%;

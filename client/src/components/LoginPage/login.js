@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import "./login.css";
 
@@ -6,6 +7,7 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { handleLogin } = props;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -15,7 +17,7 @@ function Login(props) {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = useCallback (async (event) => {
     event.preventDefault();
     if (!username && !password) {
       setErrorMessage('Missing username and password');
@@ -33,17 +35,35 @@ function Login(props) {
     }
     
     try {
-      const response = await fetch("http://localhost:3000/users?username=" + username + "&password=" + password);
-      const data = await response.json();
+      const response = await axios.get("http://localhost:3000/users", {
+        params: {
+          username: username,
+          password: password,
+        },
+      });
+      const data = response.data;
       if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
         setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
         return;
       }
-      props.handleLogin(username);
+      handleLogin(username);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [username, password, handleLogin]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        handleSubmit(event);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [handleSubmit]);
 
   return (
     <div className="login-container">
