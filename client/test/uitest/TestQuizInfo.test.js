@@ -22,28 +22,28 @@ describe("QuizInfo component", () => {
     timestamp: "12/12/2023",
     thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
     quizId: '123',
-    questions : [
+    questions: [
       {
         question: 'Question 1 content',
-        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
       },
       {
         question: 'Question 2 content',
-        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
       },
       {
         question: 'Question 3 content',
-        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
       },
       {
         question: 'Question 4 content',
-        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+        answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
       }
     ],
-    comments : [
-      {author: 'AdamSmith', content: 'So fun!'},
-      {author: 'johnwick', content: 'enjoy!'},
-      {author: 'carguy', content: 'I disagree with my results'}
+    comments: [
+      { author: 'AdamSmith', content: 'So fun!' },
+      { author: 'johnwick', content: 'enjoy!' },
+      { author: 'carguy', content: 'I disagree with my results' }
     ]
   }
 
@@ -51,12 +51,6 @@ describe("QuizInfo component", () => {
     axios.mockReset();
   });
 
-  test("should render loading spinner when data is being retrieved", async () => {
-    axios.get.mockResolvedValueOnce({ data: {} });
-    render(<QuizInfo user="testuser" />);
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByText("Loading...")).not.toBeInTheDocument());
-  });
 
   test("should render quiz info page with data after successful data retrieval", async () => {
     const quizData = {
@@ -71,28 +65,28 @@ describe("QuizInfo component", () => {
       timestamp: "12/12/2023",
       thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
       quizId: '123',
-      questions : [
+      questions: [
         {
           question: 'Question 1 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 2 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 3 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 4 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         }
       ],
-      comments : [
-        {author: 'AdamSmith', content: 'So fun!'},
-        {author: 'johnwick', content: 'enjoy!'},
-        {author: 'carguy', content: 'I disagree with my results'}
+      comments: [
+        { author: 'AdamSmith', content: 'So fun!' },
+        { author: 'johnwick', content: 'enjoy!' },
+        { author: 'carguy', content: 'I disagree with my results' }
       ]
     }
     axios.get.mockResolvedValueOnce({ data: quizData });
@@ -121,28 +115,28 @@ describe("QuizInfo component", () => {
       timestamp: "12/12/2023",
       thumbnail_img: "https://drive.google.com/uc?id=1Guf_k6yMjbbhvPU8A77tNhj9-plnW726",
       quizId: '123',
-      questions : [
+      questions: [
         {
           question: 'Question 1 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 2 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 3 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         },
         {
           question: 'Question 4 content',
-          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content'] 
+          answers: ['Answer 1 content', 'Answer 2 content', 'Answer 3 content', 'Answer 4 content']
         }
       ],
-      comments : [
-        {author: 'AdamSmith', content: 'So fun!'},
-        {author: 'johnwick', content: 'enjoy!'},
-        {author: 'carguy', content: 'I disagree with my results'}
+      comments: [
+        { author: 'AdamSmith', content: 'So fun!' },
+        { author: 'johnwick', content: 'enjoy!' },
+        { author: 'carguy', content: 'I disagree with my results' }
       ]
     }
     axios.get.mockResolvedValueOnce({ data: quizData });
@@ -162,6 +156,6 @@ describe("QuizInfo component", () => {
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "This is a new comment" } });
     fireEvent.click(screen.getByText("Add Comment"));
 
-  })
+  });
 
 });

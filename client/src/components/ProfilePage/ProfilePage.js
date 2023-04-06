@@ -3,7 +3,7 @@ import './style.css';
 import Quiz from './Quiz';
 import ButtonGroup from './ButtonGroup';
 import axios from 'axios';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 /**
  * React Component for Header displayed to a logged in user
  **/
@@ -11,10 +11,11 @@ import { useParams, useLocation } from 'react-router-dom';
 
 function ProfilePage(props) {
 
-    const location = useLocation();
 
     // Initialize state    
     const profile_id = useParams().id;
+
+    console.log("PARAMS " + profile_id);
     const [profile, setProfile] = useState({});
     const [quizzes, setQuizzes] = useState([]);
 
@@ -29,7 +30,7 @@ function ProfilePage(props) {
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-    }, [location]);
+    }, []);
 
     useEffect(() => {
         // Fetch quizzes data
@@ -40,13 +41,13 @@ function ProfilePage(props) {
                 }
             })
             .then(response => {
-                setQuizzes(response.data);
+                setQuizzes(response.data ? response.data : []);
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
 
-    }, [location]);
+    }, []);
 
     return (
         <div className='profile-page-container'>

@@ -3,35 +3,35 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from "react-test-renderer";
 import { BrowserRouter } from 'react-router-dom';
 import "@testing-library/jest-dom";
-import Login from "../src/components/LoginPage/login";
+import Login from "../../src/components/LoginPage/login";
 
 describe("Login component", () => {
-    test("renders correctly", () => {
-      const tree = renderer.create(<BrowserRouter><Login /></BrowserRouter>).toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-  
-    test("renders with username and password inputs", () => {
-        render(<BrowserRouter><Login /></BrowserRouter>);
-        expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
-      });
-    
-      test("renders with 'Sign In' button", () => {
-        render(<BrowserRouter><Login /></BrowserRouter>);
-        expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
-      });
-    
-      test("renders with 'Sign up' link", () => {
-        render(<BrowserRouter><Login /></BrowserRouter>);
-        expect(screen.getByRole('link', { name: /Sign up/i })).toBeInTheDocument();
-      });
-    
-      test("renders with 'PennBuzz' heading", () => {
-        render(<BrowserRouter><Login /></BrowserRouter>);
-        expect(screen.getByRole('heading', { name: /Penn Buzz/i })).toBeInTheDocument();
-      });
+  test("renders correctly", () => {
+    const tree = renderer.create(<BrowserRouter><Login /></BrowserRouter>).toJSON();
+    expect(tree).toMatchSnapshot();
   });
+
+  test("renders with username and password inputs", () => {
+    render(<BrowserRouter><Login /></BrowserRouter>);
+    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+  });
+
+  test("renders with 'Sign In' button", () => {
+    render(<BrowserRouter><Login /></BrowserRouter>);
+    expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
+  });
+
+  test("renders with 'Sign up' link", () => {
+    render(<BrowserRouter><Login /></BrowserRouter>);
+    expect(screen.getByRole('link', { name: /Sign up/i })).toBeInTheDocument();
+  });
+
+  test("renders with 'PennBuzz' heading", () => {
+    render(<BrowserRouter><Login /></BrowserRouter>);
+    expect(screen.getByRole('heading', { name: /Penn Buzz/i })).toBeInTheDocument();
+  });
+});
 
 describe('Login Functionality', () => {
   test('renders login form', () => {
@@ -72,5 +72,5 @@ describe('Login Functionality', () => {
 
     expect(screen.getByText(/Missing username and password/i)).toBeInTheDocument();
   });
-  
+
 });
