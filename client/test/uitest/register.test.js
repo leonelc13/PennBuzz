@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import renderer from "react-test-renderer";
 import "@testing-library/jest-dom";
-import Register from "../src/components/RegisterPage/register";
+import Register from "../../src/components/RegisterPage/register";
 
 describe("Register component", () => {
   test("renders correctly", () => {

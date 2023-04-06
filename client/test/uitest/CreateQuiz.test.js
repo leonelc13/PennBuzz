@@ -6,14 +6,17 @@ import React from 'react';
 import { render, fireEvent, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
-import CreateTest from '../src/components/CreateQuiz/CreateTest';
-import CreateTestQuestion from '../src/components/CreateQuiz/CreateTestQuestion';
-import CreateQuiz from '../src/components/CreateQuiz/CreateQuiz';
+import CreateTest from '../../src/components/CreateQuiz/CreateTest';
+import CreateTestQuestion from '../../src/components/CreateQuiz/CreateTestQuestion';
+import CreateQuiz from '../../src/components/CreateQuiz/CreateQuiz';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('CreateQuiz', () => {
   const mockUser = {};
   test('renders CreateQuiz component', () => {
-    render(<CreateQuiz />);
+    render(<Router>
+      <CreateQuiz />
+    </Router>);
     const createQuizHeading = screen.getByText(/choose quiz type/i);
     expect(createQuizHeading).toBeInTheDocument();
   });
@@ -25,7 +28,7 @@ describe('CreateTestQuestion', () => {
 
   test('renders question number', async () => {
     render(<CreateTestQuestion questionNumber={1} onTableDataChange={mockOnTableDataChange} onImagePreviewChange={mockOnImagePreviewChange} />);
-    const questionNumberElement = await screen.findByText(/Question 1/i, {exact: false});
+    const questionNumberElement = await screen.findByText(/Question 1/i, { exact: false });
     expect(questionNumberElement).toBeInTheDocument();
   });
 
@@ -77,21 +80,21 @@ describe('CreateTestQuestion', () => {
     expect(input.files.item(0)).toStrictEqual(file);
     expect(input.files).toHaveLength(1);
   });
-  
+
   test('calls onTableDataChange when option input is updated', () => {
     render(<CreateTestQuestion questionNumber={1} onTableDataChange={mockOnTableDataChange} onImagePreviewChange={mockOnImagePreviewChange} />);
     const optionInput = screen.getByRole('textbox', { name: '' });
     userEvent.type(optionInput, 'Paris');
     expect(mockOnTableDataChange).toHaveBeenCalled();
   });
-  
+
   test('calls onTableDataChange when correct checkbox is toggled', () => {
     render(<CreateTestQuestion questionNumber={1} onTableDataChange={mockOnTableDataChange} onImagePreviewChange={mockOnImagePreviewChange} />);
     const correctCheckbox = screen.getByRole('checkbox');
     fireEvent.click(correctCheckbox);
     expect(mockOnTableDataChange).toHaveBeenCalled();
   });
-  
+
   test('renders table header', () => {
     render(<CreateTestQuestion questionNumber={1} onTableDataChange={mockOnTableDataChange} onImagePreviewChange={mockOnImagePreviewChange} />);
     const table = screen.getByRole('table');

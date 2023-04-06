@@ -2,43 +2,57 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { BrowserRouter as Router } from 'react-router-dom';
 import Leaderboard from "../../src/components/Leaderboard/Leaderboard";
 
 describe("Leaderboard", () => {
 
-  test("changes time period and updates the active class", () => {
-    render(<Router><Leaderboard /></Router>);
-    const weekBtn = screen.getByText("Week");
-    const monthBtn = screen.getByText("Month");
-    const allTimeBtn = screen.getByText("All-Time");
+  test("changes time period and updates the active class", async () => {
+    const { getByText } = render(<Router><Leaderboard /></Router>);
+    await waitFor(() => {
+      const weekBtn = getByText("Week");
+      const monthBtn = getByText("Month");
+      const allTimeBtn = getByText("All-Time");
 
-    fireEvent.click(monthBtn);
-    expect(monthBtn).toHaveClass("active");
-    expect(weekBtn).not.toHaveClass("active");
-    expect(allTimeBtn).not.toHaveClass("active");
+      fireEvent.click(monthBtn);
+      expect(monthBtn).toHaveClass("active");
+      expect(weekBtn).not.toHaveClass("active");
+      expect(allTimeBtn).not.toHaveClass("active");
 
-    fireEvent.click(allTimeBtn);
-    expect(allTimeBtn).toHaveClass("active");
-    expect(weekBtn).not.toHaveClass("active");
-    expect(monthBtn).not.toHaveClass("active");
+      fireEvent.click(allTimeBtn);
+      expect(allTimeBtn).toHaveClass("active");
+      expect(weekBtn).not.toHaveClass("active");
+      expect(monthBtn).not.toHaveClass("active");
+    });
+
   });
 
-  test("paginates users", () => {
-    render(<Router><Leaderboard /></Router>);
-    const prevBtn = screen.getByText("Previous");
-    const nextBtn = screen.getByText("Next");
-    const pageSpan = screen.getByText("Page 1");
+  test("paginates users", async () => {
+    const { getByText } = render(<Router><Leaderboard /></Router>);
 
-    expect(prevBtn).toBeDisabled();
+    await waitFor(() => {
+      const prevBtn = getByText("Previous");
+      expect(prevBtn).toBeDisabled();
+    });
+
+    const pageSpan = getByText("Page 1");
+    const nextBtn = getByText("Next");
+    const prevBtn = getByText("Previous");
 
     fireEvent.click(nextBtn);
-    expect(pageSpan).toHaveTextContent("Page 2");
-    expect(prevBtn).not.toBeDisabled();
+
+    await waitFor(() => {
+      expect(pageSpan).toHaveTextContent("Page 2");
+      expect(prevBtn).not.toBeDisabled();
+    });
+
 
     fireEvent.click(prevBtn);
-    expect(pageSpan).toHaveTextContent("Page 1");
+    await waitFor(() => {
+      expect(pageSpan).toHaveTextContent("Page 1");
+    })
+
   });
 });
