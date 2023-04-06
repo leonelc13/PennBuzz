@@ -55,6 +55,56 @@
       ]
     }
   ],
+  "created_quizzes": [
+    {
+      "title": "Can You Pass This Quiz?",
+      "creator": "julian.g",
+      "quiz_type": "test",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Who is this?",
+          "options": [
+            {
+              "option": "Peanut Wigglebutt",
+              "correct": true
+            },
+            {
+              "option": "Wiggle Peanutbutt",
+              "correct": false
+            },
+            {
+              "option": "Butt Peanutwiggle",
+              "correct": false
+            },
+            {
+              "option": "A Dog",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "question": "What is the air-speed velocity of an unladen swallow?",
+          "options": [
+            {
+              "option": "20.1 mph",
+              "correct": false
+            },
+            {
+              "option": "24 mph",
+              "correct": false
+            },
+            {
+              "option": "What do you mean? An African or European swallow?",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "id": 1
+    }
+  ],
   "quizzes": [
     {
       "title": "Which Penn Professor are you?",

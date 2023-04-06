@@ -5,6 +5,8 @@ import MainFeed from './components/MainFeed/MainFeed';
 import DirectMessagingPage from './components/DirectMessaging/DirectMessagingPage';
 import Header from './components/Header/Header';
 import ProfilePage from './components/ProfilePage/ProfilePage'
+import CreateQuiz from './components/CreateQuiz/CreateQuiz'
+import CreateTest from './components/CreateQuiz/CreateTest'
 import Leaderboard from './components/Leaderboard/Leaderboard'
 import Login from './components/LoginPage/login'
 import Register from './components/RegisterPage/register'
@@ -45,6 +47,8 @@ function App() {
                 <>
                     <Header {...props} />
                     <Routes>
+                        <Route exact path='/create_quiz' element={<CreateQuiz {...props} />} />
+                        <Route exact path="/create_quiz/test" element={<CreateTest {...props} />} />
                         <Route exact path='/chat' element={<DirectMessagingPage {...props} />} />
                         <Route exact path='/' element={<MainFeed {...props} />} />
                         <Route exact path='/profile/:id' element={<ProfilePage {...props} />} />
