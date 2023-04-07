@@ -6,6 +6,8 @@ function LoginScreen ({navigation}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // add showPassword state
+
 
   const handleUsernameChange = (text) => {
     setUsername(text);
@@ -50,10 +52,19 @@ function LoginScreen ({navigation}) {
         );
         return;
       }
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'MainFeedScreen' }],
+      });
     } catch (error) {
       console.error(error);
     }
   }, [username, password]);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   
   return (
     <SafeAreaView style={styles.container}>
@@ -70,16 +81,24 @@ function LoginScreen ({navigation}) {
                 style={styles.inputText}
                 placeholder="Username"
                 placeholderTextColor="grey"
-                onChangeText={handleUsernameChange}/>
+                onChangeText={handleUsernameChange}
+                autoCapitalize="none"/>
         </View>
-        <View style={styles.inputView}>
-            <TextInput
-                style={styles.inputText}
-                secureTextEntry
-                placeholder="Password"
-                placeholderTextColor="grey"
-                onChangeText={handlePasswordChange}/>
-        </View>
+        <View style={[styles.inputView, { flexDirection: 'row', justifyContent: 'space-between' }]}>
+        <TextInput
+          style={[styles.passwordText, { flex: 1 }]}
+          secureTextEntry={!showPassword}
+          placeholder="Password"
+          placeholderTextColor="grey"
+          onChangeText={handlePasswordChange}
+          autoCapitalize="none"
+        />
+        <TouchableOpacity onPress={toggleShowPassword}>
+          <Text style={styles.showPasswordText}>
+            {showPassword ? "Hide" : "Show"}
+          </Text>
+        </TouchableOpacity>
+      </View>
         {errorMessage != '' ? (
               <Text style={styles.errorStyle}>
                 {errorMessage}
@@ -143,7 +162,8 @@ const styles = StyleSheet.create({
     inputText:{
         height:50,
         fontSize: 19,
-        color:"black"
+        color:"black",
+        textAlignVertical: 'center'
     },
 
     signupView: {
@@ -192,6 +212,20 @@ const styles = StyleSheet.create({
       color: "#fb5b5a",
       fontSize: 22,
       paddingBottom: 10
+    },
+
+    showPasswordText: {
+      color: "grey",
+      fontSize: 15,
+      textAlignVertical: 'center',
+      paddingTop: 5
+    },
+
+    passwordText: {
+      height:50,
+      fontSize: 19,
+      color:"black",
+      paddingBottom: 20
     }
 }); 
 export default LoginScreen;

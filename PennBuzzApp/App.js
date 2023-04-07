@@ -9,6 +9,7 @@
 import React, { useState, useEffect } from 'react';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen'
+import MainFeedScreen from './screens/MainFeedScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -26,6 +27,7 @@ export default function App() {
           >
             <Stack.Screen name='LoginScreen' component={LoginScreen}/>
             <Stack.Screen name='RegisterScreen' component={RegisterScreen}/>
+            <Stack.Screen name="MainFeedScreen" component={MainFeedScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
