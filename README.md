@@ -1,4 +1,5 @@
-A note to the MS2 grader: We finished everything on time but forgot to resubmit the repo on github by the deadline.
+A note to the MS3
+grader: We finished everything on time but forgot to resubmit the repo on github by the deadline.
 
 Could you please verify that no modifications of the wiki were made after the deadline? 
 
