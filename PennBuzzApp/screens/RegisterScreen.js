@@ -7,6 +7,7 @@ function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // add showPassword state
 
   const handleUsernameChange = (text) => {
     setUsername(text);
@@ -66,6 +67,10 @@ function RegisterScreen({ navigation }) {
     }
   }, [username, password]);
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <SafeAreaView style={stylesTwo.container}>
         <Text style={stylesTwo.titleText}>
@@ -81,13 +86,18 @@ function RegisterScreen({ navigation }) {
                 placeholderTextColor="grey"
                 onChangeText={handleUsernameChange}/>
         </View>
-        <View style={stylesTwo.input}>
+        <View style={[stylesTwo.input, { flexDirection: 'row', justifyContent: 'space-between' }]}>
             <TextInput
-                style={stylesTwo.inputField}
-                secureTextEntry
+                style={[stylesTwo.pass, { flex: 1 }]}
+                secureTextEntry={!showPassword}
                 placeholder="Password"
                 placeholderTextColor="grey"
                 onChangeText={handlePasswordChange}/>
+            <TouchableOpacity onPress={toggleShowPassword}>
+            <Text style={stylesTwo.showPasswordText}>
+              {showPassword ? "Hide" : "Show"}
+            </Text>
+             </TouchableOpacity>
         </View>
         {errorMessage != '' ? (
               <Text style={stylesTwo.errorMessage}>
@@ -202,6 +212,20 @@ const stylesTwo = StyleSheet.create({
       color: "#fb5b5a",
       fontSize: 22,
       paddingBottom: 10
+    },
+
+    showPasswordText: {
+      color: "grey",
+      fontSize: 15,
+      textAlignVertical: 'center',
+      paddingTop: 5
+    },
+
+    pass: {
+      height:50,
+      fontSize: 19,
+      color:"black",
+      paddingBottom: 20
     }
 }); 
 
