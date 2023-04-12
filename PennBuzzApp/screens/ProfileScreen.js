@@ -2,11 +2,11 @@ import React, { useState, useCallback } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from "react-native";
 import axios from "axios";
 
-function MainFeedScreen ({navigation}) {
+function ProfileScreen ({navigation}) {
   
 }
 
 const styles = StyleSheet.create({
 }); 
 
-export default MainFeedScreen;
+export default ProfileScreen;
