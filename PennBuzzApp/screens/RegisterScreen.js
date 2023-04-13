@@ -60,6 +60,7 @@ function RegisterScreen({ navigation }) {
         setErrorMessage(postData.error);
         return;
       }
+      navigation.navigate('ProfileScreen', { profile_id: username})
 
     } catch (error) {
       console.error(error);

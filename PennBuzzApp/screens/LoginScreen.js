@@ -53,10 +53,7 @@ function LoginScreen ({navigation}) {
         return;
       }
 
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'MainFeedScreen' }],
-      });
+      navigation.navigate('ProfileScreen', { profile_id: username})
     } catch (error) {
       console.error(error);
     }
