@@ -52,7 +52,7 @@ function LoginScreen({ navigation, setUser }) {
         );
         return;
       }
-
+      setUser(username);
       navigation.navigate('ProfileScreen', { profile_id: username})
       setUser(username);
     } catch (error) {
