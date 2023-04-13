@@ -9,13 +9,11 @@ function SearchBar() {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        console.log(" I RAN");
         setResults([]);
         if (query) {
             getSearchResults(query)
                 .then(data => {
-                    console.log("DATA" + data);
-                    setResults(data[0].results)
+                    setResults(data);
                 })
                 .catch(error => console.log(error));
         }
