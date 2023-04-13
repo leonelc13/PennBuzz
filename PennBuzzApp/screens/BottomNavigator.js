@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 
 import MainFeedScreen from './MainFeed/MainFeedScreen';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './ProfileScreenComponents/ProfileScreen';
 import SearchScreen from './SearchScreen';
 import QuizScreen from './QuizScreen';
 
@@ -29,6 +29,7 @@ function HomeStack({ user }) {
             </HomeStackNavigator.Screen>
             <HomeStackNavigator.Screen name="SearchScreen" component={SearchScreen} />
             <HomeStackNavigator.Screen name="QuizScreen" component={QuizScreen} />
+            <HomeStackNavigator.Screen name="ProfileScreen" component={ProfileScreen}/>
         </HomeStackNavigator.Navigator>
     );
 }
@@ -46,6 +47,7 @@ function SearchStack() {
         >
             <SearchStackNavigator.Screen name="SearchScreen" component={SearchScreen} />
             <SearchStackNavigator.Screen name="QuizScreen" component={QuizScreen} />
+            <SearchStackNavigator.Screen name="ProfileScreen" component={ProfileScreen}/>
 
         </SearchStackNavigator.Navigator>
     );
@@ -62,6 +64,9 @@ function ProfileStack({ user }) {
                 headerShown: false,
             }}
         >
+            <ProfileStackNavigator.Screen name="ProfileScreen" >
+                {props => <ProfileScreen {...props} username={user}/>}
+            </ProfileStackNavigator.Screen>
             <ProfileStackNavigator.Screen name="SearchScreen" >
                 {props => <ProfileScreen {...props} />}
             </ProfileStackNavigator.Screen>

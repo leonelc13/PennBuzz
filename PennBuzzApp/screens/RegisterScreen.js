@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } fro
 import axios from "axios";
 
 
-function RegisterScreen({ navigation }) {
+function RegisterScreen({ navigation, setUser}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -60,7 +60,7 @@ function RegisterScreen({ navigation }) {
         setErrorMessage(postData.error);
         return;
       }
-      navigation.navigate('ProfileScreen', { profile_id: username})
+      setUser(username)
 
     } catch (error) {
       console.error(error);

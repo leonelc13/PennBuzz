@@ -4,9 +4,8 @@ import Quiz from './Quiz';
 import axios from 'axios';
 
 
-function ProfileScreen ({ navigation, route }) {
+function ProfileScreen ({ username }) {
   // Initialize state    
-  const { profile_id } = route.params;
   const [profile, setProfile] = useState({});
   const [quizzes, setQuizzes] = useState([]);
   const [selectedButton, setSelectedButton] = useState('Created');
@@ -15,7 +14,7 @@ function ProfileScreen ({ navigation, route }) {
 
   useEffect(() => {
       // Fetch profile data
-      axios.get(`http://localhost:3000/profile/${profile_id}`)
+      axios.get(`http://localhost:3000/profile/${username}`)
           .then(response => {
               console.log(response);
               setProfile(response.data);
@@ -30,7 +29,7 @@ function ProfileScreen ({ navigation, route }) {
       axios.get('http://localhost:3000/quizzes',
           {
               params: {
-                  user: profile_id
+                  user: username
               }
           })
           .then(response => {
