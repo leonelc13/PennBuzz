@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import StarCheckbox from './StarCheck';
+import StarCheck from './StarCheck';
 
 function Quiz(props) {
   const { author_img, author_name, thumbnail_img, title } = props;
@@ -18,7 +18,7 @@ function Quiz(props) {
           <Text>{author_name}</Text>
         </View>
         <View style={styles.quizFavorite}>
-          <StarCheckbox checked={favorite} onChange={setFavorite} />
+          <StarCheck checked={favorite} onChange={setFavorite} />
         </View>
       </View>
       <View style={styles.quizImgContainer}>

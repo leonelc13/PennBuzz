@@ -16,7 +16,7 @@ function ProfileScreen ({ username }) {
       // Fetch profile data
       axios.get(`http://localhost:3000/profile/${username}`)
           .then(response => {
-              console.log(response);
+              console.log(response.data);
               setProfile(response.data);
           })
           .catch(error => {
@@ -110,6 +110,8 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 1,
+    marginLeft: 20,
+    marginTop: 10,
     borderColor: '#e5e5e5',
   },
   name: {
