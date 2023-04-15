@@ -4,46 +4,46 @@ import Quiz from './Quiz';
 import axios from 'axios';
 
 
-function ProfileScreen ({ username }) {
+function ProfileScreen(props) {
   // Initialize state    
   const [profile, setProfile] = useState({});
   const [quizzes, setQuizzes] = useState([]);
   const [selectedButton, setSelectedButton] = useState('Created');
 
-
+  console.log(props);
 
   useEffect(() => {
-      // Fetch profile data
-      axios.get(`http://localhost:3000/profile/${username}`)
-          .then(response => {
-              console.log(response.data);
-              setProfile(response.data);
-          })
-          .catch(error => {
-              console.error('Error fetching data: ', error);
-          });
+    // Fetch profile data
+    axios.get(`http://localhost:3000/profile/${props.username}`)
+      .then(response => {
+        console.log(response.data);
+        setProfile(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
   }, []);
 
   useEffect(() => {
-      // Fetch quizzes data
-      axios.get('http://localhost:3000/quizzes',
-          {
-              params: {
-                  user: username
-              }
-          })
-          .then(response => {
-              setQuizzes(response.data ? response.data : []);
-          })
-          .catch(error => {
-              console.error('Error fetching data: ', error);
-          });
+    // Fetch quizzes data
+    axios.get('http://localhost:3000/quizzes',
+      {
+        params: {
+          user: props.username
+        }
+      })
+      .then(response => {
+        setQuizzes(response.data ? response.data : []);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
 
   }, []);
 
   return (
     <SafeAreaView style={styles.profilePageContainer}>
-        <ScrollView>
+      <ScrollView>
         <View style={styles.profileSection}>
           <View style={styles.profileImage}>
             <Image
@@ -87,7 +87,7 @@ function ProfileScreen ({ username }) {
             <Quiz key={quiz.id} {...quiz} />
           ))}
         </View>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   profileSection: {
     marginBottom: 20,
     flexDirection: 'row',
+    display: 'flex',
   },
   profileImage: {
     marginRight: 20,
@@ -122,6 +123,7 @@ const styles = StyleSheet.create({
   },
   profileBiography: {
     flex: 1,
+    paddingTop: 20
   },
   buttonGroup: {
     flexDirection: 'row',
@@ -142,6 +144,6 @@ const styles = StyleSheet.create({
   quizContainer: {
     flex: 1,
   }
-}); 
+});
 
 export default ProfileScreen;

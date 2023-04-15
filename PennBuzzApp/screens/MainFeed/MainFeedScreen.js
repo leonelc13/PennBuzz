@@ -49,7 +49,7 @@ function MainFeedScreen({ username, navigation }) {
                 </View > */}
                 {
                     quizzes.map(quiz => (
-                        <Quiz {...quiz} navigation={navigation} />
+                        <Quiz {...quiz} navigation={navigation} username={username} />
                     ))
                 }
             </ScrollView >

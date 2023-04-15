@@ -16,7 +16,8 @@ import QuizScreen from './QuizScreen';
 
 // HomeStack
 const HomeStackNavigator = createNativeStackNavigator();
-function HomeStack({ user }) {
+function HomeStack({ route }) {
+    const { username } = route.params;
     return (
         <HomeStackNavigator.Navigator
             initialRouteName='MainFeedScreen'
@@ -25,11 +26,11 @@ function HomeStack({ user }) {
             }}
         >
             <HomeStackNavigator.Screen name="MainFeedScreen" >
-                {props => <MainFeedScreen {...props} username={user} />}
+                {props => <MainFeedScreen {...props} username={username} />}
             </HomeStackNavigator.Screen>
             <HomeStackNavigator.Screen name="SearchScreen" component={SearchScreen} />
             <HomeStackNavigator.Screen name="QuizScreen" component={QuizScreen} />
-            <HomeStackNavigator.Screen name="ProfileScreen" component={ProfileScreen}/>
+            <HomeStackNavigator.Screen name="ProfileScreen" component={ProfileScreen} />
         </HomeStackNavigator.Navigator>
     );
 }
@@ -47,7 +48,7 @@ function SearchStack() {
         >
             <SearchStackNavigator.Screen name="SearchScreen" component={SearchScreen} />
             <SearchStackNavigator.Screen name="QuizScreen" component={QuizScreen} />
-            <SearchStackNavigator.Screen name="ProfileScreen" component={ProfileScreen}/>
+            <SearchStackNavigator.Screen name="ProfileScreen" component={ProfileScreen} />
 
         </SearchStackNavigator.Navigator>
     );
@@ -56,7 +57,9 @@ function SearchStack() {
 // Profile Stack
 
 const ProfileStackNavigator = createNativeStackNavigator();
-function ProfileStack({ user }) {
+function ProfileStack({ route }) {
+    const { username } = route.params;
+
     return (
         <ProfileStackNavigator.Navigator
             initialRouteName='ProfileScreen'
@@ -65,18 +68,17 @@ function ProfileStack({ user }) {
             }}
         >
             <ProfileStackNavigator.Screen name="ProfileScreen" >
-                {props => <ProfileScreen {...props} username={user}/>}
+                {props => <ProfileScreen {...props} username={username} />}
             </ProfileStackNavigator.Screen>
-            <ProfileStackNavigator.Screen name="SearchScreen" >
-                {props => <ProfileScreen {...props} />}
-            </ProfileStackNavigator.Screen>
-            <ProfileStackNavigator.Screen name="QuizScreen" component={QuizScreen} />
+
         </ProfileStackNavigator.Navigator >
     );
 }
 
 const Tab = createBottomTabNavigator();
 const BottomNav = ({ user }) => {
+
+    console.log("bottom nav ", user);
     return (
         <Tab.Navigator
             initialRouteName='Home'

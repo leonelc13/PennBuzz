@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, Button, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 export default function QuizScreen({ route }) {
-    const { quizId, navigation } = route.params;
+    const { quizId, username, navigation } = route.params;
     const [inQuiz, setInQuiz] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [quizData, setQuizData] = useState({});
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
-
     const [isUpvoted, setIsUpvoted] = useState(false);
     const [isDownvoted, setIsDownvoted] = useState(false);
 
@@ -16,8 +15,6 @@ export default function QuizScreen({ route }) {
     const [downvotes, setDownvotes] = useState(0);
 
     useEffect(() => {
-        console.log(" QUIZ ID ", quizId)
-        console.log("DATA", quizData);
         axios.get(`http://localhost:3000/quiz?id=${quizId}`)
             .then(response => {
                 setQuizData(response.data[0]);
@@ -49,6 +46,20 @@ export default function QuizScreen({ route }) {
         return setIsDownvoted(true);
     }
 
+
+    function handleAddComment(e) {
+        axios.post(`http://localhost:3000/quiz?id=${quizId.current}/comments`, {
+            author: username,
+            content: newComment
+        })
+            .then(response => {
+                setComments([...comments, response.data]);
+                setQuizData({ ...quizData, comments: [...comments, response.data] });
+            })
+            .catch(error => {
+                console.error('Error adding comment: ', error);
+            });
+    }
 
     const renderComment = ({ item }) => (
         <View style={{ paddingVertical: 10 }}>
@@ -124,11 +135,27 @@ export default function QuizScreen({ route }) {
                 </View >
             </View>
             <View style={[styles.comments_container, { flex: 1 }]}>
+                <View style={styles.comments_title_container}>
+                    <Text style={styles.comments_title}>Comments</Text>
+                </View>
                 <FlatList
                     data={comments}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={renderComment}
                 />
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TextInput
+                        placeholder="Add a comment..."
+                        value={newComment}
+                        onChangeText={text => setNewComment(text)}
+                        style={{ flex: 1, marginRight: 10 }}
+                    />
+                    <Button
+                        title="Add"
+                        onPress={handleAddComment}
+                        disabled={!newComment}
+                    />
+                </View>
             </View>
         </SafeAreaView>
     );
@@ -151,7 +178,7 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: '10',
+        marginBottom: 10,
         alignItems: 'center'
     },
     quiz_author: {
@@ -215,6 +242,17 @@ const styles = StyleSheet.create({
         width: '40%',
         alignItems: 'center'
     },
+    comments_title_container: {
+        width: '100%',
+        borderBottomColor: '#F0F0F0',
+        padding: 2,
+        borderBottomWidth: 1
+    },
+    comments_title: {
+        fontSize: 20,
+        fontWeight: 'bold'
+    }
+    ,
     quiz_upvotes_button: {
         borderColor: '#FF0606',
         borderWidth: 1,
@@ -235,6 +273,6 @@ const styles = StyleSheet.create({
     white_text: {
         color: 'white'
     }, comments_container: {
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     }
 });
