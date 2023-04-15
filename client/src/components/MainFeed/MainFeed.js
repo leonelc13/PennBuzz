@@ -43,7 +43,7 @@ function MainFeed(props) {
             </div>
             {
                 quizzes.map(quiz => (
-                    <Quiz {...quiz} />
+                    <Quiz {...quiz} id={quiz.id} />
                 ))
             }
         </div >

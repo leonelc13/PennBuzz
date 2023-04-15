@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Message from './Message';
 import Channel from './Channel';
+import ChatWindow from './ChatWindow';
 import './style.css';
+const { socketURL, serverPort } = require('../../utils/utils.js');
+
 
 /**
  * DIRECT MESSAGING PAGE 
  **/
 
-
 function DirectMessagingPage(props) {
 
     // Initialize the state
     const [selectedChannel, setSelectedChannel] = useState("");
-    const [messages, setMessages] = useState([]);
     const [channels, setChannels] = useState({});
+    const [socket, setSocket] = useState(null);
 
 
     useEffect(() => {
@@ -32,20 +33,25 @@ function DirectMessagingPage(props) {
             });
     }, [props.user]);
 
+    // Create Socket Connection
     useEffect(() => {
-        if (selectedChannel) {
-            axios.get(`http://localhost:3000/messages?channel_id=${selectedChannel}`)
-                .then(response => {
-                    setMessages(response.data[0].messages);
-                })
-                .catch(error => {
-                    console.error('Error fetching messages data for channel: ', selectedChannel, '\n\n', error);
-                });
-        } else {
-            setMessages([]);
-        }
+        const newSocket = new WebSocket(`${socketURL}:${serverPort}`);
 
-    }, [selectedChannel]);
+        newSocket.onopen = () => {
+            console.log('WebSocket connection opened');
+            setSocket(newSocket);
+        };
+
+        newSocket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        return () => {
+            newSocket.close();
+            setSocket(null);
+        };
+    }, []);
+
 
     /*
         Handles Channel selection by 
@@ -54,45 +60,6 @@ function DirectMessagingPage(props) {
         setSelectedChannel(new_selected_channel);
         console.log("new selected user: " + selectedChannel + " " + new_selected_channel);
     }
-
-    /*
-        Renders empty chat window in the case no channel is currently selected
-    **/
-
-    function noChannelSelectedChatWindow() {
-        return (
-            <div id="empty-chat-window">
-                <p id="empty-chat-window-text">Create a new chat or select an existing one to chat with your friends!</p>
-            </div>
-        )
-    }
-
-    /*
-        Renders chat window for an existing chat
-    **/
-
-    function chatWindow() {
-        return (
-            <div id="chat-window" >
-                <div id="chat-container">
-                    {messages.map(message => (
-                        <Message
-                            key={message.sender + message.timestamp + props.user}
-                            sender={message.sender}
-                            timestamp={message.timestamp}
-                            text={message.text}
-                            user={props.user}
-                        />
-                    ))}
-                </div>
-                <div id="input-area">
-                    <input type="text" id="message-input" placeholder="Type your message..."></input>
-                    <button id="send-button">Send</button>
-                </div>
-            </div>
-        )
-    }
-
 
     /*
         Renders chat header for an existing chat
@@ -137,7 +104,7 @@ function DirectMessagingPage(props) {
             </div>
 
             {selectedChannel ? existingChatHeader() : (<span></span>)}
-            {selectedChannel ? chatWindow() : noChannelSelectedChatWindow()}
+            <ChatWindow socket={socket} selectedChannel={selectedChannel} user={props.user} />\
         </div >
     );
 }
