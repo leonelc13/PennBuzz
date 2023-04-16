@@ -86,7 +86,7 @@ function Quiz(props) {
                     <Image style={{ width: '100%', height: 200 }} source={{ uri: props.thumbnail_img }} alt="quiz_thumbnail" resizeMode="cover" />
                 </View>
                 <View style={styles.quiz_buttons} >
-                    <TouchableOpacity onPress={() => { props.navigation.navigate("QuizScreen", { quizId: props.id }) }} style={styles.quiz_take_quiz_button_container}>
+                    <TouchableOpacity onPress={() => { props.navigation.navigate("QuizScreen", { quizId: props.id, username: props.username }) }} style={styles.quiz_take_quiz_button_container}>
                         <Text style={styles.red_text}>
                             Take Quiz
                         </Text>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: '10',
+        marginBottom: 10,
         alignItems: 'center'
     },
     quiz_author: {
