@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./register.css";
+const { rootURL } = require('../../utils/utils');
 
 function Register(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { handleLogin } = props;
+  const saltRounds = 10;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -35,34 +37,14 @@ function Register(props) {
       return;
     }
 
-  
     try {
-      const response = await axios.get('http://localhost:3000/users');
-      const data = response.data;
-
-      if (data.find((user) => user.username === username)) {
-        setErrorMessage('Username is already taken');
-        return;
-      }
-
-      const postResponse = await axios.post('http://localhost:3000/users', {
-          username: username,
-          password: password,
-      });
-  
-      const postData = postResponse.data;
-  
-      if (postData.error) {
-        setErrorMessage(postData.error);
-        return;
-      }
-  
-      handleLogin(username);
-
-    } catch (error) {
-      console.error(error);
-      setErrorMessage('An error occurred while registering. Please try again later.');
+      const response = await axios.post(`${rootURL}/register`, `name=${username}&password=${password}`)
+      handleLogin(username, response.data.apptoken);
+    } catch (err) {
+      setErrorMessage(err.response.data.error);
+      console.log('error', err.message);
     }
+
   }, [username, password, handleLogin]);
 
   useEffect(() => {
