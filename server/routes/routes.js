@@ -1,8 +1,10 @@
-import DirectMessagingRoutes from "./DirectMessagingRoutes";
+const DirectMessagingRoutes = require("./DirectMessagingRoutes");
+const LeaderboardRoutes = require("./LeaderboardRoutes");
 
 // Routes Tree
 var routes = {
-    DirectMessaging: DirectMessagingRoutes
+    DirectMessaging: DirectMessagingRoutes,
+    Leaderboard: LeaderboardRoutes
 }
 
 module.exports = routes;

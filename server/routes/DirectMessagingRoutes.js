@@ -1,4 +1,4 @@
-const db = require('./db').getDb();
+const db = require('../model/db').getDb();
 
 
 
