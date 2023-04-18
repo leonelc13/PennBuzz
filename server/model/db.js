@@ -6,7 +6,8 @@ const connect = async (url, callback) => {
     try {
         const conn = (await MongoClient.connect(url, {
             useNewUrlParser: true, useUnifiedTopology: true,
-        })).db();
+        }));
+        db = conn.db("PennBuzz");
         console.log(`Connected to database: ${conn.databaseName}`);
         return callback(null);
     } catch (err) {
@@ -16,9 +17,10 @@ const connect = async (url, callback) => {
 
 const init = async () => {
     // ADD COLLECTION NAMES
-    const collectionNames = [];
+    const collectionNames = ["User", "Quiz", "Message"];
     collectionNames.forEach(async (collectionName) => {
-        const exists = db.listCollections({ name: collectionName }).hasNext();
+        const exists = await db.listCollections({ name: collectionName }).hasNext();
+
         if (!exists) {
             console.log(`Creating database with name ${collectionName}`);
             db.createCollection(collectionName);
