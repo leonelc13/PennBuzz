@@ -1,6 +1,6 @@
-import DirectMessagingRoutes from "./DirectMessagingRoutes";
-import LoginRoute from "./LoginRoute";
-import RegisterRoute from "./RegisterRoute";
+const DirectMessagingRoutes = require("./DirectMessagingRoutes")
+const LoginRoute = require("./LoginRoute");
+const RegisterRoute = require ("./RegisterRoute");
 
 // Routes Tree
 var routes = {
