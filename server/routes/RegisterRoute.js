@@ -3,6 +3,7 @@ const { getUser, registerUser } = require('../model/Login-RegisterDBOperations')
 
 const RegisterRoute = async function(req, res) {
     const { name, password } = req.body;
+
     if ((!name || name === '') && (!password || password === '')) {
         res.status(404).json({error: 'Missing username and password'});
         return;
@@ -27,10 +28,10 @@ const RegisterRoute = async function(req, res) {
             password: password
         }
 
-        const result = await registerUser(newUser);
+        await registerUser(newUser);
 
         try {
-            const token = authenticateUser(result);
+            const token = authenticateUser(username);
             res.status(201).json({apptoken: token});
         } catch (err) {
             res.status(404).json({error: `${err.message}`});

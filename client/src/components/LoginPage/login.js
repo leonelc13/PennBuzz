@@ -22,7 +22,9 @@ function Login(props) {
     event.preventDefault();
     
     try {
-      const response = await axios.post(`${rootURL}/login`, `name=${username}&password=${password}`)
+      console.log(username);
+      console.log(password);
+      const response = await axios.post(`${rootURL}:3000/login`, `name=${username}&password=${password}`)
       handleLogin(username, response.data.apptoken);
     } catch (err) {
       setErrorMessage(err.response.data.error);

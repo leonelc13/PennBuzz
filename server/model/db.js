@@ -9,7 +9,7 @@ const connect = async (url, callback) => {
         }));
         db = conn.db("PennBuzz");
         console.log(`Connected to database: ${conn.databaseName}`);
-        return callback(null);
+        return callback(null, conn);
     } catch (err) {
         return callback(err);
     }
@@ -18,14 +18,14 @@ const connect = async (url, callback) => {
 const init = async () => {
     // ADD COLLECTION NAMES
     const collectionNames = ["User", "Quiz", "Message"];
-    collectionNames.forEach(async (collectionName) => {
+    for (const collectionName of collectionNames) {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
 
         if (!exists) {
             console.log(`Creating database with name ${collectionName}`);
-            db.createCollection(collectionName);
+            await db.createCollection(collectionName);
         }
-    });
+    }
 };
 
 function getDb() {

@@ -9,7 +9,6 @@ function Register(props) {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const { handleLogin } = props;
-  const saltRounds = 10;
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -38,7 +37,9 @@ function Register(props) {
     }
 
     try {
-      const response = await axios.post(`${rootURL}/register`, `name=${username}&password=${password}`)
+      console.log(username);
+      console.log(password);
+      const response = await axios.post(`${rootURL}:3000/register`, `name=${username}&password=${password}`)
       handleLogin(username, response.data.apptoken);
     } catch (err) {
       setErrorMessage(err.response.data.error);

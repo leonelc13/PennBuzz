@@ -11,8 +11,17 @@ const getUser = async(username) => {
 };
 
 const registerUser = async (newUser) => {
-    const result = await db.collection('User').insertOne(newUser);
-    return result.username;
+    console.log(newUser);
+    console.log('hellow from registerUser');
+    try {
+        const result = await db.collection('User').insertOne(newUser);
+        console.log('after inserting');
+        return result;
+
+    } catch (err) {
+        console.log(err);
+    }
+    console.log('after inserting');
 };
 
 module.exports = {
