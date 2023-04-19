@@ -5,20 +5,20 @@ const RegisterRoute = async function(req, res) {
     const { name, password } = req.body;
 
     if ((!name || name === '') && (!password || password === '')) {
-        res.status(404).json({error: 'Missing username and password'});
+        res.status(401).json({error: 'Missing username and password'});
         return;
     } else if (!name || name === '') {
-        res.status(404).json({error: 'Missing username'});
+        res.status(401).json({error: 'Missing username'});
         return;
     } else if (!password || password === '') {
-        res.status(404).json({error: 'Missing password'});
+        res.status(401).json({error: 'Missing password'});
         return;
     }
 
     const user = await getUser(name);
     
     if (user) {
-        res.status(404).json({error: 'User already exists'});
+        res.status(401).json({error: 'User already exists'});
         return;
     }
 
@@ -31,14 +31,14 @@ const RegisterRoute = async function(req, res) {
         await registerUser(newUser);
 
         try {
-            const token = authenticateUser(username);
+            const token = authenticateUser(name);
             res.status(201).json({apptoken: token});
         } catch (err) {
-            res.status(404).json({error: `${err.message}`});
+            res.status(401).json({error: `${err.message}`});
         }
 
     } catch(err) {
-        res.status(400).json({message: 'There was an error registering this user'});
+        res.status(401).json({message: 'There was an error registering this user'});
     }
 
 }

@@ -9,7 +9,7 @@ const connect = async (url, callback) => {
             useNewUrlParser: true, useUnifiedTopology: true,
         }));
         db = conn.db("PennBuzz");
-        console.log(`Connected to database: ${conn.databaseName}`);
+        console.log(`Connected to database: ${db.databaseName}`);
         return callback(null, conn);
     } catch (err) {
         return callback(err);
@@ -19,7 +19,7 @@ const connect = async (url, callback) => {
 const init = async () => {
     // ADD COLLECTION NAMES
     const collectionNames = ["User", "Quiz", "Message", "Scores"];
-    const collectionSeeds = [[],[],[],scoresSeeds]
+    const collectionSeeds = [[],[],[],scoresSeeds];
     collectionNames.forEach(async (collectionName, i) => {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
         if (!exists) {
@@ -27,7 +27,7 @@ const init = async () => {
             const collection = await db.createCollection(collectionName);
             collection.insertMany(collectionSeeds[i])
         }
-    }
+    })
 };
 
 function getDb() {

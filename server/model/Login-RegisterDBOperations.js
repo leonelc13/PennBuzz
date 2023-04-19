@@ -1,6 +1,8 @@
-const db = require('./db').getDb();
+const { getDb } = require('./db');
+
 
 const getUser = async(username) => {
+    const db = getDb();
     try {
         const result = await db.collection('User').findOne({name: username});
         console.log(`User: ${JSON.stringify(result)}`);
@@ -11,8 +13,7 @@ const getUser = async(username) => {
 };
 
 const registerUser = async (newUser) => {
-    console.log(newUser);
-    console.log('hellow from registerUser');
+    const db = getDb();
     try {
         const result = await db.collection('User').insertOne(newUser);
         console.log('after inserting');
