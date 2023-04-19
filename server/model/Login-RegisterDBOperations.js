@@ -1,10 +1,10 @@
 const { getDb } = require('./db');
 
 
-const getUser = async(username) => {
+const getUser = async(name) => {
     const db = getDb();
     try {
-        const result = await db.collection('User').findOne({name: username});
+        const result = await db.collection('User').findOne({username: name});
         console.log(`User: ${JSON.stringify(result)}`);
         return result;
     } catch (err) {
