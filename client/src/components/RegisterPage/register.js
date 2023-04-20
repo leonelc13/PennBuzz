@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import "./register.css";
+const { rootURL } = require('../../utils/utils');
 
 function Register(props) {
   const [username, setUsername] = useState('');
@@ -19,50 +20,16 @@ function Register(props) {
 
   const handleSubmit = useCallback (async (event) => {
     event.preventDefault();
-
-    if (!username && !password) {
-      setErrorMessage('Please enter both a username and password');
-      return;
-    }
-
-    if (!username) {
-      setErrorMessage('Please enter a username');
-      return;
-    }
-  
-    if (!password) {
-      setErrorMessage('Please enter a password');
-      return;
-    }
-
-  
     try {
-      const response = await axios.get('http://localhost:3000/users');
-      const data = response.data;
-
-      if (data.find((user) => user.username === username)) {
-        setErrorMessage('Username is already taken');
-        return;
-      }
-
-      const postResponse = await axios.post('http://localhost:3000/users', {
-          username: username,
-          password: password,
-      });
-  
-      const postData = postResponse.data;
-  
-      if (postData.error) {
-        setErrorMessage(postData.error);
-        return;
-      }
-  
-      handleLogin(username);
-
-    } catch (error) {
-      console.error(error);
-      setErrorMessage('An error occurred while registering. Please try again later.');
+      console.log(username);
+      console.log(password);
+      const response = await axios.post(`${rootURL}:3000/register`, `name=${username}&password=${password}`)
+      handleLogin(username, response.data.apptoken);
+    } catch (err) {
+      setErrorMessage(err.response.data.error);
+      console.log('error', err.message);
     }
+
   }, [username, password, handleLogin]);
 
   useEffect(() => {

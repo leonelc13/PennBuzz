@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link } from 'react-router-dom';
 import "./login.css";
+const { rootURL } = require('../../utils/utils');
 
 function Login(props) {
   const [username, setUsername] = useState("");
@@ -19,36 +20,15 @@ function Login(props) {
 
   const handleSubmit = useCallback (async (event) => {
     event.preventDefault();
-    if (!username && !password) {
-      setErrorMessage('Missing username and password');
-      return;
-    }
-
-    if (!username) {
-      setErrorMessage('Missing username');
-      return;
-    }
-  
-    if (!password) {
-      setErrorMessage('Missing password');
-      return;
-    }
     
     try {
-      const response = await axios.get("http://localhost:3000/users", {
-        params: {
-          username: username,
-          password: password,
-        },
-      });
-      const data = response.data;
-      if (data.length === 0 || data[0].password !== password || data[0].username !== username) {
-        setErrorMessage("Sorry, we don't recognize that combination of username and password. Please try again");
-        return;
-      }
-      handleLogin(username);
-    } catch (error) {
-      console.error(error);
+      console.log(username);
+      console.log(password);
+      const response = await axios.post(`${rootURL}:3000/login`, `name=${username}&password=${password}`)
+      handleLogin(username, response.data.apptoken);
+    } catch (err) {
+      setErrorMessage(err.response.data.error);
+      console.log('error', err.message);
     }
   }, [username, password, handleLogin]);
 

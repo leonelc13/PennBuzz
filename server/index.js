@@ -35,10 +35,10 @@ db.connect(process.env.DATABASE_URL, async (err) => {
         }
     }
 
-    app.listen(SERVER_PORT, async () => {
-        await db.init();
-        console.log('Server running on port', SERVER_PORT);
-        runWebSocketServer();
+    db.init().then(() => {
+        app.listen(SERVER_PORT, async () => {
+            runWebSocketServer();
+            console.log('Server running on port', SERVER_PORT);
     });
 });
 
