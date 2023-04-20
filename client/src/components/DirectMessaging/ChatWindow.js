@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Message from './Message';
 
-import { AddMessage } from '../../api/PostRequests';
+import { AddMessage, getMessages } from '../../api/DirectMessagesAPI';
 
 import './style.css';
 
@@ -26,10 +26,16 @@ export default function ChatWindow(props) {
 
 
     useEffect(() => {
+        setMessages([]);
         if (selectedChannel) {
-            axios.get(`http://localhost:3000/messages?channel_id=${selectedChannel}`)
-                .then(response => {
-                    setMessages(response.data[0].messages);
+            getMessages(username, selectedChannel)
+                .then(data => {
+                    console.log("DATA", data);
+                    if (data && Array.isArray(data)) {
+                        setMessages(data);
+                    } else {
+                        setMessages([]);
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching messages data for channel: ', selectedChannel, '\n\n', error);
@@ -57,6 +63,7 @@ export default function ChatWindow(props) {
         const dateString = date.toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
+            second: 'numeric',
             hour12: true,
             month: 'numeric',
             day: 'numeric',
@@ -67,20 +74,18 @@ export default function ChatWindow(props) {
             "sender": username,
             "text": text,
             "timestamp": dateString,
-            "channel": selectedChannel
+            "channel_id": selectedChannel
         }
 
         const messageString = JSON.stringify(body);
         if (socket) {
-            socket.send("FEFE");
             socket.send(messageString);
             console.log("SEND TO SOCKET: ", messageString)
         }
 
-        console.log("SEND ", message, socket);
 
         // Add message to backend
-        AddMessage(messageString).then(data => {
+        AddMessage(body).then(data => {
             // Add message to UI
             setMessages(prev => [...prev, body]);
         }

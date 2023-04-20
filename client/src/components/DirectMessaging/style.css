@@ -15,6 +15,13 @@
 .channels-window {
     grid-column: 1/1;
     grid-row: 2/2;
+    height: min(100%, 500px);
+    width: 250px;
+    overflow-y: scroll;
+    display: inline-block;
+    white-space: nowrap;
+    overflow-x: auto;
+
 }
 
 /* CHANNEL HEADER */
@@ -50,7 +57,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    width: 100%;
+
     height: 70px;
     border-top: 1px solid black;
 }
@@ -132,7 +139,7 @@
     font-weight: bold;
     padding: 20%;
     top: 0;
-
+    height: min(100%, 500px);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     border: 1px solid #ccc;
     border-radius: 20px;

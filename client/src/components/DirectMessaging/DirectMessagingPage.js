@@ -3,7 +3,8 @@ import axios from 'axios';
 import Channel from './Channel';
 import ChatWindow from './ChatWindow';
 import './style.css';
-const { socketURL, serverPort } = require('../../utils/utils.js');
+import { getChannels } from '../../api/DirectMessagesAPI';
+const { socketURL, socketPort } = require('../../utils/utils.js');
 
 
 /**
@@ -19,14 +20,9 @@ function DirectMessagingPage(props) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/channels',
-            {
-                params: {
-                    user: props.user
-                }
-            })
-            .then(response => {
-                setChannels(response.data);
+        getChannels(props.user)
+            .then(data => {
+                setChannels(data);
             })
             .catch(error => {
                 console.error('Error fetching channels data: ', error);
@@ -35,7 +31,7 @@ function DirectMessagingPage(props) {
 
     // Create Socket Connection
     useEffect(() => {
-        const newSocket = new WebSocket(`${socketURL}:${serverPort}`);
+        const newSocket = new WebSocket(`${socketURL}:${socketPort}`);
 
         newSocket.onopen = () => {
             console.log('WebSocket connection opened');

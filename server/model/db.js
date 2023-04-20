@@ -17,7 +17,7 @@ const connect = async (url, callback) => {
 
 const init = async () => {
     // ADD COLLECTION NAMES
-    const collectionNames = ["User", "Quiz", "Message"];
+    const collectionNames = ["User", "Quiz", "Message", "Channel"];
     collectionNames.forEach(async (collectionName) => {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
 

@@ -1,7 +1,6 @@
-import DirectMessagingRoutes from "./DirectMessagingRoutes";
-
+const DirectMessagingRoutes = require('./DirectMessagingRoutes');
 // Routes Tree
-var routes = {
+const routes = {
     DirectMessaging: DirectMessagingRoutes
 }
 

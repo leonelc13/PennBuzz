@@ -7,11 +7,13 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
+const bodyParser = require('body-parser');
+
 app.use(cors());
 app.use(express.urlencoded(
     { extended: true },
 ));
-
+app.use(bodyParser.json());
 
 
 
@@ -29,7 +31,7 @@ const channels = [
 
 // Consider adding a <client, channel> mapping to reduce client cleaning time
 
-function runWebSocketServer() {
+async function runWebSocketServer() {
     const server = new WebSocket.Server({ port: 8000 });
 
     server.on('connection', (socket) => {
@@ -39,9 +41,9 @@ function runWebSocketServer() {
             try {
                 const data = JSON.parse(message);
                 // If message contains channel attribute
-                if (data.channel) {
+                if (data.channel_id) {
                     // Find room in channels
-                    const channel = channels.find((r) => r.id === data.channel);
+                    const channel = channels.find((r) => r.id === data.channel_id);
 
                     if (channel) {
                         // Send message to all clients in room
@@ -55,8 +57,8 @@ function runWebSocketServer() {
                         channel.clients.add(socket);
                     } else {
                         // Create new channel representation if channel id is not in server
-                        console.log("Created channel " + data.channel + " in memory");
-                        channels.push({ id: data.channel, clients: new Set([socket]) })
+                        console.log("Created channel " + data.channel_id + " in memory");
+                        channels.push({ id: data.channel_id, clients: new Set([socket]) })
                     }
                 } else {
                     console.error('Missing channel property in message');
