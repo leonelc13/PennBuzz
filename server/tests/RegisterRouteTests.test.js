@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const deleteTestDataFromDB = async (db, testData) => {
     try {
-        const result = await db.collection('User').deleteMany({ name: testData });
+        const result = await db.collection('User').deleteMany({ username: testData });
         const { deletedCount } = result;
         if (deletedCount === 1) {
           console.log('info', 'Successfully deleted test user');
@@ -27,6 +27,7 @@ afterAll(async () => {
     const db = getDb();
     try {
         await deleteTestDataFromDB(db, 'testuser');
+        await deleteTestDataFromDB(db, 'newuser');
     } catch (err) {
         return err;
     }
