@@ -1,6 +1,7 @@
-const { directMessagingDB } = require('./DirectMessagingDB');
+const directMessagingDB = require('./DirectMessagingDB');
+console.log("ADD", directMessagingDB);
 // Model Tree
 const model = {
-    directMessagingDB: directMessagingDB
+    DirectMessaging: directMessagingDB
 }
 module.exports = model
