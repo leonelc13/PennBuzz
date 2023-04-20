@@ -3,15 +3,14 @@ const { getUser } = require('../model/Login-RegisterDBOperations');
 
 const LoginRoute = async function (req, res) {
     const { name, password } = req.body;
-    if ((!name || name === '') && (!password || password === '')) {
-        res.status(401).json({error: 'Missing username and password'});
-        return;
-    } else if (!name || name === '') {
+    if (!name || name === '') {
         res.status(401).json({error: 'Missing username'});
         return;
     } else if (!password || password === '') {
         res.status(401).json({error: 'Missing password'});
         return;
+    } else if((!name || name === '') && (!password || password === '')) {
+        res.status(401).json({error: 'Missing username and password'})
     }
 
     const user = await getUser(name);
