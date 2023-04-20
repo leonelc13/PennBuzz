@@ -25,9 +25,10 @@ db.connect(process.env.DATABASE_URL, (err) => {
         }
     }
     console.log("Successfully connected to DynamoDB");
-    app.listen(SERVER_PORT, async () => {
-        await db.init();
-        runWebSocketServer();
-        console.log('Server running on port', SERVER_PORT);
+    db.init().then(() => {
+        app.listen(SERVER_PORT, async () => {
+            runWebSocketServer();
+            console.log('Server running on port', SERVER_PORT);
+        });
     });
 });

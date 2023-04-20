@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
@@ -17,16 +17,21 @@ import './style/index.css';
 
 function App() {
 
-    const [authenticated, setAuthenticated] = useState(false);
-    const [username, setUsername] = useState("");
+    const [authenticated, setAuthenticated] = useState(sessionStorage.getItem('app-token') !== null);
+    const username = useRef('');
 
     const handleLogout = () => {
-        setAuthenticated(false);
+        sessionStorage.removeItem('app-token');
+        window.location.reload(true);
     };
 
-    const handleLogin = (username) => {
-        setUsername(username);
-        setAuthenticated(true)
+    const handleLogin = (usernameInput, token) => {
+        username.current = usernameInput;
+        if (token) {
+            sessionStorage.setItem('app-token', token);
+            setAuthenticated(true);
+        }
+
     }
 
     useEffect(() => {
@@ -36,7 +41,7 @@ function App() {
     // Needs to be modified upons integration with Login/Registration
     let props = {
         user_profile_picture: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-        user: username,
+        user: username.current,
         handleLogout: handleLogout
     };
 

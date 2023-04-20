@@ -3,6 +3,7 @@
 */
 
 const express = require('express');
+const routes = require('./routes/routes');
 
 const cors = require('cors');
 
@@ -12,7 +13,8 @@ app.use(express.urlencoded(
     { extended: true },
 ));
 
-
+app.post('/login', routes.Login);
+app.post('/register', routes.Register);
 
 
 
