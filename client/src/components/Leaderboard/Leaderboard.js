@@ -7,7 +7,7 @@ export default function Leaderboard () {
     const [scores, setScores] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/scores')
+        axios.get('http://localhost:3000/api/scores')
             .then(response => {
                 setScores(response.data);
             })

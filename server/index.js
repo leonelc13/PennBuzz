@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const { app, runWebSocketServer } = require('./server');
 require('dotenv').config();
 const db = require('./model/db');
+const routes = require('./routes/routes')
 
 const routes = require('./routes/routes');
 console.log(routes);
@@ -25,7 +26,15 @@ db.connect(process.env.DATABASE_URL, async (err) => {
         console.error('Failed to connect to database:', err);
         process.exit(1);
     }
+
     console.log("Successfully connected to MongoDB");
+    for (const apikey in routes) {
+        for (const routekey in routes[apikey]) {
+            const{method, path, handler} = routes[apikey][routekey]
+            app[method](path, handler)
+        }
+    }
+
     app.listen(SERVER_PORT, async () => {
         await db.init();
         console.log('Server running on port', SERVER_PORT);

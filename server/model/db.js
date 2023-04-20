@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const scoresSeeds = require("./scores-seeds.json")
 
 let db;
 
@@ -17,13 +18,16 @@ const connect = async (url, callback) => {
 
 const init = async () => {
     // ADD COLLECTION NAMES
-    const collectionNames = ["User", "Quiz", "Message", "Channel"];
-    collectionNames.forEach(async (collectionName) => {
+
+    const collectionNames = ["User", "Quiz", "Message", "Scores", "Channel"];
+    const collectionSeeds = [[],[],[],scoresSeeds]
+    collectionNames.forEach(async (collectionName, i) => {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
 
         if (!exists) {
             console.log(`Creating database with name ${collectionName}`);
-            db.createCollection(collectionName);
+            const collection = await db.createCollection(collectionName);
+            collection.insertMany(collectionSeeds[i])
         }
     });
 };

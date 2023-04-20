@@ -1,5 +1,6 @@
 const model = require('../model/model');
 
+
 const getChannels = async (req, res) => {
     const { user } = req.query;
     if (!user) return res.status(401).send({ err: "/channels: Missing arguments" });
