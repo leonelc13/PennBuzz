@@ -26,7 +26,12 @@ export async function getChannels(user) {
         const token = localStorage.getItem('token') ?? '';
         console.log(`${rootURL}:${serverPort}/channels`);
         let response = await axios.get(`${rootURL}:${serverPort}/channels`,
-            { params: { user: user } }
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                params: { user: user }
+            }
         );
 
         return response.data;

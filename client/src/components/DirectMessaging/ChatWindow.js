@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Message from './Message';
 
 import { AddMessage, getMessages } from '../../api/DirectMessagesAPI';
@@ -43,7 +42,7 @@ export default function ChatWindow(props) {
         } else {
             setMessages([]);
         }
-    }, [selectedChannel]);
+    }, [selectedChannel, username]);
 
 
     /*
