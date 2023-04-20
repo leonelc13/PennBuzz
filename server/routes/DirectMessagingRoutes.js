@@ -28,9 +28,7 @@ const getMessages = async (req, res) => {
     const { user, channel } = req.query;
     if (!user || !channel) return res.status(401).send({ err: "/messages: Invalid user, channel provided" });
     // Check if user is in channel
-    console.log(channel);
     const channelQuery = await model.DirectMessaging.getChannelById(channel);
-    console.log(channelQuery);
     if (channelQuery && channelQuery.members && channelQuery.members.includes(user)) {
         const messages = await model.DirectMessaging.getMessages(channel);
         return res.status(201).send(messages);

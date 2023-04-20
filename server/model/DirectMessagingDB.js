@@ -30,11 +30,9 @@ const getChannelById = async (channel) => {
         if (typeof channel !== 'string') {
             channel = channel.toString();
         }
-        console.log("CJAMME:", channel)
         const res = await db.collection('Channel').findOne({
             channel_id: channel
         });
-        console.log("RES", res);
         return res;
     } catch (err) {
         console.error(err);
