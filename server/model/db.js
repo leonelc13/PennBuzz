@@ -18,8 +18,8 @@ const connect = async (url, callback) => {
 
 const init = async () => {
     // ADD COLLECTION NAMES
-    const collectionNames = ["User", "Quiz", "Message", "Scores"];
-    const collectionSeeds = [[],[],[],scoresSeeds];
+    const collectionNames = ["User", "Quiz", "Message", "Scores", "Channel"];
+    const collectionSeeds = [[],[],[],scoresSeeds]
     collectionNames.forEach(async (collectionName, i) => {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
         if (!exists) {
