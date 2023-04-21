@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');
 const { app, runWebSocketServer } = require('./server');
 require('dotenv').config();
 const db = require('./model/db');
-const routes = require('./routes/routes')
 
 const routes = require('./routes/routes');
 console.log(routes);
@@ -19,6 +18,9 @@ app.get('/channels', routes.DirectMessaging.getChannels);
 app.get('/messages', routes.DirectMessaging.getMessages);
 app.post('/addchannel', routes.DirectMessaging.createChannel);
 app.post('/addmessage', routes.DirectMessaging.addMessage);
+
+// Profile Page
+app.get('/profile', routes.ProfilePage.getProfileByUsername);
 
 console.log("Attempting to connect to MongoDB ");
 db.connect(process.env.DATABASE_URL, async (err) => {
@@ -31,7 +33,7 @@ db.connect(process.env.DATABASE_URL, async (err) => {
     for (const apikey in routes) {
         for (const routekey in routes[apikey]) {
             const{method, path, handler} = routes[apikey][routekey]
-            app[method](path, handler)
+            //app[method](path, handler)
         }
     }
 
@@ -39,10 +41,9 @@ db.connect(process.env.DATABASE_URL, async (err) => {
         app.listen(SERVER_PORT, async () => {
             runWebSocketServer();
             console.log('Server running on port', SERVER_PORT);
+        });
     });
 });
-
-
 
 
 module.exports = app;

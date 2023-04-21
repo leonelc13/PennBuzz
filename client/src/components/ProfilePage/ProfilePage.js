@@ -4,38 +4,30 @@ import Quiz from './Quiz';
 import ButtonGroup from './ButtonGroup';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-/**
- * React Component for Header displayed to a logged in user
- **/
-
+import { getProfileByUsername } from '../../api/ProfilePageAPI';
 
 function ProfilePage(props) {
-
-
-    // Initialize state    
-    const profile_id = useParams().id;
-
-    console.log("PARAMS " + profile_id);
+    const username = useParams().username;
     const [profile, setProfile] = useState({});
     const [quizzes, setQuizzes] = useState([]);
 
-
     useEffect(() => {
-        // Fetch profile data
-        axios.get(`http://localhost:3000/profile/${profile_id}`)
-            .then(response => {
-                console.log(response);
-                setProfile(response.data);
-            })
-            .catch(error => {
+        const fetchProfile = async () => {
+            try {
+                const profileData = await getProfileByUsername(username);
+                setProfile(profileData);
+            } catch (error) {
                 console.error('Error fetching data: ', error);
-            });
-    }, []);
+            }
+        };
 
-    useEffect(() => {
+        fetchProfile();
+    }, [username]);
+    
+
+   /* useEffect(() => {
         // Fetch quizzes data
-        axios.get('http://localhost:3000/quizzes',
-            {
+        axios.get('/api/quizzes', {
                 params: {
                     user: props.user
                 }
@@ -46,15 +38,14 @@ function ProfilePage(props) {
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-
-    }, []);
+    }, []);*/
 
     return (
         <div className='profile-page-container'>
             <div className='profile-section'>
                 <div className="profile-image">
                     <img src={profile.profile_img} alt="profile pic" />
-                    <p>{profile.name}</p>
+                    <p>{profile.username}</p>
                 </div>
                 <div className="profile-biography">
                     <p>{profile.biography}</p>
@@ -62,11 +53,7 @@ function ProfilePage(props) {
             </div>
             <ButtonGroup />
             <div className="pp-quiz-container">
-                {
-                    quizzes.map(quiz => (
-                        <Quiz {...quiz} />
-                    ))
-                }
+                {quizzes.map(quiz => <Quiz {...quiz} />)}
             </div>
         </div>
     );
