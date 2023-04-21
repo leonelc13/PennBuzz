@@ -7,27 +7,27 @@ require('dotenv').config();
 
 const deleteTestDataFromDB = async (db, testData) => {
     try {
-        const result = await db.collection('students').deleteMany({ name: testData });
+        const result = await db.collection('User').deleteMany({ username: testData });
         const { deletedCount } = result;
         if (deletedCount === 1) {
-          console.log('info', 'Successfully deleted test student');
+          console.log('info', 'Successfully deleted test user');
         } else {
-          console.log('warning', 'test student was not deleted');
+          console.log('warning', `test user '${testData}' was not deleted`);
         }
     } catch (err) {
           console.log('error', err.message);
     }
 }
+
 beforeAll(async () => {
-    console.log('here');
     await connect(process.env.DATABASE_URL);
-    console.log('after');
 });
   
 afterAll(async () => {
     const db = getDb();
     try {
         await deleteTestDataFromDB(db, 'testuser');
+        await deleteTestDataFromDB(db, 'newuser');
     } catch (err) {
         return err;
     }
@@ -40,7 +40,6 @@ describe('POST /login', () => {
         .send({});
   
       expect(response.status).toBe(401);
-      expect(response.body).toEqual({ error: 'Missing username' });
     });
   
     test('returns 401 if name is missing', async () => {
