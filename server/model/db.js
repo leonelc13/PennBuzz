@@ -12,7 +12,7 @@ const connect = async (url, callback) => {
         console.log(`Connected to database: ${db.databaseName}`);
         return callback(null, conn);
     } catch (err) {
-        return callback(err);
+        console.log(err);
     }
 };
 
