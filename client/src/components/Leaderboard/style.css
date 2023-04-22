@@ -1,26 +1,69 @@
 .leaderboard-container {
-  width: 100%;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-  border: 1px solid #ccc;
-  margin: 2em;
-  border-radius: 10px;
-  padding: 30px;
+  width: 30rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-top: 100px;
+  padding: 30px 0;
 }
 
 .leaderboard-header {
   display: flex;
-  justify-content: center;
   margin-bottom: 1em;
 }
 
+
 .leaderboard-toggle-btn {
+  min-width: 0;
+  flex-basis: 0;
+  flex-grow: 1;
   background-color: white;
-  border: 1px solid #FF0606;
+  border: 1px solid black;
   color: #FF0606;
-  border-radius: 5px;
   padding: 10px;
+}
+
+.leaderboard-toggle-btn.active {
+  background-color: #FF0606;
+  color: white;
+}
+
+.leaderboard-table-container {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th {
+  text-align: left;
+}
+
+.leaderboard-table tr {
+  border-bottom: 1.5px solid lightgray;
+}
+
+.leaderboard-table tr td:first-of-type {
+  padding-left: 10px;
+}
+
+.leaderboard-pagination {
+  align-items: end;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leaderboard-pagination-btn {
+  border: none;
+    padding: 0.5em;
+    background-color: #FF0606;
+    color: white;
+    border-radius: 30px;
 }
