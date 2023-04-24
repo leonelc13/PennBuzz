@@ -8,6 +8,7 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { handleLogin } = props;
 
   const handleUsernameChange = (event) => {
@@ -18,16 +19,18 @@ function Login(props) {
     setPassword(event.target.value);
   };
 
+  const handleShowPassword = () => { // added function
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = useCallback (async (event) => {
     event.preventDefault();
     
     try {
-      console.log(username);
-      console.log(password);
       const response = await axios.post(`${rootURL}:3000/login`, `name=${username}&password=${password}`)
-      handleLogin(username, response.data.apptoken);
+      handleLogin(response);
     } catch (err) {
-      setErrorMessage(err.response.data.error);
+      setErrorMessage(err.response.data.error || err.message);
       console.log('error', err.message);
     }
   }, [username, password, handleLogin]);

@@ -29,9 +29,14 @@ const LoginRoute = async function (req, res) {
 
     try {
         const token = authenticateUser(name);
-        res.status(201).json({apptoken: token});
+        const response = {
+            username: user.username,
+            profile_picture: user.profile_img,
+            apptoken: token
+        }
+        res.status(201).send(response);
     } catch (err) {
-        res.status(401).json({error: `${err.message}`});
+        res.status(401).send({error: `${err.message}`});
     }
 }
 

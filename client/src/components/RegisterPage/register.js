@@ -24,7 +24,7 @@ function Register(props) {
       console.log(username);
       console.log(password);
       const response = await axios.post(`${rootURL}:3000/register`, `name=${username}&password=${password}`)
-      handleLogin(username, response.data.apptoken);
+      handleLogin(response);
     } catch (err) {
       setErrorMessage(err.response.data.error);
       console.log('error', err.message);
