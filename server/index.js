@@ -23,6 +23,9 @@ app.post('/addmessage', routes.DirectMessaging.addMessage);
 // Profile Page
 app.get('/profile', routes.ProfilePage.getProfileByUsername);
 
+// Leaderboard Page
+app.get('/scores', routes.Leaderboard.getAllScores);
+
 console.log("Attempting to connect to MongoDB ");
 db.connect(process.env.DATABASE_URL, async (err) => {
     if (err) {
