@@ -18,17 +18,20 @@ import './style/index.css';
 function App() {
 
     const [authenticated, setAuthenticated] = useState(sessionStorage.getItem('app-token') !== null);
-    const username = useRef('');
+    const username = useRef(null);
+    const userpic = useRef(null);
 
     const handleLogout = () => {
         sessionStorage.removeItem('app-token');
         window.location.reload(true);
     };
 
-    const handleLogin = (usernameInput, token) => {
-        username.current = usernameInput;
-        if (token) {
-            sessionStorage.setItem('app-token', token);
+    const handleLogin = (response) => {
+        const { apptoken, username: usernameValue, profile_picture }  = response.data
+        username.current = usernameValue;
+        userpic.current = profile_picture;
+        if (apptoken) {
+            sessionStorage.setItem('app-token', apptoken);
             setAuthenticated(true);
         }
 
@@ -40,7 +43,7 @@ function App() {
 
     // Needs to be modified upons integration with Login/Registration
     let props = {
-        user_profile_picture: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
+        user_profile_picture: userpic.current,
         user: username.current,
         handleLogout: handleLogout
     };

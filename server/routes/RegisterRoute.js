@@ -32,7 +32,12 @@ const RegisterRoute = async function(req, res) {
 
         try {
             const token = authenticateUser(name);
-            res.status(201).json({apptoken: token});
+            const response = {
+                apptoken: token,
+                username: name,
+                profile_picture: ''
+            }
+            res.status(201).send(response);
         } catch (err) {
             res.status(401).json({error: `${err.message}`});
         }
