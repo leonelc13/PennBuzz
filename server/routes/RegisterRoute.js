@@ -4,7 +4,7 @@ const { getUser, registerUser } = require('../model/Login-RegisterDBOperations')
 const RegisterRoute = async function(req, res) {
     const { name, password } = req.body;
 
-    if ((!name || name === '') && (!password || password === '')) {
+    if ((name === '') && (password === '')) {
         res.status(401).json({error: 'Missing username and password'});
         return;
     } else if (!name || name === '') {
