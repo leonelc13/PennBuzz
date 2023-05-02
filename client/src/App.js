@@ -59,7 +59,7 @@ function App() {
                         <Route exact path="/create_quiz/test" element={<CreateTest {...props} />} />
                         <Route exact path='/chat' element={<DirectMessagingPage {...props} />} />
                         <Route exact path='/' element={<MainFeed {...props} />} />
-                        <Route exact path='/profile/:id' element={<ProfilePage {...props} />} />
+                        <Route exact path='/profile/:username' element={<ProfilePage {...props} />} />
                         <Route exact path='/leaderboard' element={<Leaderboard {...props} />} />
                         <Route path='/quiz/:id' element={<QuizInfo {...props} />} />
                         <Route exact path='*' element={<Navigate to='/' />} />
