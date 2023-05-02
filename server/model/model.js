@@ -6,7 +6,7 @@ const quizDB = require('./QuizDB');
 const model = {
     DirectMessaging: directMessagingDB,
     MainFeed: mainFeedDB,
-    Quiz: quizDB
+    Quiz: quizDB,
     ProfilePage: profilePageDB
 }
 module.exports = model
