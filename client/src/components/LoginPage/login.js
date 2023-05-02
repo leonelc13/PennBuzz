@@ -27,10 +27,14 @@ function Login(props) {
     event.preventDefault();
     
     try {
-      const response = await axios.post(`${rootURL}:3000/login`, `name=${username}&password=${password}`)
+      const response = await axios.post(`${rootURL}:3000/login`, `name=${username}&password=${password}`);
       handleLogin(response);
     } catch (err) {
-      setErrorMessage(err.response.data.error || err.message);
+      if (err.response.data.error === 'Missing username and password') {
+        setErrorMessage('Missing username and password');
+      } else {
+        setErrorMessage(err.response.data.error || err.message);
+      }
       console.log('error', err.message);
     }
   }, [username, password, handleLogin]);
@@ -59,11 +63,11 @@ function Login(props) {
           Or <Link to="/register" className="sign-up-text">Sign Up</Link> to make your own account
         </p>
         <div>
-          <label className="inputs-text" htmlFor="username">Username</label>
+          <label className="inputs-text" htmlFor="username" id="Usernametitle">Username</label>
           <input type="text" className="login-inputs" value={username} id="username" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label className="inputs-text" htmlFor="password">Password</label>
+          <label className="inputs-text" htmlFor="password" id="Passwordtitle">Password</label>
           <input type="password" className="login-inputs" value={password} id="password" onChange={handlePasswordChange} />
         </div>
         <button type="submit" className="login-button">Sign In</button>

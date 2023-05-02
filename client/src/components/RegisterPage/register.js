@@ -55,11 +55,11 @@ function Register(props) {
           Or <Link to="/login" className='url-text'>Sign In</Link> to your account
         </p>
         <div>
-          <label className='titles-text' htmlFor="username">Pick a Username</label>
+          <label className='titles-text' htmlFor="username" id='user2'>Pick a Username</label>
           <input type="text" value={username} id="username" className="input-edits" onChange={handleUsernameChange} />
         </div>
         <div>
-          <label className='titles-text' htmlFor='password'>Pick a Password</label>
+          <label className='titles-text' htmlFor='password' id='password2'>Pick a Password</label>
           <input type="password" value={password} id="password" className="input-edits" onChange={handlePasswordChange} />
         </div>
         <button type="submit" className='btn-edits'>Sign Up</button>
