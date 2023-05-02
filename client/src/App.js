@@ -27,7 +27,7 @@ function App() {
     };
 
     const handleLogin = (response) => {
-        const { apptoken, username: usernameValue, profile_picture }  = response.data
+        const { apptoken, username: usernameValue, profile_picture } = response.data
         username.current = usernameValue;
         userpic.current = profile_picture;
         if (apptoken) {
@@ -37,10 +37,6 @@ function App() {
 
     }
 
-    useEffect(() => {
-        console.log(authenticated);
-    }, [authenticated]);
-
     // Needs to be modified upons integration with Login/Registration
     let props = {
         user_profile_picture: userpic.current,
@@ -48,6 +44,7 @@ function App() {
         handleLogout: handleLogout
     };
 
+    if (authenticated) console.log("META PROPS ", props);
 
     return (
         <Router>

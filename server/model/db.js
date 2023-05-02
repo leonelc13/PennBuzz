@@ -19,13 +19,13 @@ const connect = async (url, callback) => {
 const init = async () => {
     // ADD COLLECTION NAMES
     const collectionNames = ["User", "Quiz", "Message", "Scores", "Channel"];
-    const collectionSeeds = [[],[],[],scoresSeeds]
+    const collectionSeeds = [[], [], [], scoresSeeds];
     collectionNames.forEach(async (collectionName, i) => {
         const exists = await db.listCollections({ name: collectionName }).hasNext();
         if (!exists) {
             console.log(`Creating database with name ${collectionName}`);
             const collection = await db.createCollection(collectionName);
-            collection.insertMany(collectionSeeds[i])
+            if (collectionSeeds[i].length > 0) collection.insertMany(collectionSeeds[i]);
         }
     })
 };

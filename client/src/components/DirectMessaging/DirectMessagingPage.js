@@ -22,7 +22,11 @@ function DirectMessagingPage(props) {
     useEffect(() => {
         getChannels(props.user)
             .then(data => {
-                setChannels(data);
+                const channels_object = {};
+                data.forEach(channel => {
+                    channels_object[channel.channel_id] = channel;
+                });
+                setChannels(channels_object);
             })
             .catch(error => {
                 console.error('Error fetching channels data: ', error);
@@ -54,7 +58,6 @@ function DirectMessagingPage(props) {
     **/
     function handleChannelSelection(new_selected_channel) {
         setSelectedChannel(new_selected_channel);
-        console.log("new selected user: " + selectedChannel + " " + new_selected_channel);
     }
 
     /*
@@ -83,15 +86,15 @@ function DirectMessagingPage(props) {
             </div>
             <div className="channels-window">
                 {
-                    Object.keys(channels).map(channel_id => {
+                    Object.values(channels).map(channel => {
 
                         return (
                             <Channel
-                                key={channel_id}
-                                id={channel_id}
-                                is_selected_channel={channel_id === selectedChannel}
-                                name={channels[channel_id].name}
-                                image_src={channels[channel_id].img}
+                                key={channel.channel_id}
+                                id={channel.channel_id}
+                                is_selected_channel={channel.channel_id === selectedChannel}
+                                name={channel.name}
+                                image_src={channel.img}
                                 handleClick={handleChannelSelection}
                             />
                         )
@@ -100,7 +103,7 @@ function DirectMessagingPage(props) {
             </div>
 
             {selectedChannel ? existingChatHeader() : (<span></span>)}
-            <ChatWindow socket={socket} selectedChannel={selectedChannel} user={props.user} />\
+            <ChatWindow socket={socket} selectedChannel={selectedChannel} user={props.user} />
         </div >
     );
 }

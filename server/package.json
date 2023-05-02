@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "jest --coverage --runInBand --detectOpenHandles"
+    "test": "jest --coverage --runInBand --detectOpenHandles "
   },
   "eslintConfig": {
     "extends": [
