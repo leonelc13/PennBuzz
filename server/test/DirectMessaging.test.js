@@ -41,12 +41,12 @@ const insertTestData = async (test_channel, test_message) => {
 
 const deleteTestData = async (test_channel) => {
     try {
-        const resultDeleteChannel = await db.collection('Channel').deleteOne({ channel_id: test_channel.channel_id });
+        const resultDeleteChannel = await db.collection('Channel').deleteMany({ channel_id: test_channel.channel_id });
         const { numChannelDocumentsDeleted } = resultDeleteChannel;
         if (numChannelDocumentsDeleted != 1) {
             console.log('warning', 'test channel was not deleted');
         }
-        const resultDeleteMessage = await db.collection('Message').deleteOne({ channel_id: test_channel.channel_id });
+        const resultDeleteMessage = await db.collection('Message').deleteMany({ channel_id: test_channel.channel_id });
         const { numMessageDocumentsDeleted } = resultDeleteMessage;
         if (numMessageDocumentsDeleted != 1) {
             console.log('warning', 'test message was not deleted');

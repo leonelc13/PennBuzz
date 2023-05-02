@@ -8,7 +8,6 @@ import { deleteDownvote, addDownvote, deleteUpvote, addUpvote } from '../../api/
 
 
 function Quiz(props) {
-    console.log(props);
 
     const [isUpvoted, setIsUpvoted] = useState(props.is_upvote ? props.is_upvote : false);
     const [isDownvoted, setIsDownvoted] = useState(props.is_downvote ? props.is_downvote : false);

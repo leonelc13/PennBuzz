@@ -29,7 +29,6 @@ export default function ChatWindow(props) {
         if (selectedChannel) {
             getMessages(username, selectedChannel)
                 .then(data => {
-                    console.log("DATA", data);
                     if (data && Array.isArray(data)) {
                         setMessages(data);
                     } else {
@@ -39,6 +38,10 @@ export default function ChatWindow(props) {
                 .catch(error => {
                     console.error('Error fetching messages data for channel: ', selectedChannel, '\n\n', error);
                 });
+
+            if (!socket) return;
+            const joinMessageJSON = { "join_channel": selectedChannel };
+            socket.send(JSON.stringify(joinMessageJSON));
         } else {
             setMessages([]);
         }
@@ -92,10 +95,11 @@ export default function ChatWindow(props) {
     }
 
     if (socket) socket.onmessage = async function (event) {
-        const messageString = await event.data.text();
+
+        const messageString = await event.data;
         const messageObject = JSON.parse(messageString);
         // Add message to UI only if the channel equals that of the chat window
-        if (messageObject.channel === selectedChannel)
+        if (messageObject.channel_id === selectedChannel)
             setMessages(prev => [...prev, messageObject]);
     };
 

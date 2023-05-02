@@ -5,9 +5,9 @@
 
 const WebSocket = require('ws');
 
-const channels = [
-    { id: 'channel1', clients: new Set() },  // Example channel
-];
+const channels = { 'channel1': { clients: new Set() } }; // Example channel
+
+const socket_to_channel_map = new Map();
 
 // Consider adding a <client, channel> mapping to reduce client cleaning time
 
@@ -19,10 +19,34 @@ server.on('connection', (socket) => {
     socket.on('message', (message) => {
         try {
             const data = JSON.parse(message);
+            // If message contains join attribute
+            if (data.join_channel) {
+                // delete entry from socket to channel map if user exists
+                if (socket_to_channel_map.has(socket)) {
+                    const channel_id = socket_to_channel_map.get(socket);
+                    if (channels[channel_id]) {
+                        channels[channel_id].clients.delete(socket);
+                    } else {
+                        console.log("Warning: Deleting user from non-existent channel");
+                    }
+                    socket_to_channel_map.delete(socket);
+                }
+                // Update entry to socket to channel map 
+                socket_to_channel_map.set(socket, data.join_channel);
+                // Update channel clients
+                if (channels[data.join_channel]) {
+                    channels[data.join_channel].clients.add(socket);
+                } else {
+                    // Create new channel representation if channel id is not in server
+                    console.log("Created channel " + data.join_channel + " in memory");
+                    channels[data.join_channel] = { clients: new Set([socket]) };
+                }
+                return;
+            }
             // If message contains channel attribute
             if (data.channel_id) {
                 // Find room in channels
-                const channel = channels.find((r) => r.id === data.channel_id);
+                const channel = channels[data.channel_id];
 
                 if (channel) {
                     // Send message to all clients in room
@@ -31,13 +55,9 @@ server.on('connection', (socket) => {
                             client.send(message);
                         }
                     });
-                    console.log("Broadcasted message: " + message);
-                    // Add sender to channel if not present
-                    channel.clients.add(socket);
+                    console.log("Broadcasted message: " + message + "\n to users: ", channel.clients.size);
                 } else {
-                    // Create new channel representation if channel id is not in server
-                    console.log("Created channel " + data.channel_id + " in memory");
-                    channels.push({ id: data.channel_id, clients: new Set([socket]) })
+                    console.log("Received message for non-existing channel");
                 }
             } else {
                 console.error('Missing channel property in message');
@@ -48,11 +68,18 @@ server.on('connection', (socket) => {
     });
 
     socket.on('close', () => {
-        console.log('WebSocket client disconnected');
+
         // Remove the disconnected client from all chat channels
-        channels.forEach((channel) => {
-            channel.clients.delete(socket);
-        });
+        if (socket_to_channel_map.has(socket)) {
+            const channel_id = socket_to_channel_map.get(socket);
+            if (channels[channel_id]) {
+                channels[channel_id].clients.delete(socket);
+            } else {
+                console.log("Warning: Deleting user from non-existent channel");
+            }
+            socket_to_channel_map.delete(socket);
+        }
+        return console.log('WebSocket client disconnected');
     });
 });
 
