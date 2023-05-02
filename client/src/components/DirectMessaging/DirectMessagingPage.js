@@ -20,7 +20,6 @@ function DirectMessagingPage(props) {
 
 
     useEffect(() => {
-        console.log("CHATS FOR " + props.user);
         getChannels(props.user)
             .then(data => {
                 const channels_object = {};

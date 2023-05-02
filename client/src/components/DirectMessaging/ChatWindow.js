@@ -82,7 +82,6 @@ export default function ChatWindow(props) {
         const messageString = JSON.stringify(body);
         if (socket) {
             socket.send(messageString);
-            console.log("SEND TO SOCKET: ", messageString)
         }
 
 
