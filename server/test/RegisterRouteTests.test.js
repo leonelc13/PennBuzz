@@ -1,36 +1,37 @@
 const request = require('supertest');
-const app = require('../server').app;
+const { app, closeServer } = require('../index');
 const { connect, getDb } = require('../model/db');
 
 require('dotenv').config();
 
 
 const deleteTestDataFromDB = async (db, testData) => {
-    try {
-        const result = await db.collection('User').deleteMany({ username: testData });
-        const { deletedCount } = result;
-        if (deletedCount === 1) {
-          console.log('info', 'Successfully deleted test user');
-        } else {
-          console.log('warning', 'test user was not deleted');
-        }
-    } catch (err) {
-          console.log('error', err.message);
+  try {
+    const result = await db.collection('User').deleteMany({ username: testData });
+    const { deletedCount } = result;
+    if (deletedCount === 1) {
+      console.log('info', 'Successfully deleted test user');
+    } else {
+      console.log('warning', 'test user was not deleted');
     }
+  } catch (err) {
+    console.log('error', err.message);
+  }
 }
 
 beforeAll(async () => {
-    await connect(process.env.DATABASE_URL);
+  await connect(process.env.DATABASE_URL);
 });
-  
+
 afterAll(async () => {
-    const db = getDb();
-    try {
-        await deleteTestDataFromDB(db, 'testuser');
-        await deleteTestDataFromDB(db, 'newuser');
-    } catch (err) {
-        return err;
-    }
+  const db = getDb();
+  try {
+    await deleteTestDataFromDB(db, 'testuser');
+    await deleteTestDataFromDB(db, 'newuser');
+    await closeServer();
+  } catch (err) {
+    return err;
+  }
 });
 
 describe('POST /register', () => {
@@ -38,7 +39,7 @@ describe('POST /register', () => {
     const response = await request(app)
       .post('/register')
       .send({});
-    
+
     expect(response.status).toBe(401);
   });
 
@@ -63,7 +64,7 @@ describe('POST /register', () => {
     await request(app)
       .post('/register')
       .send({ name: 'testuser', password: 'password' });
-    
+
     const response = await request(app)
       .post('/register')
       .send({ name: 'testuser', password: 'password' });

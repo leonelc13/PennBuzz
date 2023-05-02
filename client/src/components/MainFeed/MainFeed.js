@@ -10,12 +10,12 @@ import { Link } from 'react-router-dom';
 
 
 function MainFeed(props) {
-
+    console.log("MAIN FEED " + props.user);
     // Initialize state    
     const [quizzes, setQuizzes] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/quizzes',
+        axios.get('http://localhost:3000/getfeed',
             {
                 params: {
                     user: props.user
@@ -43,7 +43,7 @@ function MainFeed(props) {
             </div>
             {
                 quizzes.map(quiz => (
-                    <Quiz {...quiz} id={quiz.id} />
+                    <Quiz {...quiz} username={props.user} id={quiz.id} />
                 ))
             }
         </div >

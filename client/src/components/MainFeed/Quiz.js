@@ -1,36 +1,54 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
+import { deleteDownvote, addDownvote, deleteUpvote, addUpvote } from '../../api/QuizAPI';
 /**
  * React Component for Header displayed to a logged in user
  **/
 
 
 function Quiz(props) {
+    console.log(props);
 
-    const [isUpvoted, setIsUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
-    const [isDownvoted, setIsDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
+    const [isUpvoted, setIsUpvoted] = useState(props.is_upvote ? props.is_upvote : false);
+    const [isDownvoted, setIsDownvoted] = useState(props.is_downvote ? props.is_downvote : false);
 
-    const [upvotes, setUpvotes] = useState(props.upvotes);
-    const [downvotes, setDownvotes] = useState(props.downvotes)
+    const [upvotes, setUpvotes] = useState(props.num_upvotes);
+    const [downvotes, setDownvotes] = useState(props.num_downvotes)
 
 
-    const handleUpvote = (event) => {
+    const handleUpvote = async (event) => {
         if (isUpvoted) {
-            setUpvotes(upvotes - 1);
-            return setIsUpvoted(false);
+            return deleteUpvote(props.id, props.username).then(data => {
+                setUpvotes(upvotes - 1);
+                setIsUpvoted(false);
+            }).catch(error => {
+                console.log("An error occured while deleting downvote: " + error);
+            });
         }
-        setUpvotes(upvotes + 1);
-        return setIsUpvoted(true);
+        return addUpvote(props.id, props.username).then(data => {
+            setUpvotes(upvotes + 1);
+            return setIsUpvoted(true);
+        }).catch(error => {
+            console.log("An error occured while adding downvote: " + error);
+        });
     }
 
-    const handleDownvote = (event) => {
+    const handleDownvote = async (event) => {
         if (isDownvoted) {
-            setDownvotes(downvotes - 1);
-            return setIsDownvoted(false);
+            return deleteDownvote(props.id, props.username).then(data => {
+                setDownvotes(downvotes - 1);
+                return setIsDownvoted(false);
+            }).catch(error => {
+                console.log("An error occured while deleting downvote: " + error);
+            });
         }
-        setDownvotes(downvotes + 1);
-        return setIsDownvoted(true);
+        return addDownvote(props.id, props.username).then(data => {
+            setDownvotes(downvotes + 1);
+            return setIsDownvoted(true);
+        }).catch(error => {
+            console.log("An error occured while adding downvote: " + error);
+        });
     }
 
     return (
@@ -64,11 +82,11 @@ function Quiz(props) {
                     </Link>
                     <div className="quiz-upvotes-comments">
                         <div className='quiz-upvotes'>
-                            <button onClick={handleUpvote} class={`quiz-upvotes-button ${isUpvoted && 'selected-vote-button'}`}>
+                            <button onClick={handleUpvote} className={`quiz-upvotes-button ${isUpvoted && 'selected-vote-button'}`}>
                                 <i className="fa-solid fa-arrow-up"></i>
                                 {upvotes}
                             </button>
-                            <button onClick={handleDownvote} class={`quiz-upvotes-button ${isDownvoted && 'selected-vote-button'}`}>
+                            <button onClick={handleDownvote} className={`quiz-upvotes-button ${isDownvoted && 'selected-vote-button'}`}>
                                 <i className="fa-solid fa-arrow-down"></i>
                                 {downvotes}
                             </button>

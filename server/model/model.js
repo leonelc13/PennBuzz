@@ -1,7 +1,10 @@
 const directMessagingDB = require('./DirectMessagingDB');
-console.log("ADD", directMessagingDB);
+const mainFeedDB = require('./MainFeedDB');
+const quizDB = require('./QuizDB');
 // Model Tree
 const model = {
-    DirectMessaging: directMessagingDB
+    DirectMessaging: directMessagingDB,
+    MainFeed: mainFeedDB,
+    Quiz: quizDB
 }
 module.exports = model

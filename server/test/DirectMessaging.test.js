@@ -1,7 +1,7 @@
 /* eslint-disable */
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
-const app = require('../index');
+const { app, closeServer } = require('../index');
 const database = require('../model/db');
 require('dotenv').config();
 
@@ -72,7 +72,9 @@ describe('Direct Messaging Tests', () => {
     afterAll(async () => {
         try {
             await deleteTestData(test_channel);
+            await closeServer();
         } catch (err) {
+            console.log(err);
             return err;
         }
     });
