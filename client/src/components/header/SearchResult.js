@@ -5,12 +5,11 @@ export function SearchResult(props) {
     const navigate = useNavigate();
 
     function handleClick() {
-        console.log("RUN");
         props.resetQuery();
     }
-
+    console.log(props);
     return (
-        <Link to={props.type == "quiz" ? `/quiz/${props.id}` : `/profile/${props.id}`}>
+        <Link to={props.type == "quiz" ? `/quiz/${props.id}` : `/profile/${props.title}`}>
             <div className='search-result-container' onClick={handleClick}>
                 {props.title}
                 <span>
@@ -18,6 +17,5 @@ export function SearchResult(props) {
                 </span>
             </div>
         </Link>
-
     );
 }  

@@ -24,7 +24,8 @@ app.post('/addchannel', routes.DirectMessaging.createChannel);
 app.post('/addmessage', routes.DirectMessaging.addMessage);
 // Feed
 app.get('/getfeed', routes.MainFeed.getFeed);
-
+// Search
+app.get('/search', routes.Search.search);
 //Quiz
 app.get('/quiz', routes.Quiz.getQuiz);
 app.put('/addcomment', routes.Quiz.addComment);
@@ -32,5 +33,12 @@ app.put('/addupvote', routes.Quiz.addUpvote);
 app.put('/deleteupvote', routes.Quiz.deleteDownvote);
 app.put('/adddownvote', routes.Quiz.addDownvote);
 app.put('/deletedownvote', routes.Quiz.deleteDownvote);
+
+// Profile Page
+app.get('/profile', routes.ProfilePage.getProfileByUsername);
+app.get('/profileQuizzes', routes.ProfilePage.getAllQuizzes);
+app.get('/profileCreatedQuizzes', routes.ProfilePage.getCreatedQuizzes);
+app.get('/profileFavoriteQuizzes', routes.ProfilePage.getFavoriteQuizzes);
+
 
 module.exports = app;
