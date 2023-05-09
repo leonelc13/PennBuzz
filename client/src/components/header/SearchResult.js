@@ -7,9 +7,9 @@ export function SearchResult(props) {
     function handleClick() {
         props.resetQuery();
     }
-
+    console.log(props);
     return (
-        <Link to={props.type == "quiz" ? `/quiz/${props.title}` : `/profile/${props.title}`}>
+        <Link to={props.type == "quiz" ? `/quiz/${props.id}` : `/profile/${props.title}`}>
             <div className='search-result-container' onClick={handleClick}>
                 {props.title}
                 <span>

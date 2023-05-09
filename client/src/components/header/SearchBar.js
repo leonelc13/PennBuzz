@@ -23,7 +23,6 @@ function SearchBar() {
     function handleInputChange(event) {
         setQuery(event.target.value);
     }
-
     return (
         <div className="search-container">
             <input type="text" id="search-input" placeholder="Search for Friends, Quizzes, and more" value={query} onChange={handleInputChange}></input>
@@ -31,7 +30,7 @@ function SearchBar() {
             <ul className="search-results">
                 {results.map(result => (
                     <Link to="/">
-                        <SearchResult {...result} resetQuery={() => setQuery("")} />
+                        <SearchResult {...result} resetQuery={() => { setQuery(""); setResults([]) }} />
                     </Link>
                 ))}
             </ul>

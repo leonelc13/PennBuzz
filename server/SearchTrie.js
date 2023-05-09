@@ -19,7 +19,8 @@ const TrieNode = function (key) {
 const SearchTrie = function () {
     this.root = new TrieNode(null);
 
-    this.insert = function (title, type) {
+    this.insert = function (item) {
+        let title = item.title;
         // Start a root node
         let node = this.root;
         // Traverse trie
@@ -37,7 +38,7 @@ const SearchTrie = function () {
 
             // If it's the last charcter, insert value
             if (i == title.length - 1) {
-                return node.values.push({ "title": title, "type": type });
+                return node.values.push(item);
             };
         }
     }
@@ -82,8 +83,10 @@ const SearchTrie = function () {
         const quizzes = await db.collection('Quiz').find({}).toArray();
 
         quizzes.forEach(quiz => {
-            if (quiz.title)
-                searchTrie.insert(quiz.title, "quiz");
+            if (!quiz.title)
+                return;
+            let item = { title: quiz.title, type: "quiz", id: quiz.id };
+            searchTrie.insert(item);
         });
 
         console.log("Added " + quizzes.length + " quizzes to the Search Trie");
@@ -92,7 +95,7 @@ const SearchTrie = function () {
 
         users.forEach(user => {
             if (user.username)
-                searchTrie.insert(user.username, "user");
+                searchTrie.insert({ title: user.username, type: "user" });
         });
 
         console.log("Added " + users.length + " users to the Search Trie");
