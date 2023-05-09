@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-function ButtonGroup() {
+function ButtonGroup(props) {
   const [selectedButton, setSelectedButton] = useState('Created');
 
   const handleClick = (button) => {
     setSelectedButton(button);
+    props.onChange(button);
   };
 
   return (
@@ -23,4 +24,3 @@ function ButtonGroup() {
 }
 
 export default ButtonGroup;
-
