@@ -40,5 +40,7 @@ app.get('/profileQuizzes', routes.ProfilePage.getAllQuizzes);
 app.get('/profileCreatedQuizzes', routes.ProfilePage.getCreatedQuizzes);
 app.get('/profileFavoriteQuizzes', routes.ProfilePage.getFavoriteQuizzes);
 
+// Leaderboard Page
+app.get('/scores', routes.Leaderboard.getAllScores);
 
 module.exports = app;
