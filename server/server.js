@@ -26,6 +26,8 @@ app.post('/addmessage', routes.DirectMessaging.addMessage);
 app.get('/getfeed', routes.MainFeed.getFeed);
 
 //Quiz
+app.get('/quiz', routes.Quiz.getQuiz);
+app.put('/addcomment', routes.Quiz.addComment);
 app.put('/addupvote', routes.Quiz.addUpvote);
 app.put('/deleteupvote', routes.Quiz.deleteDownvote);
 app.put('/adddownvote', routes.Quiz.addDownvote);

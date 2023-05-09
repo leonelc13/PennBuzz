@@ -4,6 +4,7 @@ import TakeQuiz from '../TakeQuiz/TakeQuiz';
 import CommentList from '../Comments/CommentList';
 import './quizStyle.css'
 import axios from 'axios';
+import { getQuiz, addComment, deleteDownvote, addDownvote, deleteUpvote, addUpvote } from '../../api/QuizAPI';
 
 function QuizInfo(props) {
     // Initialize states
@@ -13,94 +14,80 @@ function QuizInfo(props) {
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState([]);
 
-    const [isUpvoted, setIsUpvoted] = useState(props.is_upvoted ? props.is_upvoted : false);
-    const [isDownvoted, setIsDownvoted] = useState(props.is_downvoted ? props.is_downvoted : false);
+    const [isUpvoted, setIsUpvoted] = useState(false);
+    const [isDownvoted, setIsDownvoted] = useState(false);
 
-    const [upvotes, setUpvotes] = useState(props.upvotes);
-    const [downvotes, setDownvotes] = useState(props.downvotes);
+    const [upvotes, setUpvotes] = useState(0);
+    const [downvotes, setDownvotes] = useState(0)
 
-
-
-
-
-    const quizId = useRef('');
+    const quizId = useRef();
     quizId.current = useParams().id;
 
-    // mock backend quizData retrieval
     useEffect(() => {
-        axios.get(`http://localhost:3000/quiz?id=${quizId.current}`)
-            .then(response => {
-                setQuizData(response.data[0]);
-                setComments(response.data[0].comments);
-                setUpvotes(response.data[0].upvotes);
-                setDownvotes(response.data[0].downvotes);
-            })
-            .catch(error => {
+        const fetchQuiz = async () => {
+            try {
+                const res = await getQuiz(quizId.current);
+                setQuizData(res);
+                setUpvotes(res.upvotes.length);
+                setDownvotes(res.downvotes.length);
+                setIsUpvoted(res.upvotes.includes(props.user));
+                setIsDownvoted(res.downvotes.includes(props.user));
+                setComments(res.comments);
+            } catch (error) {
                 console.error('Error fetching data: ', error);
-            });
+            }
+        }
 
+        fetchQuiz();
     }, [quizData.current]);
 
 
-    const handleUpvote = (event) => {
+    const handleUpvote = async (event) => {
         if (isUpvoted) {
-            setUpvotes(upvotes - 1);
-            return setIsUpvoted(false);
+            return deleteUpvote(quizId.current, props.user).then(data => {
+                setUpvotes(upvotes - 1);
+                setIsUpvoted(false);
+            }).catch(error => {
+                console.log("An error occured while deleting downvote: " + error);
+            });
         }
-        setUpvotes(upvotes + 1);
-        return setIsUpvoted(true);
+        return addUpvote(quizId.current, props.user).then(data => {
+            setUpvotes(upvotes + 1);
+            return setIsUpvoted(true);
+        }).catch(error => {
+            console.log("An error occured while adding downvote: " + error);
+        });
     }
 
-    const handleDownvote = (event) => {
+    const handleDownvote = async (event) => {
         if (isDownvoted) {
-            setDownvotes(downvotes - 1);
-            return setIsDownvoted(false);
+            return deleteDownvote(quizId.current, props.user).then(data => {
+                setDownvotes(downvotes - 1);
+                return setIsDownvoted(false);
+            }).catch(error => {
+                console.log("An error occured while deleting downvote: " + error);
+            });
         }
-        setDownvotes(downvotes + 1);
-        return setIsDownvoted(true);
+        return addDownvote(quizId.current, props.user).then(data => {
+            setDownvotes(downvotes + 1);
+            return setIsDownvoted(true);
+        }).catch(error => {
+            console.log("An error occured while adding downvote: " + error);
+        });
     }
-
-
-    // // Updates upvote number
-    // function handleUpvoteClick(e) {
-    //     axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, { upvotes: quizData.upvotes + 1 })
-    //         .then(response => {
-    //             setUpvotes(response.data.upvotes);
-    //             setQuizData({ ...quizData, upvotes: response.data.upvotes });
-    //         })
-    //         .catch(error => {
-    //             console.error('Error upvoting: ', error);
-    //         });
-    // }
-
-    // // Updates downvote number
-    // function handleDownvoteClick(e) {
-
-    //     axios.post(`http://localhost:3000/quiz?id=${quizId.current}`, {
-    //         downvotes: quizData.downvotes + 1
-    //     })
-    //         .then(response => {
-    //             setDownvotes(response.data.downvotes);
-    //             setQuizData({ ...quizData, downvotes: response.data.downvotes });
-    //         })
-    //         .catch(error => {
-    //             console.error('Error downvoting: ', error);
-    //         });
-    // }
 
     // updates comments 
-    function handleAddComment(e) {
-        axios.post(`http://localhost:3000/quiz?id=${quizId.current}/comments`, {
-            author: props.user,
-            content: newComment
+    const handleAddComment = async (event) => {
+        const timestamp = Date.now();
+        return addComment(quizId.current, props.user, newComment, timestamp)
+        .then(data => {
+            console.log(data);
+            setComments([...comments, {author: props.user, content: newComment, timestamp: timestamp}]);
+            setQuizData({ ...quizData, comments: [...comments, {author: props.user, content: newComment, timestamp: timestamp}] });
         })
-            .then(response => {
-                setComments([...comments, response.data]);
-                setQuizData({ ...quizData, comments: [...comments, response.data] });
-            })
-            .catch(error => {
-                console.error('Error adding comment: ', error);
-            });
+        .catch(error => {
+            console.error('Error adding comment: ', error);
+        });
     }
 
     // handles Take quiz click to trigger take quiz rendering

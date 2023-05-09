@@ -1,8 +1,22 @@
 const model = require('../model/model');
 
-// TODO: FILL IN ADD COMMENT ROUTE
-const addComment = async (req, res) => {
 
+const getQuiz = async (req, res) => {
+    const { id } = req.query;
+    const quiz = await model.Quiz.getQuiz(id);
+    if (!quiz) {
+        return res.status(401).send({ error: 'Quiz not found' });
+    }
+
+    return res.status(201).send(quiz);
+}
+
+const addComment = async (req, res) => {
+    const { user, quizId, content, timestamp } = req.body;
+    console.log(content);
+    if (!user || !quizId) return res.status(401).send({ err: "/addcomment: Missing arguments" });
+    const response = await model.Quiz.addComment(quizId, user, content, timestamp);
+    return response.acknowledged ? res.sendStatus(201) : res.sendStatus(400);
 }
 
 const addUpvote = async (req, res) => {
@@ -39,7 +53,9 @@ const QuizRoutes = {
     addUpvote: addUpvote,
     deleteUpvote: deleteUpvote,
     addDownvote: addDownvote,
-    deleteDownvote: deleteDownvote
+    deleteDownvote: deleteDownvote,
+    addComment: addComment,
+    getQuiz: getQuiz
 }
 
 module.exports = QuizRoutes;
