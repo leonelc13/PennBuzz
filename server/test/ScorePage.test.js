@@ -4,9 +4,19 @@ const app = require('../index');
 const database = require('../model/db');
 require('dotenv').config();
 
+const { app, closeServer } = require('../index');
+
 let db;
 
 describe('Leaderboard Tests', () => {
+    afterAll(async () => {
+        try {
+            await closeServer();
+        } catch (err) {
+            console.log(err);
+            return err;
+        }
+    });
     test('get leaderboard: valid request', async () => {
         const response = await request(app)
             .get(`/scores`)
