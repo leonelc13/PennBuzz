@@ -4,7 +4,7 @@ const { getUser, registerUser } = require('../model/Login-RegisterDBOperations')
 const RegisterRoute = async function(req, res) {
     const { name, password } = req.body;
 
-    if ((!name || name === '') && (!password || password === '')) {
+    if ((name === '') && (password === '')) {
         res.status(401).json({error: 'Missing username and password'});
         return;
     } else if (!name || name === '') {
@@ -32,7 +32,12 @@ const RegisterRoute = async function(req, res) {
 
         try {
             const token = authenticateUser(name);
-            res.status(201).json({apptoken: token});
+            const response = {
+                apptoken: token,
+                username: name,
+                profile_picture: ''
+            }
+            res.status(201).send(response);
         } catch (err) {
             res.status(401).json({error: `${err.message}`});
         }

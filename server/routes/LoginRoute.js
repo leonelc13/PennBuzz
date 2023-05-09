@@ -2,15 +2,22 @@ const { authenticateUser } = require('../utils/auth');
 const { getUser } = require('../model/Login-RegisterDBOperations');
 
 const LoginRoute = async function (req, res) {
+
     const { name, password } = req.body;
+
+    if ((name === '') && (password === '')) {
+        res.status(401).json({error: 'Missing username and password'})
+        return;
+    }
+
+
+
     if (!name || name === '') {
         res.status(401).json({error: 'Missing username'});
         return;
     } else if (!password || password === '') {
         res.status(401).json({error: 'Missing password'});
         return;
-    } else if((!name || name === '') && (!password || password === '')) {
-        res.status(401).json({error: 'Missing username and password'})
     }
 
     const user = await getUser(name);
@@ -29,9 +36,14 @@ const LoginRoute = async function (req, res) {
 
     try {
         const token = authenticateUser(name);
-        res.status(201).json({apptoken: token});
+        const response = {
+            username: user.username,
+            profile_picture: user.profile_img,
+            apptoken: token
+        }
+        res.status(201).send(response);
     } catch (err) {
-        res.status(401).json({error: `${err.message}`});
+        res.status(401).send({error: `${err.message}`});
     }
 }
 

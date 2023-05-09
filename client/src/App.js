@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
@@ -17,34 +17,39 @@ import './style/index.css';
 
 function App() {
 
-    const [authenticated, setAuthenticated] = useState(sessionStorage.getItem('app-token') !== null);
-    const username = useRef('');
+    const [authenticated, setAuthenticated] = useState(localStorage.getItem('app-token') !== null);
+    const username = useRef(null);
+    const userpic = useRef(null);
 
     const handleLogout = () => {
-        sessionStorage.removeItem('app-token');
+        localStorage.removeItem('app-token');
+        localStorage.removeItem('user-profile-picture');
+        localStorage.removeItem('user');
+        setAuthenticated(false);
         window.location.reload(true);
     };
 
-    const handleLogin = (usernameInput, token) => {
-        username.current = usernameInput;
-        if (token) {
-            sessionStorage.setItem('app-token', token);
+    const handleLogin = (response) => {
+        const { apptoken, username: usernameValue, profile_picture } = response.data
+        username.current = usernameValue;
+        userpic.current = profile_picture;
+        if (apptoken) {
+            localStorage.setItem('user-profile-picture', profile_picture);
+            localStorage.setItem('user', usernameValue);
+            localStorage.setItem('app-token', apptoken);
             setAuthenticated(true);
         }
 
     }
 
-    useEffect(() => {
-        console.log(authenticated);
-    }, [authenticated]);
-
     // Needs to be modified upons integration with Login/Registration
     let props = {
-        user_profile_picture: "https://drive.google.com/uc?id=1munwKbM6dQSWE1ruZ_41O79ZeliPXYVe&export=download",
-        user: username.current,
+        user_profile_picture: localStorage.getItem('user-profile-picture'),
+        user: localStorage.getItem('user'),
         handleLogout: handleLogout
     };
 
+    if (authenticated) console.log("META PROPS ", props);
 
     return (
         <Router>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
-const app = require('../index');
+const { app, closeServer } = require('../index');
 const database = require('../model/db');
 require('dotenv').config();
 
@@ -41,12 +41,12 @@ const insertTestData = async (test_channel, test_message) => {
 
 const deleteTestData = async (test_channel) => {
     try {
-        const resultDeleteChannel = await db.collection('Channel').deleteOne({ channel_id: test_channel.channel_id });
+        const resultDeleteChannel = await db.collection('Channel').deleteMany({ channel_id: test_channel.channel_id });
         const { numChannelDocumentsDeleted } = resultDeleteChannel;
         if (numChannelDocumentsDeleted != 1) {
             console.log('warning', 'test channel was not deleted');
         }
-        const resultDeleteMessage = await db.collection('Message').deleteOne({ channel_id: test_channel.channel_id });
+        const resultDeleteMessage = await db.collection('Message').deleteMany({ channel_id: test_channel.channel_id });
         const { numMessageDocumentsDeleted } = resultDeleteMessage;
         if (numMessageDocumentsDeleted != 1) {
             console.log('warning', 'test message was not deleted');
@@ -72,7 +72,9 @@ describe('Direct Messaging Tests', () => {
     afterAll(async () => {
         try {
             await deleteTestData(test_channel);
+            await closeServer();
         } catch (err) {
+            console.log(err);
             return err;
         }
     });
