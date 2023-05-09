@@ -30,6 +30,7 @@ function ProfilePage(props) {
         const getQuizzes = async () => {
             try {
                 let quizData = [];
+                setQuizzes([]);
                 switch (selectedButton) {
                     case 'Created':
                         quizData = await getCreatedQuizzes(username);
