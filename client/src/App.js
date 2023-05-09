@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import MainFeed from './components/MainFeed/MainFeed';
 import DirectMessagingPage from './components/DirectMessaging/DirectMessagingPage';
-import Header from './components/header/Header';
+import Header from './components/Header/Header';
 import ProfilePage from './components/ProfilePage/ProfilePage'
 import CreateQuiz from './components/CreateQuiz/CreateQuiz'
 import CreateTest from './components/CreateQuiz/CreateTest'

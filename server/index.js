@@ -22,6 +22,12 @@ app.post('/addmessage', routes.DirectMessaging.addMessage);
 
 // Profile Page
 app.get('/profile', routes.ProfilePage.getProfileByUsername);
+app.get('/profileQuizzes', routes.ProfilePage.getAllQuizzes);
+app.get('/profileCreatedQuizzes', routes.ProfilePage.getCreatedQuizzes);
+app.get('/profileFavoriteQuizzes', routes.ProfilePage.getFavoriteQuizzes);
+
+// Create Quiz
+app.post('/create_quiz/test', routes.CreateQuiz.addQuiz);
 
 console.log("Attempting to connect to MongoDB ");
 db.connect(process.env.DATABASE_URL, async (err) => {

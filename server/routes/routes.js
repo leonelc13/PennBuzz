@@ -3,6 +3,7 @@ const ProfileRoutes = require("./ProfileRoutes");
 const LoginRoute = require("./LoginRoute");
 const RegisterRoute = require ("./RegisterRoute");
 const LeaderboardRoutes = require("./LeaderboardRoutes");
+const CreateQuizRoutes = require("./CreateQuizRoutes");
 
 
 // Routes Tree
@@ -12,6 +13,7 @@ var routes = {
     ProfilePage: ProfileRoutes,
     Login: LoginRoute,
     Register: RegisterRoute,
+    CreateQuiz: CreateQuizRoutes
 }
 
 module.exports = routes;
