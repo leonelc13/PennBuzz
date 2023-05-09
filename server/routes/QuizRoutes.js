@@ -13,8 +13,7 @@ const getQuiz = async (req, res) => {
 
 const addComment = async (req, res) => {
     const { user, quizId, content, timestamp } = req.body;
-    console.log(content);
-    if (!user || !quizId) return res.status(401).send({ err: "/addcomment: Missing arguments" });
+    if (!user || !quizId || !content || !timestamp) return res.status(401).send({ err: "/addcomment: Missing arguments" });
     const response = await model.Quiz.addComment(quizId, user, content, timestamp);
     return response.acknowledged ? res.sendStatus(201) : res.sendStatus(400);
 }

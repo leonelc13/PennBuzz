@@ -3,12 +3,13 @@ const database = require('./db');
 
 const getQuiz = async (quizId) => {
     try {
+        console.log(quizId);
         let db = await database.getDb();
         const res = await db.collection('Quiz').findOne({ id: quizId });
+        console.log(res);
         console.log(`Quiz: ${JSON.stringify(res)}`);
         return res;
     } catch (err) {
-        console.error(err);
         throw new Error('Error retrieving quiz.');
     }
 }
@@ -27,7 +28,6 @@ const addComment = async (quizId, user, comment, timestamp) => {
         );
         return res;
     } catch (err) {
-        console.error(err);
         throw new Error('Error adding comment.');
     }
 }
