@@ -3,9 +3,9 @@ const ProfileRoutes = require("./ProfileRoutes");
 const LoginRoute = require("./LoginRoute");
 const RegisterRoute = require("./RegisterRoute");
 const LeaderboardRoutes = require("./LeaderboardRoutes");
-const CreateQuizRoutes = require("./CreateQuizRoutes");
 const MainFeedRoutes = require("./MainFeedRoutes");
 const QuizRoutes = require("./QuizRoutes");
+const SearchRoutes = require("./SearchRoutes");
 
 // Routes Tree
 var routes = {
@@ -14,9 +14,9 @@ var routes = {
     ProfilePage: ProfileRoutes,
     Login: LoginRoute,
     Register: RegisterRoute,
-    CreateQuiz: CreateQuizRoutes,
     MainFeed: MainFeedRoutes,
-    Quiz: QuizRoutes
+    Quiz: QuizRoutes,
+    Search: SearchRoutes
 }
 
 module.exports = routes;
